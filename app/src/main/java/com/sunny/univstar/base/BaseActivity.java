@@ -37,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initData();
 
 
-    //    统一管理fragment
+    //    fragment复用
     protected BaseFragment fragmentRepeat(int contaired, Class<? extends BaseFragment> baseFragment) {
 //        得到一个Fragment管理器
         FragmentManager fragmentManager = getSupportFragmentManager();
