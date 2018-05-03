@@ -36,42 +36,48 @@ public abstract class BaseActivity extends AppCompatActivity {
     //    统一加载数据
     protected abstract void initData();
 
-    public BaseFragment fragmentRepeat(int container, Class<? extends BaseFragment> baseFragmemt) {
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        String simpleName = baseFragmemt.getSimpleName();
-        BaseFragment fragmentByTag = (BaseFragment) supportFragmentManager.findFragmentByTag(simpleName);
+
+    //    fragment复用
+    protected BaseFragment fragmentRepeat(int contaired, Class<? extends BaseFragment> baseFragment) {
+//        得到一个Fragment管理器
+        FragmentManager fragmentManager = getSupportFragmentManager();
+//        得到转换器
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        得到标记名字
+        String simpleName = baseFragment.getSimpleName();
+
+        BaseFragment fragmentByTag = (BaseFragment) fragmentManager.findFragmentByTag(simpleName);
 
         try {
             if (fragmentByTag == null) {
-                fragmentByTag = baseFragmemt.newInstance();
-                transaction.add(container, fragmentByTag, simpleName);
+                fragmentByTag = baseFragment.newInstance();
+                transaction.add(contaired, fragmentByTag, simpleName);
             }
+            transaction.show(fragmentByTag);
             if (lastFragment != null) {
                 transaction.hide(lastFragment);
             }
-            transaction.show(fragmentByTag);
-
-
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        lastFragment=fragmentByTag;
+        lastFragment = fragmentByTag;
         transaction.commit();
         return fragmentByTag;
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        App.context=this;
+        App.context = this;
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        App.context=null;
+        App.context = null;
     }
 }
