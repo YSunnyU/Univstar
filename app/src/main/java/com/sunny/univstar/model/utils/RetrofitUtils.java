@@ -36,10 +36,10 @@ public class RetrofitUtils {
     public Retrofit retrofit;
     public RetrofitUtils() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)//链接超时
-                .readTimeout(20,TimeUnit.SECONDS)//读取
-                .writeTimeout(20,TimeUnit.SECONDS)//写
-                .retryOnConnectionFailure(false)//目前关闭重复请求
+//                .connectTimeout(15, TimeUnit.SECONDS)//链接超时
+//                .readTimeout(20,TimeUnit.SECONDS)//读取
+//                .writeTimeout(20,TimeUnit.SECONDS)//写
+//                .retryOnConnectionFailure(false)//目前关闭重复请求
                 .addInterceptor(new ReceivedCookiesInterceptor(context))
                 .addInterceptor(new AddCookiesInterceptor(context))
                 .build();
@@ -118,8 +118,8 @@ public class RetrofitUtils {
                         long time = System.currentTimeMillis();
 
                         try {
-                            String desApptoken= EncryptUtil.decrypt(apptoken);
-
+                            String desApptoken= EncryptUtil.decrypt(apptoken);//解码后的数据
+                            //解码后的数据拼接上当前系统时间 再编码 去掉换行 把所有字母转成大写
                             String headerApptoken=EncryptUtil.encrypt(time + desApptoken).replaceAll("\\n","").toUpperCase();
 
                             saveAppToken(context,headerApptoken,time);
@@ -147,6 +147,7 @@ public class RetrofitUtils {
 
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences("77777", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        //存储的时候 转成大写后的token + "."  + 加上当前系统时间 组成最中的token
         editor.putString("xyxy_apptoken",token+"."+time);
         editor.commit();
 
