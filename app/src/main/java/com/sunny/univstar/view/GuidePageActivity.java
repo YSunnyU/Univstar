@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.sunny.univstar.R;
+import com.sunny.univstar.view.preference.PreferenceActivity;
 
 public class GuidePageActivity extends AppCompatActivity {
 

@@ -1,6 +1,5 @@
-package com.sunny.univstar.view;
+package com.sunny.univstar.view.preference;
 
-import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by 张玗 on 2018/5/3.

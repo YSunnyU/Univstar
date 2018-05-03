@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.PreferenceActivity">
+        <activity android:name=".view.preference.PreferenceActivity">
 
         </activity>
     </application>
