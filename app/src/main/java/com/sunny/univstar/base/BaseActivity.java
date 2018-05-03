@@ -51,12 +51,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         try {
             if (fragmentByTag == null) {
                 fragmentByTag = baseFragment.newInstance();
-                transaction.add(contaired, fragmentByTag, simpleName);
+                transaction.add(contaired, fragmentByTag);
             }
-            transaction.show(fragmentByTag);
             if (lastFragment != null) {
                 transaction.hide(lastFragment);
             }
+            transaction.show(fragmentByTag);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
