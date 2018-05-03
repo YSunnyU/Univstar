@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
-//        fragmentRepeat(R.id.container, MasterFragment.class);
+        fragmentRepeat(R.id.container, MasterFragment.class);
     }
 
     @Override
