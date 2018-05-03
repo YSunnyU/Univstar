@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.sunny.univstar.R;
-import com.sunny.univstar.view.preference.PreferenceActivity;
 
 public class GuidePageActivity extends AppCompatActivity {
 
@@ -21,7 +20,7 @@ public class GuidePageActivity extends AppCompatActivity {
             len--;
 
             if (len == 0) {
-                startActivity(new Intent(GuidePageActivity.this, PreferenceActivity.class));
+                startActivity(new Intent(GuidePageActivity.this, MainActivity.class));
             } else {
                 handler.postDelayed(runnable, 300);
             }
@@ -39,6 +38,6 @@ public class GuidePageActivity extends AppCompatActivity {
     private void initView() {
         guideImage = (ImageView) findViewById(R.id.guideImage);
         guideImage.setImageResource(R.mipmap.guide);
-        handler.postDelayed(runnable,300);
+        handler.postDelayed(runnable, 300);
     }
 }

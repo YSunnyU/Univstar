@@ -5,5 +5,6 @@ package com.sunny.univstar.model.service;
  */
 
 public interface BaseUrl {
-    public String Base_URL="https://www.univstar.com/swagger-ui.html#/";
+//    swagger-ui.html#/
+    public String Base_URL="https://www.univstar.com/";
 }

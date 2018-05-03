@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sunny.univstar.app.App;
 import com.sunny.univstar.model.service.BaseUrl;
+import com.sunny.univstar.model.service.PreferenceService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -32,12 +33,14 @@ public class RetrofitUtils {
 
 
     }
-    public static RetrofitUtils getInstance(RetrofitUtils retrofitUtils){
+    public static RetrofitUtils getInstance(){
         if (retrofitUtils==null){
             retrofitUtils=new RetrofitUtils();
         }
         return retrofitUtils;
     }
-
+    public PreferenceService getPreferenceService(){
+        return retrofit.create(PreferenceService.class);
+    }
 
 }
