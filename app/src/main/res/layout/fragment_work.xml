@@ -4,9 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.sunny.univstar.view.work.fragment.WorkFragment">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/work_"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+    <!--<include-->
+        <!--android:id="@+id/list_head"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--layout="@layout/work_list_head_item"/>-->
+
+
+    <!--<com.yalantis.phoenix.PullToRefreshView-->
+        <!--android:id="@+id/pull_to_refresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/work_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    <!--</com.yalantis.phoenix.PullToRefreshView>-->
 </LinearLayout>

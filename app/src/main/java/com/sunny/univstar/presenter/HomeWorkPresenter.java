@@ -30,8 +30,8 @@ public class HomeWorkPresenter implements HomeWorkContract.HomeWorkPreference{
     }
 
     @Override
-    public void sendWorkData(Context context, int page, int sortord) {
-        iHomeModel.getWorkData().gethomewokData(getUserId(context),page,sortord)
+    public void sendWorkData(Context context, int page, int sortord,int row) {
+        iHomeModel.getWorkData().gethomewokData(getUserId(context),page,sortord,row)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeWokListModel>() {
