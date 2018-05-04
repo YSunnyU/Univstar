@@ -11,9 +11,9 @@ import com.sunny.univstar.R;
 public class GuidePageActivity extends AppCompatActivity {
 
     private ImageView guideImage;
-    private Handler handler = new Handler();
+   // private Handler handler = new Handler();
 
-    int len = 3;
+    /*int len = 3;
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -21,11 +21,12 @@ public class GuidePageActivity extends AppCompatActivity {
 
             if (len == 0) {
                 startActivity(new Intent(GuidePageActivity.this, MainActivity.class));
+                handler.removeCallbacks(runnable);
             } else {
                 handler.postDelayed(runnable, 300);
             }
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,13 @@ public class GuidePageActivity extends AppCompatActivity {
     private void initView() {
         guideImage = (ImageView) findViewById(R.id.guideImage);
         guideImage.setImageResource(R.mipmap.guide);
-        handler.postDelayed(runnable, 300);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(GuidePageActivity.this, MainActivity.class));
+                finish();
+            }
+        }, 300);
+       // handler.postDelayed(runnable, 300);
     }
 }

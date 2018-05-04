@@ -25,10 +25,10 @@ public class AddCookiesInterceptor implements Interceptor {
 
 
         final Request.Builder builder = chain.request().newBuilder();
-        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences("77777", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("77777", Context.MODE_PRIVATE);
         builder.addHeader("apptoken", sharedPreferences.getString("xyxy_apptoken", ""));
         builder.addHeader("user-agent", sharedPreferences.getString("xyxy_user_agent", ""));
-//        builder.addHeader("Authorization",sharedPreferences.getString("xyxy_cookiename",""));
+        builder.addHeader("Authorization",sharedPreferences.getString("xyxy_cookiename",""));
         builder.addHeader("did",sharedPreferences.getString("xyxy_solename",""));
         builder.addHeader("cid", sharedPreferences.getString("xyxy_cidname", ""));
         return chain.proceed(builder.build());

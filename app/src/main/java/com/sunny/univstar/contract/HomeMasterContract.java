@@ -1,5 +1,7 @@
 package com.sunny.univstar.contract;
 
+import android.content.Context;
+
 import com.sunny.univstar.view.master.fragment.HomeMasterBean;
 
 /**
@@ -11,6 +13,6 @@ public interface HomeMasterContract {
         void showHomeMasterData(HomeMasterBean homeMasterBean);
     }
     interface homeMasterInPresenter{
-        void sendHomeMaster();
+        void sendHomeMaster(Context context);
     }
 }

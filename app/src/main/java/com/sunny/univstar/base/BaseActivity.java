@@ -24,6 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init();
         initData();
+        App.context = this;
+
     }
 
 
@@ -78,6 +80,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        App.context = null;
+//        App.context = null;
     }
 }
