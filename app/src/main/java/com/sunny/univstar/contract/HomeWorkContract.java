@@ -13,6 +13,6 @@ public interface HomeWorkContract {
         void getWorkData(HomeWokListModel homeWokListModel);
     }
     interface HomeWorkPreference{
-        void sendWorkData(Context context, int page, int sortord);
+        void sendWorkData(Context context, int page, int sortord,int row);
     }
 }

@@ -15,5 +15,5 @@ public interface IHomeWork {
 
     @FormUrlEncoded
     @POST("/v1/m/homewok/home")
-    Observable<HomeWokListModel> gethomewokData(@Field("loginUserId") Integer loginUserId, @Field("page") int page, @Field("sortord") int sortord);
+    Observable<HomeWokListModel> gethomewokData(@Field("loginUserId") Integer loginUserId, @Field("page") int page, @Field("sortord") int sortord,@Field("rows") int rows);
 }
