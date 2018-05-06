@@ -12,8 +12,10 @@ import com.sunny.univstar.model.entity.AppTokenModel;
 import com.sunny.univstar.model.interceptor.AddCookiesInterceptor;
 import com.sunny.univstar.model.interceptor.ReceivedCookiesInterceptor;
 import com.sunny.univstar.model.service.HomeMasterService;
+import com.sunny.univstar.model.service.HomeNoticeService;
 import com.sunny.univstar.model.service.IAppToken;
 import com.sunny.univstar.model.service.IHomeWork;
+import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
 
 import java.util.concurrent.TimeUnit;
@@ -177,5 +179,10 @@ public class RetrofitUtils {
     public HomeMasterService getHomeMasterService() {
         return retrofit.create(HomeMasterService.class);
     }
-
+    public HomeNoticeService getHomeNoticeService(){
+        return retrofit.create(HomeNoticeService.class);
+    }
+    public PersonalRegisterService getPersonalRegisterService(){
+        return retrofit.create(PersonalRegisterService.class);
+    }
 }

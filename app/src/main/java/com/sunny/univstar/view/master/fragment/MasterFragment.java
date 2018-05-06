@@ -169,13 +169,25 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     public void showHomeMasterData(HomeMasterBean homeMasterBean) {
 //        Log.d("MasterFragment", "homeMasterBean.getData().getHomewoks().size():" + homeMasterBean.getData().getHomewoks().size());
 //        得到首页轮播图的集合
-        systemAdsBeanList = homeMasterBean.getData().getSystemAds();
+        if (homeMasterBean.getData().getSystemAds() != null && homeMasterBean.getData().getSystemAds().size() > 0)
+            systemAdsBeanList = homeMasterBean.getData().getSystemAds();
+        else
+            return;
 //        得到名师推荐集合
-        usersBeanList = homeMasterBean.getData().getUsers();
+        if (homeMasterBean.getData().getUsers() != null && homeMasterBean.getData().getUsers().size() > 0)
+            usersBeanList = homeMasterBean.getData().getUsers();
+        else
+            return;
 //        得到推荐作业集合
-        homewoksBeanList = homeMasterBean.getData().getHomewoks();
+        if (homeMasterBean.getData().getHomewoks() != null && homeMasterBean.getData().getHomewoks().size() > 0)
+            homewoksBeanList = homeMasterBean.getData().getHomewoks();
+        else
+            return;
 //        得到课程推荐集合
-        liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
+        if (homeMasterBean.getData().getLiveCourses() != null && homeMasterBean.getData().getLiveCourses().size() > 0)
+            liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
+        else
+            return;
         //    制作轮播图UI界面
         flayBannerData();
 //        制作名师推荐UI界面

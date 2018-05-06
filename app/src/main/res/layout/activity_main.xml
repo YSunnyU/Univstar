@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.MainActivity">
-
     <include
         layout="@layout/guide_sign_view"
         android:layout_width="match_parent"

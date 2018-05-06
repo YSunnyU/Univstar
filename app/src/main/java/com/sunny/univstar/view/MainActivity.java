@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        setTitleTheme(this,true);
         fragmentRepeat(R.id.container, MasterFragment.class);
     }
 
@@ -55,18 +56,27 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home_master_btn:
+                headToolbar.setVisibility(View.VISIBLE);
+
                 fragmentRepeat(R.id.container, MasterFragment.class);
                 break;
             case R.id.home_work_btn:
+                headToolbar.setVisibility(View.VISIBLE);
+
                 fragmentRepeat(R.id.container, WorkFragment.class);
                 break;
             case R.id.home_valuable_btn:
+                headToolbar.setVisibility(View.VISIBLE);
+
                 fragmentRepeat(R.id.container, ValuableFragment.class);
                 break;
             case R.id.home_notice_btn:
+                headToolbar.setVisibility(View.VISIBLE);
+
                 fragmentRepeat(R.id.container, NoticeFragment.class);
                 break;
             case R.id.home_myself_btn:
+                headToolbar.setVisibility(View.GONE);
                 fragmentRepeat(R.id.container, MySelfFragment.class);
                 break;
         }
