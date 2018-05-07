@@ -134,4 +134,6 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
         edit.putString("userId",registerCodeEntity.getData().getId()+"");
         edit.commit();
     }
+
+
 }

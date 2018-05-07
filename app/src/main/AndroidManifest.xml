@@ -25,6 +25,7 @@
         <activity android:name=".view.preference.PreferenceActivity" />
         <activity android:name=".view.personal.activity.RegisterActivity" />
         <activity android:name=".view.personal.activity.PerfectUserInfoActivity" />
+        <activity android:name=".view.teachertype.activity.FindTeacherActivity"></activity>
     </application>
 
 </manifest>

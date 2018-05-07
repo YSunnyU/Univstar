@@ -1,5 +1,6 @@
 package com.sunny.univstar.model;
 
+import com.sunny.univstar.model.service.FindTeacherService;
 import com.sunny.univstar.model.service.HomeNoticeService;
 import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.PersonalRegisterService;
@@ -24,5 +25,10 @@ public class HomeModel implements IHomeModel{
     @Override
     public PersonalRegisterService getPersonalRegister() {
         return RetrofitUtils.getInstance().getPersonalRegisterService();
+    }
+
+    @Override
+    public FindTeacherService getFindTeacher() {
+        return RetrofitUtils.getInstance().getFindTeacherService();
     }
 }

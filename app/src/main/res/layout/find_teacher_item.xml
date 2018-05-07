@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp">
+
+    <LinearLayout
+        android:layout_width="162dp"
+        android:layout_height="145dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/find_teacher_img"
+            android:layout_width="162dp"
+            android:layout_height="92dp" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#333333"
+                android:textSize="14dp"
+                android:id="@+id/find_teacher_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/find_teacher_vip_img"
+                android:layout_marginLeft="5dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/find_teache_type"
+            android:textSize="12dp"
+            android:textColor="#999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

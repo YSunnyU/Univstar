@@ -1,5 +1,6 @@
 package com.sunny.univstar.model;
 
+import com.sunny.univstar.model.service.FindTeacherService;
 import com.sunny.univstar.model.service.HomeNoticeService;
 import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.PersonalRegisterService;
@@ -12,4 +13,5 @@ public interface IHomeModel {
     IHomeWork getWorkData();
     HomeNoticeService getHomeNotice();
     PersonalRegisterService getPersonalRegister();
+    FindTeacherService getFindTeacher();
 }
