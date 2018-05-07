@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     //    fragment复用
-    protected BaseFragment fragmentRepeat(int contaired, Class<? extends BaseFragment> baseFragment) {
+    protected BaseFragment fragmentRepeat(int contaired, Class<? extends BaseFragment> baseFragment,Bundle bundle) {
 //        得到一个Fragment管理器
         FragmentManager fragmentManager = getSupportFragmentManager();
 //        得到转换器
@@ -57,6 +57,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
             if (lastFragment != null) {
                 transaction.hide(lastFragment);
+            }
+            if (bundle!=null){
+                fragmentByTag.setArguments(bundle);
             }
             transaction.show(fragmentByTag);
         } catch (InstantiationException e) {

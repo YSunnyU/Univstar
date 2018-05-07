@@ -2,12 +2,18 @@ package com.sunny.univstar.view.work.fragment;
 
 
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,30 +28,59 @@ import com.sunny.univstar.view.work.adapter.HomeWorkAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static com.sunny.univstar.R.id.home_work_fragment_capacity_group;
+import static com.sunny.univstar.R.id.home_work_fragment_capacity_line;
+import static com.sunny.univstar.R.id.home_work_fragment_comment_group;
+import static com.sunny.univstar.R.id.home_work_fragment_comment_line;
+import static com.sunny.univstar.R.id.home_work_fragment_listen_group;
+import static com.sunny.univstar.R.id.home_work_fragment_listen_line;
+import static com.sunny.univstar.R.id.work_list;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeWorkView, View.OnClickListener {
+public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeWorkView{
+    @Bind(R.id.home_work_fragment_publishwok_group)
+    LinearLayout homeWorkFragmentPublishwokGroup;
+    @Bind(R.id.home_work_fragment_publishaskwok_group)
+    LinearLayout homeWorkFragmentPublishaskwokGroup;
+    @Bind(R.id.collapsing_tool_bar_test_ctl)
+    CollapsingToolbarLayout collapsingToolBarTestCtl;
+    @Bind(R.id.home_work_fragment_capacity_tv)
+    TextView homeWorkFragmentCapacityTv;
+    @Bind(home_work_fragment_capacity_line)
+    TextView homeWorkFragmentCapacityLine;
+    @Bind(home_work_fragment_capacity_group)
+    RelativeLayout homeWorkFragmentCapacityGroup;
+    @Bind(R.id.home_work_fragment_listen_tv)
+    TextView homeWorkFragmentListenTv;
+    @Bind(home_work_fragment_listen_line)
+    TextView homeWorkFragmentListenLine;
+    @Bind(home_work_fragment_listen_group)
+    RelativeLayout homeWorkFragmentListenGroup;
+    @Bind(R.id.home_work_fragment_comment_tv)
+    TextView homeWorkFragmentCommentTv;
+    @Bind(home_work_fragment_comment_line)
+    TextView homeWorkFragmentCommentLine;
+    @Bind(home_work_fragment_comment_group)
+    RelativeLayout homeWorkFragmentCommentGroup;
+    @Bind(R.id.id_appbarlayout)
+    AppBarLayout idAppbarlayout;
+    @Bind(work_list)
+    RecyclerView workList;
+    @Bind(R.id.myMainScrollView)
+    NestedScrollView myMainScrollView;
+    @Bind(R.id.scrollview)
+    CoordinatorLayout scrollview;
     private HomeWorkContract.HomeWorkPreference preferencel;
     private HomeWorkAdapter mAdapter;
-    private List<Object> mList;
-    private RecyclerView work_list;
-    private View inflate;
-    private View inflate2;
-    private LinearLayout listHeader;
-    private View header_view;
-//    头部选择蓝
-    private TextView home_work_fragment_capacity_tv;
-    private TextView home_work_fragment_capacity_line;
-    private RelativeLayout home_work_fragment_capacity_group;
-    private TextView home_work_fragment_listen_tv;
-    private TextView home_work_fragment_listen_line;
-    private RelativeLayout home_work_fragment_listen_group;
-    private TextView home_work_fragment_comment_tv;
-    private TextView home_work_fragment_comment_line;
-    private RelativeLayout home_work_fragment_comment_group;
+    private List<HomeWokListModel.DataBean.ListBean> mList;
+
     private SweetAlertDialog pDialog;
 
     @Override
@@ -55,19 +90,6 @@ public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeW
 
     @Override
     protected void init() {
-//        初始化导航栏
-//        home_work_fragment_capacity_tv = getView().findViewById(R.id.home_work_fragment_capacity_tv);
-//            home_work_fragment_capacity_line = getView().findViewById(R.id.home_work_fragment_capacity_line);
-//            home_work_fragment_capacity_group = getView().findViewById(R.id.home_work_fragment_capacity_group);
-//        home_work_fragment_capacity_group.setOnClickListener(this);
-//            home_work_fragment_listen_tv = getView().findViewById(R.id.home_work_fragment_listen_tv);
-//            home_work_fragment_listen_line = getView().findViewById(R.id.home_work_fragment_listen_line);
-//            home_work_fragment_listen_group = getView().findViewById(R.id.home_work_fragment_listen_group);
-//        home_work_fragment_listen_group.setOnClickListener(this);
-//            home_work_fragment_comment_tv = getView().findViewById(R.id.home_work_fragment_comment_tv);
-//            home_work_fragment_comment_line = getView().findViewById(R.id.home_work_fragment_comment_line);
-//            home_work_fragment_comment_group = getView().findViewById(R.id.home_work_fragment_comment_group);
-//        home_work_fragment_comment_group.setOnClickListener(this);
 //        加载时的弹出DiaLog
         pDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -78,21 +100,15 @@ public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeW
 //        初始化数据
         mList = new ArrayList();
         mAdapter = new HomeWorkAdapter(mList, getContext());
-        work_list = getView().findViewById(R.id.work_list);
-        inflate = LayoutInflater.from(getContext()).inflate(R.layout.work_list_head_item, null);
-        inflate2 = LayoutInflater.from(getContext()).inflate(R.layout.work_list_content_item, null);
-//        header_view = LayoutInflater.from(getContext()).inflate(R.layout.work_list_head_item,null);
-        mAdapter.addHeaderView(inflate);
-//        listHeader = getView().findViewById(R.layout.work_list_head_item);
 
 
 //        设置RecyclerView样式
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        work_list.setLayoutManager(linearLayoutManager);
-        work_list.setAdapter(mAdapter);
+        workList.setLayoutManager(linearLayoutManager);
+        workList.setAdapter(mAdapter);
 
         preferencel = new HomeWorkPresenter(this);
-        preferencel.sendWorkData(getContext(), 1,2, 20);
+        preferencel.sendWorkData(getContext(), 1, 2, 20);
     }
 
     @Override
@@ -115,62 +131,72 @@ public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeW
             for (HomeWokListModel.DataBean.ListBean listBean : list) {
                 Log.e("listBean--List", listBean.getContent());
             }
-        }else {
+        } else {
 
         }
     }
 
+
+
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-//            智能筛选
-            case R.id.home_work_fragment_capacity_group:
-//                点击智能筛选弹出DiaLog并且下次不可点击以及重新加载
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick({home_work_fragment_capacity_group, home_work_fragment_listen_group, home_work_fragment_comment_group})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case home_work_fragment_capacity_group:
                 pDialog.show();
 //                请求数据
                 preferencel = new HomeWorkPresenter(this);
                 preferencel.sendWorkData(getContext(), 1, 0, 20);
-                home_work_fragment_capacity_line.setVisibility(View.VISIBLE);
-                    home_work_fragment_comment_line.setVisibility(View.INVISIBLE);
-                   home_work_fragment_listen_line.setVisibility(View.INVISIBLE);
+                homeWorkFragmentCapacityLine.setVisibility(View.VISIBLE);
+                homeWorkFragmentCommentLine.setVisibility(View.GONE);
+                homeWorkFragmentListenLine.setVisibility(View.GONE);
 //                    ((MessageHolder) holder).home_work_fragment_capacity_tv.setTextSize(20);
 //                    ((MessageHolder) holder).home_work_fragment_capacity_tv.setTextColor(Color.parseColor("#333333"));
-                    home_work_fragment_capacity_group.setEnabled(false);
-                    home_work_fragment_comment_group.setEnabled(true);
-                    home_work_fragment_listen_group.setEnabled(true);
+                homeWorkFragmentCapacityGroup.setEnabled(false);
+                homeWorkFragmentCommentGroup.setEnabled(true);
+                homeWorkFragmentListenGroup.setEnabled(true);
                 break;
-//            最新点评
-
-            case R.id.home_work_fragment_comment_group:
-//                点击最新点评弹出DiaLog并且下次不可点击以及重新加载
+            case home_work_fragment_listen_group:
                 pDialog.show();
 //                请求数据
                 preferencel = new HomeWorkPresenter(this);
                 preferencel.sendWorkData(getContext(), 1, 2, 20);
-                home_work_fragment_capacity_line.setVisibility(View.INVISIBLE);
-                home_work_fragment_comment_line.setVisibility(View.VISIBLE);
-                home_work_fragment_listen_line.setVisibility(View.INVISIBLE);
+                homeWorkFragmentCapacityLine.setVisibility(View.GONE);
+                homeWorkFragmentCommentLine.setVisibility(View.GONE);
+                homeWorkFragmentListenLine.setVisibility(View.VISIBLE);
 //                    ((MessageHolder) holder).home_work_fragment_capacity_tv.setTextSize(20);
 //                    ((MessageHolder) holder).home_work_fragment_capacity_tv.setTextColor(Color.parseColor("#333333"));
-                home_work_fragment_capacity_group.setEnabled(true);
-                home_work_fragment_comment_group.setEnabled(false);
-                home_work_fragment_listen_group.setEnabled(true);
+                homeWorkFragmentCapacityGroup.setEnabled(true);
+                homeWorkFragmentCommentGroup.setEnabled(false);
+                homeWorkFragmentListenGroup.setEnabled(true);
                 break;
-//            偷听最多
-            case R.id.home_work_fragment_listen_group:
-//                点击偷听最多弹出DiaLog并且下次不可点击以及重新加载
+            case home_work_fragment_comment_group:
+                //                点击偷听最多弹出DiaLog并且下次不可点击以及重新加载
                 pDialog.show();
 //                请求数据
                 preferencel = new HomeWorkPresenter(this);
                 preferencel.sendWorkData(getContext(), 1, 1, 20);
-                home_work_fragment_capacity_line.setVisibility(View.INVISIBLE);
-                home_work_fragment_comment_line.setVisibility(View.INVISIBLE);
-                home_work_fragment_listen_line.setVisibility(View.VISIBLE);
+                homeWorkFragmentCapacityLine.setVisibility(View.GONE);
+                homeWorkFragmentCommentLine.setVisibility(View.VISIBLE);
+                homeWorkFragmentListenLine.setVisibility(View.GONE);
 //                    ((MessageHolder) holder).home_work_fragment_capacity_tv.setTextSize(20);
 //                    ((MessageHolder) holder).home_work_fragment_capacity_tv.setTextColor(Color.parseColor("#333333"));
-                home_work_fragment_capacity_group.setEnabled(true);
-                home_work_fragment_comment_group.setEnabled(true);
-                home_work_fragment_listen_group.setEnabled(false);
+                homeWorkFragmentCapacityGroup.setEnabled(true);
+                homeWorkFragmentCommentGroup.setEnabled(true);
+                homeWorkFragmentListenGroup.setEnabled(false);
                 break;
         }
     }

@@ -7,7 +7,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -51,13 +50,14 @@ class HomeWorkContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 0) {
+        /*if (viewType == 0) {
             View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.work_list_content_item,parent,false);
             return new HeadHolder(inflate);
         }else {
             View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_work_content_item, parent, false);
             return new ContentHolder(inflate);
-        }
+        }*/
+            return null;
     }
 
     @Override

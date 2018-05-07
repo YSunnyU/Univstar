@@ -2,12 +2,9 @@ package com.sunny.univstar.view.notice.fragment;
 
 
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseFragment;
-
-import butterknife.Bind;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,8 +12,7 @@ import butterknife.Bind;
 public class NoticeFragment extends BaseFragment {
 
 
-    @Bind(R.id.texy)
-    TextView texy;
+
 
     @Override
     protected int getLayoutId() {

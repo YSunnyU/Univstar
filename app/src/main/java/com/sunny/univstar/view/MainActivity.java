@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        fragmentRepeat(R.id.container, MasterFragment.class);
+        fragmentRepeat(R.id.container, MasterFragment.class,null);
     }
 
     @Override
@@ -55,19 +55,19 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home_master_btn:
-                fragmentRepeat(R.id.container, MasterFragment.class);
+                fragmentRepeat(R.id.container, MasterFragment.class,null);
                 break;
             case R.id.home_work_btn:
-                fragmentRepeat(R.id.container, WorkFragment.class);
+                fragmentRepeat(R.id.container, WorkFragment.class,null);
                 break;
             case R.id.home_valuable_btn:
-                fragmentRepeat(R.id.container, ValuableFragment.class);
+                fragmentRepeat(R.id.container, ValuableFragment.class,null);
                 break;
             case R.id.home_notice_btn:
-                fragmentRepeat(R.id.container, NoticeFragment.class);
+                fragmentRepeat(R.id.container, NoticeFragment.class,null);
                 break;
             case R.id.home_myself_btn:
-                fragmentRepeat(R.id.container, MySelfFragment.class);
+                fragmentRepeat(R.id.container, MySelfFragment.class,null);
                 break;
         }
     }

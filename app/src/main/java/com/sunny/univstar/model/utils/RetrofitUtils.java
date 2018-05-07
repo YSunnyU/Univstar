@@ -15,6 +15,7 @@ import com.sunny.univstar.model.service.HomeMasterService;
 import com.sunny.univstar.model.service.IAppToken;
 import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.PreferenceService;
+import com.sunny.univstar.model.service.HomeValuableService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -176,6 +177,10 @@ public class RetrofitUtils {
     //    名师
     public HomeMasterService getHomeMasterService() {
         return retrofit.create(HomeMasterService.class);
+    }
+//    宝典
+    public HomeValuableService getHomeValuableService(){
+        return retrofit.create(HomeValuableService.class);
     }
 
 }
