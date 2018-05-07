@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/notice_start"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/notice_start_text"
+                android:textColor="#333"
+                android:textSize="16sp"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null" />
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:layout_height="1dp"
+                android:background="#333"/>
+        </LinearLayout>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:text="至"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/notice_end"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/notice_end_text"
+                android:textColor="#333"
+                android:textSize="16sp"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null" />
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:layout_height="1dp"
+                android:background="#333"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_marginTop="20dp"
+        android:background="#d7d7d7"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/notice_time_resetting"
+            android:text="重置"
+            android:textColor="#606060"
+            android:background="@drawable/notice_time_btn_no"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/notice_time_yes"
+            android:textColor="#fff"
+            android:text="确定"
+            android:background="@drawable/notice_time_btn"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

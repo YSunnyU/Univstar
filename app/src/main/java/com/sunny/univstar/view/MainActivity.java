@@ -25,15 +25,16 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.container)
     FrameLayout container;
     @Bind(R.id.home_master_btn)
-    RadioButton homeMasterBtn;
+    public RadioButton homeMasterBtn;
     @Bind(R.id.home_work_btn)
-    RadioButton homeWorkBtn;
+    public RadioButton homeWorkBtn;
     @Bind(R.id.home_valuable_btn)
-    RadioButton homeValuableBtn;
+    public RadioButton homeValuableBtn;
     @Bind(R.id.home_notice_btn)
-    RadioButton homeNoticeBtn;
+    public RadioButton homeNoticeBtn;
     @Bind(R.id.home_myself_btn)
-    RadioButton homeMyselfBtn;
+    public RadioButton homeMyselfBtn;
+
 
     @Override
     protected int getLayoutId() {
@@ -42,7 +43,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        fragmentRepeat(R.id.container, MasterFragment.class,null);
+        setTitleTheme(this,true);
+        fragmentRepeat(R.id.container, MasterFragment.class);
     }
 
     @Override
@@ -55,20 +57,37 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home_master_btn:
-                fragmentRepeat(R.id.container, MasterFragment.class,null);
+                headToolbar.setVisibility(View.VISIBLE);
+                fragmentRepeat(R.id.container, MasterFragment.class);
                 break;
             case R.id.home_work_btn:
-                fragmentRepeat(R.id.container, WorkFragment.class,null);
+                homeWork();
                 break;
             case R.id.home_valuable_btn:
-                fragmentRepeat(R.id.container, ValuableFragment.class,null);
+                valuable();
                 break;
             case R.id.home_notice_btn:
-                fragmentRepeat(R.id.container, NoticeFragment.class,null);
+                notice();
+
                 break;
             case R.id.home_myself_btn:
-                fragmentRepeat(R.id.container, MySelfFragment.class,null);
+                headToolbar.setVisibility(View.GONE);
+                fragmentRepeat(R.id.container, MySelfFragment.class);
                 break;
         }
+    }
+
+    public void notice() {
+        headToolbar.setVisibility(View.VISIBLE);
+        fragmentRepeat(R.id.container, NoticeFragment.class);
+    }
+
+    public void homeWork(){
+        headToolbar.setVisibility(View.VISIBLE);
+        fragmentRepeat(R.id.container, WorkFragment.class);
+    }
+    public void valuable(){
+        headToolbar.setVisibility(View.VISIBLE);
+        fragmentRepeat(R.id.container, ValuableFragment.class);
     }
 }

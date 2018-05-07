@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sunny.univstar.view.teachertype.activity.FindTeacherActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/find_teacher_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/register_return" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="名师"
+            android:textColor="#0073ff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#f8f8f8"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/find_great_teacher"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/find_great_teacher_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="大师" />
+
+            <TextView
+                android:id="@+id/find_great_teacher_line"
+                android:layout_width="20dp"
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="#FFD235"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/find_famous_teacher"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/find_famous_teacher_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="名师" />
+
+            <TextView
+                android:id="@+id/find_famous_teacher_line"
+                android:layout_width="20dp"
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="#FFD235"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/find_daren_teacher"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/find_daren_teacher_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="达人" />
+
+            <TextView
+                android:id="@+id/find_daren_teacher_line"
+                android:layout_width="20dp"
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:id="@+id/find_teacher_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

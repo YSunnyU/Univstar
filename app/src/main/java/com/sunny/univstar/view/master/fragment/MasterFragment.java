@@ -1,14 +1,12 @@
 package com.sunny.univstar.view.master.fragment;
 
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,16 +17,17 @@ import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseFragment;
 import com.sunny.univstar.contract.HomeMasterContract;
 import com.sunny.univstar.presenter.HomeMasterPresenter;
+import com.sunny.univstar.view.MainActivity;
 import com.sunny.univstar.view.master.fragment.adapter.HomewoksAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.LiveCoursesAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.UserBeanAdapter;
 import com.sunny.univstar.view.master.fragment.autoui.MyScrollView;
+import com.sunny.univstar.view.teachertype.activity.FindTeacherActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.sunny.univstar.R.id.home_master_work_listView;
@@ -100,6 +99,7 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     private List<HomeMasterBean.DataBean.UsersBean> usersBeanList;
     private List<HomeMasterBean.DataBean.HomewoksBean> homewoksBeanList;
     private List<HomeMasterBean.DataBean.LiveCoursesBean> liveCoursesBeanList;
+    private MainActivity activity;
 
     @Override
     protected int getLayoutId() {
@@ -108,6 +108,7 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
 
     @Override
     protected void init() {
+        activity = (MainActivity) getActivity();
         homeMasterFragmentSwipe = getView().findViewById(R.id.home_master_fragment_swipe);
 //        实例化P 层
         homeMasterInPresenter = new HomeMasterPresenter(this);
@@ -139,14 +140,21 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
             case R.id.masterFlyBanner:
                 break;
             case R.id.home_master_find_group:
+                startActivity(new Intent(getContext(), FindTeacherActivity.class));
                 break;
             case R.id.home_master_look_group:
                 break;
             case R.id.home_master_work_group:
+                activity.homeWorkBtn.setChecked(true);
+                activity.homeWork();
                 break;
             case R.id.home_master_chat_group:
+                activity.homeValuableBtn.setChecked(true);
+                activity.valuable();
                 break;
             case R.id.home_master_learn_group:
+                activity.homeNoticeBtn.setChecked(true);
+                activity.notice();
                 break;
             case R.id.home_master_recommend_more:
                 break;
@@ -169,13 +177,25 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     public void showHomeMasterData(HomeMasterBean homeMasterBean) {
 //        Log.d("MasterFragment", "homeMasterBean.getData().getHomewoks().size():" + homeMasterBean.getData().getHomewoks().size());
 //        得到首页轮播图的集合
-        systemAdsBeanList = homeMasterBean.getData().getSystemAds();
+        if (homeMasterBean.getData().getSystemAds() != null && homeMasterBean.getData().getSystemAds().size() > 0)
+            systemAdsBeanList = homeMasterBean.getData().getSystemAds();
+        else
+            return;
 //        得到名师推荐集合
-        usersBeanList = homeMasterBean.getData().getUsers();
+        if (homeMasterBean.getData().getUsers() != null && homeMasterBean.getData().getUsers().size() > 0)
+            usersBeanList = homeMasterBean.getData().getUsers();
+        else
+            return;
 //        得到推荐作业集合
-        homewoksBeanList = homeMasterBean.getData().getHomewoks();
+        if (homeMasterBean.getData().getHomewoks() != null && homeMasterBean.getData().getHomewoks().size() > 0)
+            homewoksBeanList = homeMasterBean.getData().getHomewoks();
+        else
+            return;
 //        得到课程推荐集合
-        liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
+        if (homeMasterBean.getData().getLiveCourses() != null && homeMasterBean.getData().getLiveCourses().size() > 0)
+            liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
+        else
+            return;
         //    制作轮播图UI界面
         flayBannerData();
 //        制作名师推荐UI界面
@@ -221,19 +241,5 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
             flayBanner_list.add(systemAdsBeanList.get(i).getMobileImgUrl());
         }
         masterFlyBanner.setImagesUrl(flayBanner_list);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

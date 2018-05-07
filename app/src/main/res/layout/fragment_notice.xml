@@ -2,14 +2,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.sunny.univstar.view.notice.fragment.NoticeFragment">
 
     <TextView
-        android:gravity="center"
-        android:textSize="15sp"
-        android:textColor="#0077ff"
-        android:text="时间筛选"
+        android:id="@+id/time_bolting"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="时间筛选"
+        android:textColor="#0077ff"
+        android:textSize="15sp" />
+
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/notice_pullRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/notice_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </com.baoyz.widget.PullRefreshLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/net_work_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@mipmap/empty_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="30dp"
+            android:textColor="#333"
+            android:text="暂无内容"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>
