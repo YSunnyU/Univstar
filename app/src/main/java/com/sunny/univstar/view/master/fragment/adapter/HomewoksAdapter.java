@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +67,15 @@ public class HomewoksAdapter extends RecyclerView.Adapter<HomewoksAdapter.Holder
         holder.master_user_time.setText(sdf.format(date));
         holder.master_user_from.setText(homewoksBeanList.get(position).getSource());
         holder.master_user_content.setText(homewoksBeanList.get(position).getContent());
+        if (homewoksBeanList.get(position).getPicProperty() != null && !"".equals(homewoksBeanList.get(position).getPicProperty()))
+        {
+            String picProperty = homewoksBeanList.get(position).getPicProperty();
+            String[] split = picProperty.split("_");
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+            layoutParams.leftMargin = 155;
+            layoutParams.topMargin = 40;
+            holder.master_user_content_image.setLayoutParams(layoutParams);
+        }
         Glide.with(context).load(homewoksBeanList.get(position).getCoverImg()).asBitmap().into(holder.master_user_content_image);
         if (homewoksBeanList.get(position).getPraiseNum() > 0){
             holder.master_praise_img.setImageResource(R.mipmap.reward_active);

@@ -1,6 +1,9 @@
 package com.sunny.univstar.view.work.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.model.entity.HomeWokListModel;
 
@@ -19,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.sunny.univstar.app.App.context;
 
 /**
  * Created by DELL on 2018/5/3.
@@ -52,8 +59,21 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
-        Glide.with(mContext).load(data.get(position).getPhoto()).asBitmap().into(holder.user_img);
+    public void onBindViewHolder(final Holder holder, int position) {
+        Glide.with(mContext)
+                .load(data.get(position).getPhoto())
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+                .into(new BitmapImageViewTarget(holder.user_img){
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        super.setResource(resource);
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                        circularBitmapDrawable.setCircular(true); //设置圆角弧度
+                        holder.user_img.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
         holder.user_name.setText(data.get(position).getNickname());
         //            时间转换
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
@@ -61,9 +81,17 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
         holder.user_time.setText(sdf.format(date));
         holder.user_from.setText(data.get(position).getSource());
         holder.user_content.setText(data.get(position).getContent());
+        if (data.get(position).getPicProperty() != null && !"".equals(data.get(position).getPicProperty()))
+        {
+            String picProperty = data.get(position).getPicProperty();
+            String[] split = picProperty.split("_");
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+            layoutParams.leftMargin = 155;
+            layoutParams.topMargin = 40;
+            holder.user_content_image.setLayoutParams(layoutParams);
+        }
         if (!"图片".equals(data.get(position).getWorksType())) {
             Glide.with(mContext).load(R.mipmap.play_music_bg).into(holder.user_content_image);
-
         } else if ("图片".equals(data.get(position).getWorksType())) {
             Glide.with(mContext).load(data.get(position).getCoverImg()).into(holder.user_content_image);
         }
@@ -72,7 +100,20 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
         holder.gift.setText(data.get(position).getGiftNum()+"");
         if (data.get(position).getTRealname()!=null){
             holder.user_son.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(data.get(position).getTPhoto()).asBitmap().into(holder.user_son_image);
+            Glide.with(mContext)
+                    .load(data.get(position).getTPhoto())
+                    .asBitmap()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+                    .into(new BitmapImageViewTarget(holder.user_son_image){
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            super.setResource(resource);
+                            RoundedBitmapDrawable circularBitmapDrawable =
+                                    RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                            circularBitmapDrawable.setCircular(true); //设置圆角弧度
+                            holder.user_son_image.setImageDrawable(circularBitmapDrawable);
+                        }
+                    });
             holder.user_son_name.setText(data.get(position).getTRealname());
             holder.user_son_detail.setText(data.get(position).getTIntro());
 

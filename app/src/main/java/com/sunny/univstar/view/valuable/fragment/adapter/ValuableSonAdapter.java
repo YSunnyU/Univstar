@@ -1,6 +1,10 @@
 package com.sunny.univstar.view.valuable.fragment.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.view.valuable.fragment.HomeValuableBean;
 
@@ -38,9 +44,38 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(final Holder holder, int position) {
         if (list.size()>0) {
-            Glide.with(context).load(list.get(position).getPhoto()).into(holder.user_img);
+            Glide.with(context)
+                    .load(list.get(position).getPhoto())
+                    .asBitmap()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+                    .into(new BitmapImageViewTarget(holder.user_img){
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            super.setResource(resource);
+                            RoundedBitmapDrawable circularBitmapDrawable =
+                                    RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                            circularBitmapDrawable.setCircular(true); //设置圆角弧度
+                            holder.user_img.setImageDrawable(circularBitmapDrawable);
+                        }
+                    });
+            if (list.get(position).getPicProperty() != null && !"".equals(list.get(position).getPicProperty()))
+            {
+                String picProperty = list.get(position).getPicProperty();
+                String[] split = picProperty.split("_");
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+                layoutParams.leftMargin = 155;
+                layoutParams.topMargin = 40;
+                holder.user_content_image.setLayoutParams(layoutParams);
+            }
+            if (list.get(position).getFavoriteNum() > 0){
+                holder.gift_img.setImageResource(R.mipmap.reward_active);
+                holder.gift.setTextColor(Color.parseColor("#ff0000"));
+            }else {
+                holder.gift_img.setImageResource(R.mipmap.reward_normal);
+            }
+            holder.gift.setText(list.get(position).getFavoriteNum()+"");
             holder.user_name.setText(list.get(position).getNickname());
             holder.value_btn.setText(list.get(position).getContentType());
             holder.user_title.setText(list.get(position).getTitle());
