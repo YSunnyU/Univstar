@@ -73,7 +73,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     private final int PHONECODE = 1;
     //    验证验证码
     private final int CODECODE = 2;
-
+    private int f = 1;
     private int codeInt = 60;
     private boolean isCode = true;
     private Timer timer;

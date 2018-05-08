@@ -146,5 +146,6 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
         edit.commit();
     }
 
+    private int f = 1;
 
 }
