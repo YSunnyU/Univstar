@@ -18,6 +18,7 @@ import com.sunny.univstar.base.BaseFragment;
 import com.sunny.univstar.contract.HomeMasterContract;
 import com.sunny.univstar.presenter.HomeMasterPresenter;
 import com.sunny.univstar.view.MainActivity;
+import com.sunny.univstar.view.livecourse.activity.LiveCourseActivity;
 import com.sunny.univstar.view.master.fragment.adapter.HomewoksAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.LiveCoursesAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.UserBeanAdapter;
@@ -143,6 +144,7 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
                 startActivity(new Intent(getContext(), FindTeacherActivity.class));
                 break;
             case R.id.home_master_look_group:
+                startActivity(new Intent(getContext(), LiveCourseActivity.class));
                 break;
             case R.id.home_master_work_group:
                 activity.homeWorkBtn.setChecked(true);

@@ -66,7 +66,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (lastFragment != null) {
                 transaction.hide(lastFragment);
             }
-
             transaction.show(fragmentByTag);
         } catch (InstantiationException e) {
             e.printStackTrace();

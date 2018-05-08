@@ -17,6 +17,10 @@ import com.sunny.univstar.model.service.HomeNoticeService;
 import com.sunny.univstar.model.service.HomeValuableService;
 import com.sunny.univstar.model.service.IAppToken;
 import com.sunny.univstar.model.service.IHomeWork;
+import com.sunny.univstar.model.service.LiveCourseDetailedService;
+import com.sunny.univstar.model.service.LiveCourseService;
+import com.sunny.univstar.model.service.MasterDetailService;
+import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
@@ -198,5 +202,14 @@ public class RetrofitUtils {
     }
     public PersonalLoginService getPersonalLoginService(){
         return retrofit.create(PersonalLoginService.class);
+    }
+    public LiveCourseService getLiveCourseService(){
+        return retrofit.create(LiveCourseService.class);
+    }
+    public MasterDetailService getMasterDatailService(){
+        return retrofit.create(MasterDetailService.class);
+    }
+    public LiveCourseDetailedService getLiveCourseDetailedService(){
+        return retrofit.create(LiveCourseDetailedService.class);
     }
 }

@@ -1,14 +1,21 @@
 package com.sunny.univstar.view.master.fragment.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.view.master.fragment.HomeMasterBean;
 
@@ -38,8 +45,21 @@ public class HomewoksAdapter extends RecyclerView.Adapter<HomewoksAdapter.Holder
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
-        Glide.with(context).load(homewoksBeanList.get(position).getPhoto()).asBitmap().into(holder.master_user_img);
+    public void onBindViewHolder(final Holder holder, int position) {
+        Glide.with(context)
+                .load(homewoksBeanList.get(position).getPhoto())
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+                .into(new BitmapImageViewTarget(holder.master_user_img){
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        super.setResource(resource);
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                        circularBitmapDrawable.setCircular(true); //设置圆角弧度
+                        holder.master_user_img.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
         holder.master_user_name.setText(homewoksBeanList.get(position).getNickname());
 //            时间转换
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
@@ -47,7 +67,22 @@ public class HomewoksAdapter extends RecyclerView.Adapter<HomewoksAdapter.Holder
         holder.master_user_time.setText(sdf.format(date));
         holder.master_user_from.setText(homewoksBeanList.get(position).getSource());
         holder.master_user_content.setText(homewoksBeanList.get(position).getContent());
+        if (homewoksBeanList.get(position).getPicProperty() != null && !"".equals(homewoksBeanList.get(position).getPicProperty()))
+        {
+            String picProperty = homewoksBeanList.get(position).getPicProperty();
+            String[] split = picProperty.split("_");
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+            layoutParams.leftMargin = 155;
+            layoutParams.topMargin = 40;
+            holder.master_user_content_image.setLayoutParams(layoutParams);
+        }
         Glide.with(context).load(homewoksBeanList.get(position).getCoverImg()).asBitmap().into(holder.master_user_content_image);
+        if (homewoksBeanList.get(position).getPraiseNum() > 0){
+            holder.master_praise_img.setImageResource(R.mipmap.reward_active);
+            holder.master_user_reward.setTextColor(Color.parseColor("#ff0000"));
+        }else {
+            holder.master_praise_img.setImageResource(R.mipmap.reward_normal);
+        }
         holder.master_user_praise.setText(homewoksBeanList.get(position).getPraiseNum() + "");
         holder.master_user_reward.setText(homewoksBeanList.get(position).getGiftNum() + "");
     }
@@ -69,7 +104,7 @@ public class HomewoksAdapter extends RecyclerView.Adapter<HomewoksAdapter.Holder
         public TextView master_user_praise;
         public TextView master_user_reward;
         public TextView master_user_share;
-
+        public ImageView master_praise_img;
         public Holder(View itemView) {
             super(itemView);
             this.master_user_img = (ImageView) itemView.findViewById(R.id.master_user_img);
@@ -83,6 +118,7 @@ public class HomewoksAdapter extends RecyclerView.Adapter<HomewoksAdapter.Holder
             this.master_user_praise = (TextView) itemView.findViewById(R.id.master_user_praise);
             this.master_user_reward = (TextView) itemView.findViewById(R.id.master_user_reward);
             this.master_user_share = (TextView) itemView.findViewById(R.id.master_user_share);
+            this.master_praise_img = (ImageView) itemView.findViewById(R.id.master_praise_img);
         }
     }
 

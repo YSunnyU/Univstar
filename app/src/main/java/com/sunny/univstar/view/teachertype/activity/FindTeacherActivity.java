@@ -1,5 +1,6 @@
 package com.sunny.univstar.view.teachertype.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -81,6 +82,18 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
         findTeacherPresneter.sendFindTeacher(map);
         findTeacherList.setLayoutManager(new GridLayoutManager(this,2));
         adapter = new FindTeacherAdapter(mList);
+        adapter.setOnClickItem(new FindTeacherAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                Intent intent = new Intent(FindTeacherActivity.this,FindTeacherDetailsActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("teacherId",mList.get(0).getData().getList().get(position));
+//                intent.putExtras(bundle);
+                int id68 = mList.get(0).getData().getList().get(position).get_$Id68();
+                intent.putExtra("teacherId",mList.get(0).getData().getList().get(position).get_$Id68()+"");
+                startActivity(intent);
+            }
+        });
         findTeacherList.setAdapter(adapter);
     }
 
@@ -126,8 +139,8 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
                 map.put("userType",SORT_TYPE_DAREN);
                 map.put("page",1+"");
                 findTeacherPresneter.sendFindTeacher(map);
-                findGreatTeacherLine.setVisibility(View.INVISIBLE);
-                findFamousTeacherLine.setVisibility(View.INVISIBLE);
+                findGreatTeacherLine.setVisibility(View.GONE);
+                findFamousTeacherLine.setVisibility(View.GONE);
                 findDarenTeacherLine.setVisibility(View.VISIBLE);
                 break;
         }

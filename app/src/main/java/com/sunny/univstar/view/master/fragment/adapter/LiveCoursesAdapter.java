@@ -1,6 +1,9 @@
 package com.sunny.univstar.view.master.fragment.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.view.master.fragment.HomeMasterBean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,11 +43,26 @@ public class LiveCoursesAdapter extends RecyclerView.Adapter<LiveCoursesAdapter.
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
-        Glide.with(context).load(liveCoursesBeanList.get(position).getCoverImg()).asBitmap().into(holder.master_live_image);
+    public void onBindViewHolder(final Holder holder, int position) {
+        Glide.with(context)
+                .load(liveCoursesBeanList.get(position).getCoverImg())
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+                .into(new BitmapImageViewTarget(holder.master_live_image){
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        super.setResource(resource);
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                        circularBitmapDrawable.setCornerRadius(10); //设置圆角弧度
+                        holder.master_live_image.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
         holder.master_live_name.setText(liveCoursesBeanList.get(position).getNickname());
         holder.master_live_type.setText(liveCoursesBeanList.get(position).getType());
-        holder.master_live_content.setText(liveCoursesBeanList.get(position).getEndDate()+"");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = new Date(liveCoursesBeanList.get(position).getStartDate());
+        holder.master_live_content.setText("讲堂开播"+sdf.format(date));
     }
 
     @Override

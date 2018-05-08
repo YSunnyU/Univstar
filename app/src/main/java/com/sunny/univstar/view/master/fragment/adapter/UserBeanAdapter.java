@@ -39,6 +39,13 @@ public class UserBeanAdapter extends RecyclerView.Adapter<UserBeanAdapter.Holder
         Glide.with(context).load(usersBeanList.get(position).getImages()).asBitmap().into(holder.master_user_image);
         holder.master_user_name.setText(usersBeanList.get(position).getNickname());
         holder.master_user_detail.setText(usersBeanList.get(position).getIntro());
+        if (usersBeanList.get(position).getUserType() == 4){
+            holder.master_user_medal.setImageResource(R.mipmap.home_level_vip_red);
+        }else if (usersBeanList.get(position).getUserType() == 3){
+            holder.master_user_medal.setImageResource(R.mipmap.home_level_vip_yellow);
+        }else if (usersBeanList.get(position).getUserType() == 2){
+            holder.master_user_medal.setImageResource(R.mipmap.home_level_vip_blue);
+        }
     }
 
     @Override

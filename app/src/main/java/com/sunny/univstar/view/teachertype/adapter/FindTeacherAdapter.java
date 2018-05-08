@@ -48,7 +48,7 @@ public class FindTeacherAdapter extends RecyclerView.Adapter<FindTeacherAdapter.
                 holder.find_teacher_vip_img.setImageResource(R.mipmap.home_level_vip_yellow);
             else if (mList.get(0).getData().getList().get(position).getUserType() == 2)
                 holder.find_teacher_vip_img.setImageResource(R.mipmap.home_level_vip_blue);
-
+            holder.itemView.setTag(position);
         }
     }
 
@@ -60,10 +60,17 @@ public class FindTeacherAdapter extends RecyclerView.Adapter<FindTeacherAdapter.
             return 0;
         }
     }
-
+    public interface OnClickItem{
+        void onClickItem(View view,int position);
+    }
+    private OnClickItem onClickItem;
+    public void setOnClickItem(OnClickItem onClickItem){
+        this.onClickItem = onClickItem;
+    }
     @Override
     public void onClick(View v) {
-
+        if (onClickItem != null)
+            onClickItem.onClickItem(v,(int)v.getTag());
     }
 
     public class Holder extends RecyclerView.ViewHolder {
