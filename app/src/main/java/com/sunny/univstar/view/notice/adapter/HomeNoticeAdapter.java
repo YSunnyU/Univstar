@@ -21,7 +21,7 @@ import java.util.List;
  * Created by DELL on 2018/5/5.
  */
 
-public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.ViewHolder> {
+public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.ViewHolder> implements View.OnClickListener {
     private List<HomeNoticeEntity.DataBean.ListBean> listData;
     private Context context;
 
@@ -34,6 +34,7 @@ public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_notice_item, parent, false);
+        view.setOnClickListener(this);
         return new ViewHolder(view);
     }
 
@@ -53,6 +54,7 @@ public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.Vi
                     .asBitmap()
                     .into(holder.notice_item_img);
         }
+        holder.itemView.setTag(position);
     }
     //int类型保留一位小数
     private String getPiceDecimal(int reservationNum) {
@@ -63,6 +65,21 @@ public class HomeNoticeAdapter extends RecyclerView.Adapter<HomeNoticeAdapter.Vi
     @Override
     public int getItemCount() {
         return listData.size();
+    }
+
+    public interface OnClickItem{
+        void onClickItem(View view,int position);
+    }
+    private OnClickItem onClickItem;
+    public void setOnClickItem(OnClickItem onClickItem){
+        this.onClickItem = onClickItem;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (onClickItem != null){
+            onClickItem.onClickItem(v,(int)v.getTag());
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

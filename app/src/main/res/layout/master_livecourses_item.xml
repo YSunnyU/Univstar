@@ -46,6 +46,7 @@
             android:textSize="15sp" />
 
         <ImageView
+            android:id="@+id/master_live_vip_img"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="10dp"

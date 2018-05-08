@@ -8,6 +8,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,8 +22,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
+import com.sunny.univstar.contract.FollowPraiseContract;
 import com.sunny.univstar.contract.MasterDetailContract;
 import com.sunny.univstar.model.entity.MasterDetailEntity;
+import com.sunny.univstar.presenter.FollowPraiisePresenter;
 import com.sunny.univstar.presenter.MasterDeatilPresenter;
 import com.sunny.univstar.view.teachertype.adapter.MyTeacherDetailsAdapter;
 
@@ -34,7 +37,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class FindTeacherDetailsActivity extends BaseActivity implements MasterDetailContract.MasterDetailView {
+public class FindTeacherDetailsActivity extends BaseActivity implements MasterDetailContract.MasterDetailView,FollowPraiseContract.FollowPraiseView {
 
 
     @Bind(R.id.masterdetail_coachbtn)
@@ -76,7 +79,9 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
     private MyTeacherDetailsAdapter mAdapter;
     private List<String> mList;
     private MasterDetailContract.MasterDetailPresenter masterDetailPresenter;
-
+    private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
+    private String teacherId;
+    private List<MasterDetailEntity.DataBean.UserBean> mList2;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_find_teacher_details;
@@ -84,12 +89,14 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
 
     @Override
     protected void init() {
+        mList2 = new ArrayList<>();
         mList = new ArrayList<>();
         masterDetailPresenter = new MasterDeatilPresenter(this);
+        followPraisePresenter = new FollowPraiisePresenter(this);
         Intent intent = getIntent();
         SharedPreferences userState = getSharedPreferences("userState", 0);
         String userId = userState.getString("userId", "0");
-        String teacherId = intent.getStringExtra("teacherId");
+        teacherId = intent.getStringExtra("teacherId");
         mAdapter = new MyTeacherDetailsAdapter(mList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         teacherDetailsList.setLayoutManager(linearLayoutManager);
@@ -117,14 +124,32 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    prasre("https://www.univstar.com/v1/m/user/attention",teacherId);
                     teacherDetailsFollowCheck.setText("已关注");
                     teacherDetailsFollowCheck.setTextColor(Color.parseColor("#9c9c9c"));
                 } else {
+                    prasre("https://www.univstar.com/v1/m/user/attention/cancel",teacherId);
+                    teacherDetailsFollowCheck.setTextColor(Color.parseColor("#FFFFFF"));
                     teacherDetailsFollowCheck.setText("关注");
                 }
             }
         });
 
+
+        teacherDetailsPraise.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    prasre2("https://www.univstar.com/v1/m/user/praise",teacherId,"老师");
+                    teacherDetailsPraise.setText((Integer.parseInt(teacherDetailsPraise.getText().toString())+1)+"");
+                    teacherDetailsPraise.setTextColor(Color.parseColor("#ff9100"));
+                }else {
+                    prasre2("https://www.univstar.com/v1/m/user/praise/cancel",teacherId,"老师");
+                    teacherDetailsPraise.setTextColor(Color.parseColor("#FFFFFF"));
+                    teacherDetailsPraise.setText((Integer.parseInt(teacherDetailsPraise.getText().toString())-1)+"");
+                }
+            }
+        });
     }
 
     @Override
@@ -170,6 +195,8 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
     @Override
     public void getMasterDetailData(MasterDetailEntity masterDetailEntity) {
         MasterDetailEntity.DataBean.UserBean user = masterDetailEntity.getData().getUser();
+        mList2.clear();
+        mList2.add(user);
 //            设置主图
         Glide.with(this).load(user.getImages())
                 .asBitmap()
@@ -225,5 +252,33 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
         mList.clear();
         mList.add(user.getDetails());
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getFollowPraise(String msg) {
+        if (!msg.contains("成功")){
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void prasre(String url,String attentionId){
+        SharedPreferences userState = getSharedPreferences("userState", 0);
+        String userId = userState.getString("userId", "0");
+        Map<String,String> map = new HashMap<>();
+        map.put("attentionId",attentionId+"");
+        map.put("loginUserId",userId);
+        followPraisePresenter.sendFollowPraise(url,map);
+    }
+
+    private void prasre2(String url,String attentionId,String type){
+        SharedPreferences userState = getSharedPreferences("userState", 0);
+        String userId = userState.getString("userId", "0");
+        Log.e("userId",userId);
+        Map<String,String> map = new HashMap<>();
+        map.put("userId",attentionId+"");
+        map.put("loginUserId",userId);
+        map.put("id",attentionId+"");
+        map.put("type",type);
+        followPraisePresenter.sendFollowPraise(url,map);
     }
 }

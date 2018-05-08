@@ -19,11 +19,14 @@ import com.sunny.univstar.contract.HomeMasterContract;
 import com.sunny.univstar.presenter.HomeMasterPresenter;
 import com.sunny.univstar.view.MainActivity;
 import com.sunny.univstar.view.livecourse.activity.LiveCourseActivity;
+import com.sunny.univstar.view.livecourse.activity.LiveCourseDetailedActivity;
 import com.sunny.univstar.view.master.fragment.adapter.HomewoksAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.LiveCoursesAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.UserBeanAdapter;
 import com.sunny.univstar.view.master.fragment.autoui.MyScrollView;
+import com.sunny.univstar.view.notice.activity.NoticeDetailedActivity;
 import com.sunny.univstar.view.teachertype.activity.FindTeacherActivity;
+import com.sunny.univstar.view.teachertype.activity.FindTeacherDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,34 +182,38 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     public void showHomeMasterData(HomeMasterBean homeMasterBean) {
 //        Log.d("MasterFragment", "homeMasterBean.getData().getHomewoks().size():" + homeMasterBean.getData().getHomewoks().size());
 //        得到首页轮播图的集合
-        if (homeMasterBean.getData().getSystemAds() != null && homeMasterBean.getData().getSystemAds().size() > 0)
-            systemAdsBeanList = homeMasterBean.getData().getSystemAds();
-        else
-            return;
+        if (homeMasterBean.getCode() == 0) {
+            if (homeMasterBean.getData().getSystemAds() != null && homeMasterBean.getData().getSystemAds().size() > 0)
+                systemAdsBeanList = homeMasterBean.getData().getSystemAds();
+            else
+                return;
 //        得到名师推荐集合
-        if (homeMasterBean.getData().getUsers() != null && homeMasterBean.getData().getUsers().size() > 0)
-            usersBeanList = homeMasterBean.getData().getUsers();
-        else
-            return;
+            if (homeMasterBean.getData().getUsers() != null && homeMasterBean.getData().getUsers().size() > 0)
+                usersBeanList = homeMasterBean.getData().getUsers();
+            else
+                return;
 //        得到推荐作业集合
-        if (homeMasterBean.getData().getHomewoks() != null && homeMasterBean.getData().getHomewoks().size() > 0)
-            homewoksBeanList = homeMasterBean.getData().getHomewoks();
-        else
-            return;
+            if (homeMasterBean.getData().getHomewoks() != null && homeMasterBean.getData().getHomewoks().size() > 0)
+                homewoksBeanList = homeMasterBean.getData().getHomewoks();
+            else
+                return;
 //        得到课程推荐集合
-        if (homeMasterBean.getData().getLiveCourses() != null && homeMasterBean.getData().getLiveCourses().size() > 0)
-            liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
-        else
-            return;
-        //    制作轮播图UI界面
-        flayBannerData();
+            if (homeMasterBean.getData().getLiveCourses() != null && homeMasterBean.getData().getLiveCourses().size() > 0)
+                liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
+            else
+                return;
+            //    制作轮播图UI界面
+            flayBannerData();
 //        制作名师推荐UI界面
-        usersBeanData();
+            usersBeanData();
 //        制作课程推荐UI界面
-        liveCoursesData();
+            liveCoursesData();
 //        制作推荐作业UI界面
-        homewoksData();
+            homewoksData();
 //        Log.d("MasterFragment", "systemAdsBeanList.size():" + systemAdsBeanList.size());
+        }else {
+            homeMasterInPresenter.sendHomeMaster(getActivity());
+        }
     }
 
     //    制作课程推荐UI界面
@@ -214,6 +221,14 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         homeMasterLiveGridView.setLayoutManager(gridLayoutManager);
         LiveCoursesAdapter liveCoursesAdapter = new LiveCoursesAdapter(liveCoursesBeanList, getActivity());
+        liveCoursesAdapter.setOnClickItem(new LiveCoursesAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                Intent intent = new Intent(getContext(), LiveCourseDetailedActivity.class);
+                intent.putExtra("id",liveCoursesBeanList.get(position).getId()+"");
+                startActivity(intent);
+            }
+        });
         homeMasterLiveGridView.setAdapter(liveCoursesAdapter);
     }
 
@@ -232,6 +247,15 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeMasterRecommendRecyclerView.setLayoutManager(linearLayoutManager);
         UserBeanAdapter userBeanAdapter = new UserBeanAdapter(usersBeanList, getActivity());
+        userBeanAdapter.setOnClickItem(new UserBeanAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                HomeMasterBean.DataBean.UsersBean usersBean = usersBeanList.get(position);
+                Intent intent = new Intent(getContext(), FindTeacherDetailsActivity.class);
+                intent.putExtra("teacherId",usersBean.getId()+"");
+                startActivity(intent);
+            }
+        });
         homeMasterRecommendRecyclerView.setAdapter(userBeanAdapter);
 
     }
@@ -243,5 +267,19 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
             flayBanner_list.add(systemAdsBeanList.get(i).getMobileImgUrl());
         }
         masterFlyBanner.setImagesUrl(flayBanner_list);
+        masterFlyBanner.setOnItemClickListener(new FlyBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if ("3".equals(systemAdsBeanList.get(position).getUrlType())){
+                    Intent intent = new Intent(getContext(), NoticeDetailedActivity.class);
+                    intent.putExtra("id",systemAdsBeanList.get(position).getMobileUrl()+"");
+                    startActivity(intent);
+                }else if ("4".equals(systemAdsBeanList.get(position).getUrlType())){
+                    Intent intent = new Intent(getContext(), LiveCourseDetailedActivity.class);
+                    intent.putExtra("id",systemAdsBeanList.get(position).getMobileUrl()+"");
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

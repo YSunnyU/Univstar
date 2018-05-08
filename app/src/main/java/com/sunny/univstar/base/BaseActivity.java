@@ -1,9 +1,11 @@
 package com.sunny.univstar.base;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -30,10 +32,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        verifyStoragePermissions(this);
         ButterKnife.bind(this);
+        App.context = this;
         init();
         initData();
-        App.context = this;
     }
 
 
@@ -45,7 +48,26 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     //    统一加载数据
     protected abstract void initData();
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            "android.permission.READ_EXTERNAL_STORAGE",
+            "android.permission.WRITE_EXTERNAL_STORAGE" };
 
+
+    public static void verifyStoragePermissions(Activity activity) {
+
+        try {
+            //检测是否有写的权限
+            int permission = ActivityCompat.checkSelfPermission(activity,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //    fragment复用
     protected BaseFragment fragmentRepeat(int contaired, Class<? extends BaseFragment> baseFragment) {
@@ -86,12 +108,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-//        App.context = null;
+    protected void onPause() {
+        super.onPause();
+        App.context = null;
     }
 
-    protected void setTitleTheme(Activity activity,boolean darmode){
+    protected void setTitleTheme(Activity activity, boolean darmode){
         setStatusBarCompat(activity);
 
         setMiuiStatusBarDarkMode(activity, darmode);
