@@ -7,9 +7,172 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="home_shape_style">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#A7A8AE</item>
         <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="login_logout_input">
+        <item name="android:layout_centerVertical">true</item>
+
+        <item name="android:background">@null</item>
+
+        <item name="android:textColor">#333333</item>
+
+        <item name="android:textSize">16sp</item>
+
+        <item name="android:textColorHint">#666</item>
+
+        <item name="android:singleLine">true</item>
+
+    </style>
+
+    <style name="login_line_style">
+
+        <item name="android:background">#ededed</item>
+
+    </style>
+
+    <style name="liblogin_tv_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#b3b3b3</item>
+    </style>
+
+
+    <style name="cancle_bg_style">
+
+        <item name="android:drawableLeft">@mipmap/register_return</item>
+
+        <item name="android:gravity">center</item>
+
+        <item name="android:layout_centerVertical">true</item>
+
+        <item name="android:paddingLeft">15dp</item>
+
+        <item name="android:paddingRight">15dp</item>
+    </style>
+
+
+    <style name="register_getcode_style">
+        <item name="android:layout_centerVertical">true</item>
+
+        <item name="android:background">@null</item>
+
+        <item name="android:textSize">14sp</item>
+
+        <item name="android:textColorHint">#666</item>
+
+        <item name="android:singleLine">true</item>
+
+    </style>
+
+    <style name="line_between_style">
+        <item name="android:background">#666</item>
+    </style>
+
+
+    <style name="usermajor_school_select_item_tvstyle">
+
+        <item name="android:textSize">12sp</item>
+
+        <item name="android:gravity">center</item>
+
+        <item name="android:textAlignment">center</item>
+
+        <item name="android:paddingTop">9dp</item>
+
+        <item name="android:paddingBottom">9dp</item>
+
+        <item name="android:paddingLeft">15dp</item>
+
+        <item name="android:paddingRight">15dp</item>
+
+    </style>
+
+
+    <style name="home_myself_lable_tv_style">
+
+        <item name="android:textSize">16sp</item>
+
+        <item name="android:textColor">#5491FF</item>
+
+    </style>
+
+
+    <style name="home_myself_lableflag_tv_style">
+
+        <item name="android:textSize">14sp</item>
+
+        <item name="android:layout_marginTop">4dp</item>
+
+        <item name="android:textColor">#999999</item>
+
+    </style>
+
+    <style name="home_myselft_optional_tv_style">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="home_myself_list_tv_style">
+
+        <item name="android:textSize">15sp</item>
+
+        <item name="android:textColor">#666666</item>
+
+    </style>
+
+    <style name="search_title_tv_style">
+
+        <item name="android:textSize">16sp</item>
+
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="search_title_sorttv_style">
+
+        <item name="android:textSize">16sp</item>
+
+        <item name="android:textColor">#EC3E28</item>
+    </style>
+
+    <style name="search_title_moretv_style">
+
+        <item name="android:textSize">12sp</item>
+
+        <item name="android:textColor">#A7A8AE</item>
+
+        <item name="android:layout_marginRight">25dp</item>
+
+    </style>
+
+
+    <style name="home_work_sorbar_enabled_false_style">
+
+        <item name="android:textColor">#000</item>
+
+        <item name="android:textSize">16sp</item>
+
+    </style>
+
+    <style name="home_work_sorbar_enabled_true_style">
+
+        <item name="android:textColor">#666666</item>
+
+        <item name="android:textSize">14sp</item>
+
+    </style>
+
+
+    <style name="listui_title_style">
+
+        <item name="android:layout_centerInParent">true</item>
+
+        <item name="android:textSize">18sp</item>
+
+        <item name="android:textColor">#5491FF</item>
     </style>
 </resources>

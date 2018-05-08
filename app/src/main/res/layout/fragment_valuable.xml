@@ -42,7 +42,7 @@
             </android.support.design.widget.CollapsingToolbarLayout>
             <android.support.design.widget.TabLayout
                 android:id="@+id/valuable_tabLayout"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:background="#a9a7a7">
 

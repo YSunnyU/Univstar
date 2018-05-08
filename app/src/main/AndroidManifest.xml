@@ -25,7 +25,11 @@
         <activity android:name=".view.preference.PreferenceActivity" />
         <activity android:name=".view.personal.activity.RegisterActivity" />
         <activity android:name=".view.personal.activity.PerfectUserInfoActivity" />
-        <activity android:name=".view.teachertype.activity.FindTeacherActivity"></activity>
+        <activity android:name=".view.teachertype.activity.FindTeacherActivity" />
+        <activity android:name=".view.personal.activity.LoginActivity" />
+        <activity android:name=".view.personal.activity.LoginSetActivity" />
+        <activity android:name=".view.personal.activity.login.bean.view.HeadImageActivity" />
+        <activity android:name=".view.personal.activity.login.bean.view.PersonalInformationActivity"></activity>
     </application>
 
 </manifest>

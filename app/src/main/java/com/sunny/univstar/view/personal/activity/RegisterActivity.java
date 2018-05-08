@@ -105,14 +105,20 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                         @Override
                         public void run() {
                             codeInt--;
-                            getRegisterCode.setText(codeInt + "");
-                            getRegisterCode.setEnabled(false);
-                            if (codeInt < 1){
-                                getRegisterCode.setText("获取验证码");
-                                getRegisterCode.setEnabled(true);
-                                timer.cancel();
-                                codeInt = 60;
-                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    getRegisterCode.setText(codeInt + "");
+                                    getRegisterCode.setEnabled(false);
+                                    if (codeInt < 1){
+                                        getRegisterCode.setText("获取验证码");
+                                        getRegisterCode.setEnabled(true);
+                                        timer.cancel();
+                                        codeInt = 60;
+                                    }
+                                }
+                            });
+
                         }
                     }, 0, 1000);
                 }

@@ -22,36 +22,38 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class PerfectUserInfoActivity extends BaseActivity implements RegisterContract.RegisterView{
+import static com.sunny.univstar.view.personal.activity.LoginSetActivity.sharedPreferences;
+
+public class PerfectUserInfoActivity extends BaseActivity implements RegisterContract.RegisterView {
     private RegisterContract.RegisterPresenter presenter;
-//返回按钮
+    //返回按钮
     @Bind(R.id.perfect_info_return)
     ImageView perfectInfoReturn;
-//    头像上传
+    //    头像上传
     @Bind(R.id.perfect_user_img)
     ImageView perfectUserImg;
-//    用户昵称
+    //    用户昵称
     @Bind(R.id.perfect_user_name)
     EditText perfectUserName;
-//    删除用户昵称
+    //    删除用户昵称
     @Bind(R.id.perfect_user_name_close)
     ImageView perfectUserNameClose;
-//    男
+    //    男
     @Bind(R.id.user_sex_man)
     RadioButton userSexMan;
-//    女
+    //    女
     @Bind(R.id.user_sex_woman)
     RadioButton userSexWoman;
-//    选择器
+    //    选择器
     @Bind(R.id.user_sex_group)
     RadioGroup userSexGroup;
-//    密码框
+    //    密码框
     @Bind(R.id.perfect_user_psw)
     EditText perfectUserPsw;
-//    删除密码
+    //    删除密码
     @Bind(R.id.perfect_user_psw_close)
     ImageView perfectUserPswClose;
-//    完成完善
+    //    完成完善
     @Bind(R.id.user_perfect_yes)
     Button userPerfectYes;
     private String phone;
@@ -82,6 +84,8 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
                 break;
 //            头像
             case R.id.perfect_user_img:
+
+
                 break;
 //            删除昵称
             case R.id.perfect_user_name_close:
@@ -94,20 +98,20 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
 //            完成完善
             case R.id.user_perfect_yes:
                 String userSex = "";
-                if (userSexMan.isChecked()){
+                if (userSexMan.isChecked()) {
                     userSex = "0";
-                }else if (userSexWoman.isChecked()){
+                } else if (userSexWoman.isChecked()) {
                     userSex = "1";
                 }
                 Intent intent = getIntent();
                 phone = intent.getStringExtra("phone");
-                Map<String,String> map = new HashMap<>();
-                map.put("sex",userSex);
-                map.put("nickname",perfectUserName.getText().toString());
-                map.put("photo","");
+                Map<String, String> map = new HashMap<>();
+                map.put("sex", userSex);
+                map.put("nickname", perfectUserName.getText().toString());
+                map.put("photo", "");
                 map.put("mobile", phone);
-                map.put("psw",perfectUserPsw.getText().toString());
-                presenter.sendRegister("https://www.univstar.com/v1/m/user/saveCompleteUser",map);
+                map.put("psw", perfectUserPsw.getText().toString());
+                presenter.sendRegister("https://www.univstar.com/v1/m/user/saveCompleteUser", map);
                 break;
         }
     }
@@ -118,7 +122,14 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
 //        保存用戶狀態
         SharedPreferences userState = getSharedPreferences("userState", 0);
         edit = userState.edit();
-        edit.putBoolean("isUserLogin",true);
+//        登录状态
+//        如果是0 就没有登录
+//        如果是1  就已经登录
+        sharedPreferences = getSharedPreferences("keeepUserName", MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean("isLogin",false);
+        edit.commit();
+//        edit.putBoolean("isUserLogin",false);
         Toast.makeText(this, registerCodeEntity.getMessage(), Toast.LENGTH_SHORT).show();
 //        注册成功自动登陆
         if (registerCodeEntity.getCode() != 0) {
@@ -131,7 +142,7 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
 
     @Override
     public void codePhoneAndIdentifying(RegisterCodeEntity registerCodeEntity) {
-        edit.putString("userId",registerCodeEntity.getData().getId()+"");
+        edit.putString("userId", registerCodeEntity.getData().getId() + "");
         edit.commit();
     }
 

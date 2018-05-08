@@ -39,7 +39,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
     CoordinatorLayout scrollview;
     @Bind(R.id.valuable_viewPager)
     ViewPager valuableViewPager;
-    private List<String> title_list = new ArrayList<>();
+    private List<String> title_list;
     private List<HomeValuableBean.DataBean.ArtcircleCategoriesBean> dataArtcircleCategories;
     private List<String> banner_list = new ArrayList<>();
     private List<ValuableSonFragment> son_frag = new ArrayList<>();
@@ -54,6 +54,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
         homeValuableInPresenter = new HomeValuablePresenter(this);
         homeValuableInPresenter.sendFlyBannerData();
         homeValuableInPresenter.sendHomeValuableData("0", "20", "0", "0");
+        title_list = new ArrayList<>();
         title_list.add("智能筛选");
         title_list.add("赞数最多");
         title_list.add("最新评论");
@@ -70,16 +71,19 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
     public void showHomeValuableData(HomeValuableBean homeValuableBean) {
         HomeValuableBean.DataBean data = homeValuableBean.getData();
         dataArtcircleCategories = data.getArtcircleCategories();
-        ValuableSonFragment valuableSonFragment =null;
+        ValuableSonFragment valuableSonFragment = null;
         for (int i = 0; i < dataArtcircleCategories.size(); i++) {
             title_list.add(dataArtcircleCategories.get(i).getName());
-            valuableSonFragment =  new ValuableSonFragment();
+
+        }
+        for (int i = 0; i < title_list.size(); i++) {
+            valuableSonFragment = new ValuableSonFragment();
             Bundle bundle = new Bundle();
             bundle.putString("page", i + "");
-            bundle.putString("rows", i + "");
+            bundle.putString("rows", 20 + "");
             bundle.putString("sortord", i + "");
             bundle.putString("loginUserId", "0");
-            bundle.putInt("size",i);
+            bundle.putInt("size", i);
             valuableSonFragment.setArguments(bundle);
             son_frag.add(valuableSonFragment);
         }
