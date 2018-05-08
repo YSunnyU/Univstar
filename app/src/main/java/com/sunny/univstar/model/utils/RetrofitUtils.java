@@ -23,6 +23,8 @@ import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.LiveCourseDetailedService;
 import com.sunny.univstar.model.service.LiveCourseService;
 import com.sunny.univstar.model.service.MasterDetailService;
+import com.sunny.univstar.model.service.MyFollowPraiseService;
+import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
@@ -109,6 +111,12 @@ public class RetrofitUtils {
     }
 
     public RetrofitUtils() {
+
+        if (TextUtils.isEmpty(getAppToken(context))){
+            loadApptoken(context);
+        }
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -121,9 +129,6 @@ public class RetrofitUtils {
                 .addNetworkInterceptor(interceptor)
                 .build();
 
-        if (TextUtils.isEmpty(getAppToken(context))) {
-            loadApptoken(context);
-        }
 
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
@@ -149,7 +154,9 @@ public class RetrofitUtils {
         }
 
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences("77777", Context.MODE_PRIVATE);
-
+        if (sharedPreferences == null){
+            return "";
+        }
         String apptoken = sharedPreferences.getString("xyxy_apptoken", "");
         if (TextUtils.isEmpty(apptoken)) {
             return "";
@@ -160,7 +167,7 @@ public class RetrofitUtils {
 
     }
 
-    public void loadApptoken(final Context context) {
+    private void loadApptoken(final Context context) {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -361,5 +368,11 @@ public class RetrofitUtils {
         BigDecimal result4 = new BigDecimal(teraBytes);
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
                 + "TB";
+    }
+    public NoticeDetailedService getNoticeDetailedService(){
+        return retrofit.create(NoticeDetailedService.class);
+    }
+    public MyFollowPraiseService getMyFollowPraiseService(){
+        return retrofit.create(MyFollowPraiseService.class);
     }
 }

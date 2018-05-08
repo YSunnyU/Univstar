@@ -19,11 +19,14 @@ import com.sunny.univstar.contract.HomeMasterContract;
 import com.sunny.univstar.presenter.HomeMasterPresenter;
 import com.sunny.univstar.view.MainActivity;
 import com.sunny.univstar.view.livecourse.activity.LiveCourseActivity;
+import com.sunny.univstar.view.livecourse.activity.LiveCourseDetailedActivity;
 import com.sunny.univstar.view.master.fragment.adapter.HomewoksAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.LiveCoursesAdapter;
 import com.sunny.univstar.view.master.fragment.adapter.UserBeanAdapter;
 import com.sunny.univstar.view.master.fragment.autoui.MyScrollView;
+import com.sunny.univstar.view.notice.activity.NoticeDetailedActivity;
 import com.sunny.univstar.view.teachertype.activity.FindTeacherActivity;
+import com.sunny.univstar.view.teachertype.activity.FindTeacherDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,31 @@ import static com.sunny.univstar.R.id.home_master_work_listView;
 public class MasterFragment extends BaseFragment implements HomeMasterContract.homeMasterInView {
 
     public HomeMasterContract.homeMasterInPresenter homeMasterInPresenter;
+    //    FlyBanner masterFlyBanner;
+//    @Bind(R.id.home_master_find_group)
+//    LinearLayout homeMasterFindGroup;
+//    @Bind(R.id.home_master_look_group)
+//    LinearLayout homeMasterLookGroup;
+//    @Bind(R.id.home_master_work_group)
+//    LinearLayout homeMasterWorkGroup;
+//    @Bind(R.id.home_master_chat_group)
+//    LinearLayout homeMasterChatGroup;
+//    @Bind(R.id.home_master_learn_group)
+//    LinearLayout homeMasterLearnGroup;
+//    @Bind(R.id.home_master_recommend_more)
+//    TextView homeMasterRecommendMore;
+//    @Bind(R.id.home_master_recommend_recyclerView)
+//    RecyclerView homeMasterRecommendRecyclerView;
+//    @Bind(R.id.home_master_live_more)
+//    TextView homeMasterLiveMore;
+//    @Bind(R.id.home_master_live_gridView)
+//    RecyclerView homeMasterLiveGridView;
+//    @Bind(R.id.home_master_fragment_workMore)
+//    TextView homeMasterFragmentWorkMore;
+//    @Bind(home_master_work_listView)
+//    RecyclerView homeMasterWorkListView;
+//    @Bind(R.id.home_master_fragment_chatValuable)
+//    RelativeLayout homeMasterFragmentChatValuable;
     public List<String> flayBanner_list = new ArrayList<>();
 
     @Bind(R.id.masterFlyBanner)
@@ -183,6 +211,8 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
 //        制作推荐作业UI界面
             homewoksData();
 //        Log.d("MasterFragment", "systemAdsBeanList.size():" + systemAdsBeanList.size());
+        }else {
+            homeMasterInPresenter.sendHomeMaster(getActivity());
         }
     }
 
@@ -191,6 +221,14 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         homeMasterLiveGridView.setLayoutManager(gridLayoutManager);
         LiveCoursesAdapter liveCoursesAdapter = new LiveCoursesAdapter(liveCoursesBeanList, getActivity());
+        liveCoursesAdapter.setOnClickItem(new LiveCoursesAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                Intent intent = new Intent(getContext(), LiveCourseDetailedActivity.class);
+                intent.putExtra("id",liveCoursesBeanList.get(position).getId()+"");
+                startActivity(intent);
+            }
+        });
         homeMasterLiveGridView.setAdapter(liveCoursesAdapter);
     }
 
@@ -209,6 +247,15 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeMasterRecommendRecyclerView.setLayoutManager(linearLayoutManager);
         UserBeanAdapter userBeanAdapter = new UserBeanAdapter(usersBeanList, getActivity());
+        userBeanAdapter.setOnClickItem(new UserBeanAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                HomeMasterBean.DataBean.UsersBean usersBean = usersBeanList.get(position);
+                Intent intent = new Intent(getContext(), FindTeacherDetailsActivity.class);
+                intent.putExtra("teacherId",usersBean.getId()+"");
+                startActivity(intent);
+            }
+        });
         homeMasterRecommendRecyclerView.setAdapter(userBeanAdapter);
 
     }
@@ -220,5 +267,19 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
             flayBanner_list.add(systemAdsBeanList.get(i).getMobileImgUrl());
         }
         masterFlyBanner.setImagesUrl(flayBanner_list);
+        masterFlyBanner.setOnItemClickListener(new FlyBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if ("3".equals(systemAdsBeanList.get(position).getUrlType())){
+                    Intent intent = new Intent(getContext(), NoticeDetailedActivity.class);
+                    intent.putExtra("id",systemAdsBeanList.get(position).getMobileUrl()+"");
+                    startActivity(intent);
+                }else if ("4".equals(systemAdsBeanList.get(position).getUrlType())){
+                    Intent intent = new Intent(getContext(), LiveCourseDetailedActivity.class);
+                    intent.putExtra("id",systemAdsBeanList.get(position).getMobileUrl()+"");
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

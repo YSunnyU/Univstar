@@ -1,6 +1,8 @@
 package com.sunny.univstar.view.valuable.fragment;
 
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -9,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.recker.flybanner.FlyBanner;
 import com.sunny.univstar.R;
@@ -17,6 +21,7 @@ import com.sunny.univstar.contract.HomeValuableContract;
 import com.sunny.univstar.presenter.HomeValuablePresenter;
 import com.sunny.univstar.view.valuable.fragment.adapter.ValuableAdapter;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +98,8 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
         valuableViewPager.setAdapter(vva);
         valuableTabLayout.setupWithViewPager(valuableViewPager);
         valuableTabLayout.setTabMode(View.HAPTIC_FEEDBACK_ENABLED);
+        reflex(valuableTabLayout);
+
         Log.d("ValuableFragment", "title_list.size():" + title_list.size());
     }
 
@@ -109,5 +116,68 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
 
     }
 
+    public void reflex(final TabLayout tabLayout){
+        //了解源码得知 线的宽度是根据 tabView的宽度来设置的
+        tabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //拿到tabLayout的mTabStrip属性
+                    LinearLayout mTabStrip = (LinearLayout) tabLayout.getChildAt(0);
 
+                    int dp10 = dip2px(tabLayout.getContext(), 10);
+
+                    for (int i = 0; i < mTabStrip.getChildCount(); i++) {
+                        View tabView = mTabStrip.getChildAt(i);
+                        tabView.measure(0,0);
+                        //拿到tabView的mTextView属性  tab的字数不固定一定用反射取mTextView
+                        Field mTextViewField = tabView.getClass().getDeclaredField("mTextView");
+                        mTextViewField.setAccessible(true);
+
+                        TextView mTextView = (TextView) mTextViewField.get(tabView);
+                        mTextView.setTextColor(Color.parseColor("#9e9e9e"));
+                        tabView.setPadding(0, 0, 0, 0);
+
+                        //因为我想要的效果是   字多宽线就多宽，所以测量mTextView的宽度
+                        int width = 0;
+                        width = mTextView.getWidth();
+                        if (width == 0) {
+                            mTextView.measure(0, 0);
+                            width = mTextView.getMeasuredWidth();
+                        }
+
+                        //设置tab左右间距为10dp  注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
+                        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
+                        params.width = width ;
+                        params.leftMargin = dp10;
+                        params.rightMargin = dp10;
+                        tabView.setLayoutParams(params);
+
+                        tabView.invalidate();
+                    }
+
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
 }

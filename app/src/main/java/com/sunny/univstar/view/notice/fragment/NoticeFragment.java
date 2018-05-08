@@ -3,6 +3,7 @@ package com.sunny.univstar.view.notice.fragment;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,6 +26,7 @@ import com.sunny.univstar.base.BaseFragment;
 import com.sunny.univstar.contract.HomeNoticeContract;
 import com.sunny.univstar.model.entity.HomeNoticeEntity;
 import com.sunny.univstar.presenter.HomeNoticePresenter;
+import com.sunny.univstar.view.notice.activity.NoticeDetailedActivity;
 import com.sunny.univstar.view.notice.adapter.HomeNoticeAdapter;
 
 import java.util.ArrayList;
@@ -73,6 +75,14 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
 //        notice_pullRefresh.setBackgroundColor(Color.parseColor("#00000000"));
         initTimeFilterPopup();
         adapter = new HomeNoticeAdapter(listData);
+        adapter.setOnClickItem(new HomeNoticeAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                Intent intent = new Intent(getContext(), NoticeDetailedActivity.class);
+                intent.putExtra("id",listData.get(position).getId()+"");
+                startActivity(intent);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         notice_list.setLayoutManager(linearLayoutManager);
         notice_list.setAdapter(adapter);

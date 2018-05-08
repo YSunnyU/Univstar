@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
 
@@ -36,6 +38,8 @@
         <activity android:name=".view.teachertype.activity.FindTeacherActivity" />
         <activity android:name=".view.livecourse.activity.LiveCourseActivity" />
         <activity android:name=".view.teachertype.activity.FindTeacherDetailsActivity" />
+        <activity android:name=".view.livecourse.activity.LiveCourseDetailedActivity" />
+        <activity android:name=".view.notice.activity.NoticeDetailedActivity"></activity>
         <activity android:name=".view.livecourse.activity.LiveCourseDetailedActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AlertPasswordActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.NewPswActivity"></activity>

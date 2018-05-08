@@ -25,7 +25,7 @@ import java.util.List;
  * Created by 张玗 on 2018/5/4.
  */
 
-public class LiveCoursesAdapter extends RecyclerView.Adapter<LiveCoursesAdapter.Holder> {
+public class LiveCoursesAdapter extends RecyclerView.Adapter<LiveCoursesAdapter.Holder> implements View.OnClickListener {
     private List<HomeMasterBean.DataBean.LiveCoursesBean> liveCoursesBeanList;
     public Context context;
 
@@ -38,6 +38,7 @@ public class LiveCoursesAdapter extends RecyclerView.Adapter<LiveCoursesAdapter.
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.master_livecourses_item, parent, false);
+        inflate.setOnClickListener(this);
         Holder holder = new Holder(inflate);
         return holder;
     }
@@ -58,11 +59,19 @@ public class LiveCoursesAdapter extends RecyclerView.Adapter<LiveCoursesAdapter.
                         holder.master_live_image.setImageDrawable(circularBitmapDrawable);
                     }
                 });
+        if (liveCoursesBeanList.get(position).getUserType() == 4){
+            holder.master_live_vip_img.setImageResource(R.mipmap.home_level_vip_red);
+        }else if (liveCoursesBeanList.get(position).getUserType() == 3){
+            holder.master_live_vip_img.setImageResource(R.mipmap.home_level_vip_yellow);
+        }else if (liveCoursesBeanList.get(position).getUserType() == 2){
+            holder.master_live_vip_img.setImageResource(R.mipmap.home_level_vip_blue);
+        }
         holder.master_live_name.setText(liveCoursesBeanList.get(position).getNickname());
         holder.master_live_type.setText(liveCoursesBeanList.get(position).getType());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = new Date(liveCoursesBeanList.get(position).getStartDate());
         holder.master_live_content.setText("讲堂开播"+sdf.format(date));
+        holder.itemView.setTag(position);
     }
 
     @Override
@@ -70,17 +79,32 @@ public class LiveCoursesAdapter extends RecyclerView.Adapter<LiveCoursesAdapter.
         return liveCoursesBeanList.isEmpty()?0:liveCoursesBeanList.size();
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
-        public ImageView master_live_image;
-        public TextView master_live_type;
-        public TextView master_live_name;
-        public TextView master_live_content;
-        public Holder(View itemView) {
+    public interface OnClickItem{
+        void onClickItem(View view,int position);
+    }
+    private OnClickItem onClickItem;
+    public void setOnClickItem(OnClickItem onClickItem){
+        this.onClickItem = onClickItem;
+    }
+    @Override
+    public void onClick(View v) {
+        if (onClickItem != null)
+            onClickItem.onClickItem(v,(int)v.getTag());
+    }
+
+     class Holder extends RecyclerView.ViewHolder {
+        private ImageView master_live_image;
+        private TextView master_live_type;
+        private TextView master_live_name;
+        private TextView master_live_content;
+        private ImageView master_live_vip_img;
+        private Holder(View itemView) {
             super(itemView);
-            this.master_live_image = (ImageView) itemView.findViewById(R.id.master_live_image);
-            this.master_live_type = (TextView) itemView.findViewById(R.id.master_live_type);
-            this.master_live_name = (TextView) itemView.findViewById(R.id.master_live_name);
-            this.master_live_content = (TextView) itemView.findViewById(R.id.master_live_content);
+            this.master_live_image =  itemView.findViewById(R.id.master_live_image);
+            this.master_live_type =  itemView.findViewById(R.id.master_live_type);
+            this.master_live_name =  itemView.findViewById(R.id.master_live_name);
+            this.master_live_content = itemView.findViewById(R.id.master_live_content);
+            master_live_vip_img = itemView.findViewById(R.id.master_live_vip_img);
         }
     }
 

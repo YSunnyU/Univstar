@@ -6,6 +6,8 @@ import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.LiveCourseDetailedService;
 import com.sunny.univstar.model.service.LiveCourseService;
 import com.sunny.univstar.model.service.MasterDetailService;
+import com.sunny.univstar.model.service.MyFollowPraiseService;
+import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 
 /**
@@ -20,4 +22,6 @@ public interface IHomeModel {
     LiveCourseService getLiveCourse();
     MasterDetailService getMasterDetail();
     LiveCourseDetailedService getLiveCourseDetailed();
+    NoticeDetailedService getNoticeDetailedService();
+    MyFollowPraiseService getMyFollowPraiseService();
 }

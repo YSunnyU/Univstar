@@ -18,7 +18,7 @@ import java.util.List;
  * Created by 张玗 on 2018/5/4.
  */
 
-public class UserBeanAdapter extends RecyclerView.Adapter<UserBeanAdapter.Holder> {
+public class UserBeanAdapter extends RecyclerView.Adapter<UserBeanAdapter.Holder> implements View.OnClickListener {
     private List<HomeMasterBean.DataBean.UsersBean> usersBeanList;
     public Context context;
 
@@ -30,6 +30,7 @@ public class UserBeanAdapter extends RecyclerView.Adapter<UserBeanAdapter.Holder
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.master_user_item, parent, false);
+        inflate.setOnClickListener(this);
         Holder holder = new Holder(inflate);
         return holder;
     }
@@ -46,11 +47,25 @@ public class UserBeanAdapter extends RecyclerView.Adapter<UserBeanAdapter.Holder
         }else if (usersBeanList.get(position).getUserType() == 2){
             holder.master_user_medal.setImageResource(R.mipmap.home_level_vip_blue);
         }
+        holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
         return usersBeanList.isEmpty() ? 0 : usersBeanList.size();
+    }
+
+    public interface OnClickItem{
+        void onClickItem(View view,int position);
+    }
+    private OnClickItem onClickItem;
+    public void setOnClickItem(OnClickItem onClickItem){
+        this.onClickItem = onClickItem;
+    }
+    @Override
+    public void onClick(View v) {
+        if (onClickItem != null)
+            onClickItem.onClickItem(v,(int)v.getTag());
     }
 
     public class Holder extends RecyclerView.ViewHolder {
