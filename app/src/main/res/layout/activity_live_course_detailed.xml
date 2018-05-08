@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sunny.univstar.view.livecourse.activity.LiveCourseDetailedActivity"
+    android:background="#fff">
+    <LinearLayout
+        android:weightSum="5"
+        android:orientation="horizontal"
+        android:id="@+id/masterdetail_coachbtn"
+        android:gravity="center"
+        android:background="#2371ff"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <LinearLayout
+            android:background="#fff"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:button="@null"
+                android:background="@drawable/live_course_detailed_collect_check"
+                android:id="@+id/live_course_detailed_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/live_course_detailed_buy"
+            android:gravity="center"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="购买"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <com.sunny.univstar.view.master.fragment.autoui.MyScrollView
+        android:layout_above="@+id/masterdetail_coachbtn"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/img_re"
+                android:layout_width="match_parent"
+                android:layout_height="202dp">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:id="@+id/live_course_detailed_msg_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="202dp" />
+                <RelativeLayout
+                    android:background="#66000000"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp">
+                    <TextView
+                        android:id="@+id/live_course_detailed_classify"
+                        android:textSize="13sp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_centerVertical="true"
+                        android:text="表演 台词 表演"
+                        android:textColor="#fff"
+                        android:background="@drawable/meather_detail_live_flag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/live_course_detailed_course_time"
+                        android:layout_marginRight="10dp"
+                        android:textSize="13sp"
+                        android:textColor="#fff"
+                        android:layout_centerVertical="true"
+                        android:text="开课时间：2018"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/img_re2"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/img_re4"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/live_course_detailed__header_img"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp" />
+                <LinearLayout
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/live_course_detailed__header_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/live_course_detailed_nick_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="李苒苒"
+                            android:textColor="#ff9100" />
+
+                        <ImageView
+                            android:id="@+id/live_course_detailed_vip"
+                            android:src="@mipmap/home_level_vip_red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/live_course_detailed_synopsis"
+                        android:textSize="13sp"
+                        android:text="表演界泰斗"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <CheckBox
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/live_course_detailed_follow_check"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:checked="false"
+                    android:text="关注"
+                    android:button="@null"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/detail_guanzhu_bg"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp" />
+            </RelativeLayout>
+            <View
+                android:layout_below="@+id/img_re2"
+                android:background="#c1c1c1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:id="@+id/img_re4"
+                android:layout_below="@id/img_re"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:weightSum="4.2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/live_course_detailed_type"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/course_type_text"
+                            android:gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="13dp"
+                            android:background="@drawable/course_type"
+                            android:text="讲堂"
+                            android:textColor="#0055ff"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="已预约："
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/live_course_detailed_reservation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="20dp"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="/"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/live_course_detailed_subscribe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="6dp"
+                    android:layout_weight="1.2"
+                    android:background="#fff"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="¥"
+                        android:textColor="#333"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/live_course_detailed_item_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="128.0"
+                        android:textColor="#ff9500"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <WebView
+                android:id="@+id/live_course_detailed_web"
+                android:layout_below="@id/img_re2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </WebView>
+        </RelativeLayout>
+    </com.sunny.univstar.view.master.fragment.autoui.MyScrollView>
+    <ImageView
+        android:id="@+id/live_course_detailed_return"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/detail_back"
+        android:layout_width="33dp"
+        android:layout_height="33dp" />
+    <ImageView
+        android:id="@+id/live_course_detailed_share"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/detail_share"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp" />
+</RelativeLayout>

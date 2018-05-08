@@ -62,7 +62,8 @@ public class MySelfFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
-        if (userState.getBoolean("isUserLogin", false)) {
+        boolean isUserLogin = userState.getBoolean("isUserLogin", false);
+        if (isUserLogin) {
             userYesLogin.setVisibility(View.VISIBLE);
             userNoLogin.setVisibility(View.GONE);
         }else {

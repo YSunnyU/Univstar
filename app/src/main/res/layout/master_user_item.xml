@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="90dp"
+    android:layout_margin="7dp">
 
     <ImageView
         android:id="@+id/master_user_image"
         android:layout_width="140dp"
-        android:layout_height="98dp"
-        android:layout_margin="10dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/approve_certification" />
+        android:layout_height="90dp" />
+
+
 
     <TextView
-        android:id="@+id/master_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
-        android:text="李冉冉"
-        android:textColor="#fff"
-        android:textSize="16sp" />
-
-    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
         android:id="@+id/master_user_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/master_user_name"
-        android:layout_marginLeft="10dp"
         android:text="表演届泰斗"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="6dp"
+        android:layout_above="@id/master_user_detail"
+        android:id="@+id/master_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="李冉冉"
         android:textColor="#fff"
         android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/master_user_medal"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:src="@mipmap/home_level_vip_red"
+        android:layout_marginLeft="6dp"
         android:layout_alignBottom="@id/master_user_name"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/master_user_name"
-        android:src="@mipmap/approve_certification" />
+        android:layout_toRightOf="@id/master_user_name" />
 </RelativeLayout>

@@ -11,9 +11,16 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sunny.univstar.model.entity.AppTokenModel;
 import com.sunny.univstar.model.interceptor.AddCookiesInterceptor;
 import com.sunny.univstar.model.interceptor.ReceivedCookiesInterceptor;
+import com.sunny.univstar.model.service.FindTeacherService;
 import com.sunny.univstar.model.service.HomeMasterService;
+import com.sunny.univstar.model.service.HomeNoticeService;
+import com.sunny.univstar.model.service.HomeValuableService;
 import com.sunny.univstar.model.service.IAppToken;
 import com.sunny.univstar.model.service.IHomeWork;
+import com.sunny.univstar.model.service.LiveCourseDetailedService;
+import com.sunny.univstar.model.service.LiveCourseService;
+import com.sunny.univstar.model.service.MasterDetailService;
+import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
 
 import java.util.concurrent.TimeUnit;
@@ -190,5 +197,14 @@ public class RetrofitUtils {
     }
     public FindTeacherService getFindTeacherService(){
         return retrofit.create(FindTeacherService.class);
+    }
+    public LiveCourseService getLiveCourseService(){
+        return retrofit.create(LiveCourseService.class);
+    }
+    public MasterDetailService getMasterDatailService(){
+        return retrofit.create(MasterDetailService.class);
+    }
+    public LiveCourseDetailedService getLiveCourseDetailedService(){
+        return retrofit.create(LiveCourseDetailedService.class);
     }
 }

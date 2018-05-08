@@ -32,7 +32,8 @@ import butterknife.OnClick;
 import static com.sunny.univstar.R.id.register_phone_code;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.RegisterView{
-    private String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
+//     String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
+private String regex = "^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}$";
     //    手机号
     @Bind(R.id.register_phone_number)
     EditText registerPhoneNumber;
@@ -105,6 +106,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                         @Override
                         public void run() {
                             codeInt--;
+;
                             getRegisterCode.setText(codeInt + "");
                             getRegisterCode.setEnabled(false);
                             if (codeInt < 1){

@@ -1,7 +1,5 @@
 package com.sunny.univstar.model.entity;
 
-import android.os.Parcel;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,19 +8,19 @@ import java.util.List;
  * Created by DELL on 2018/5/7.
  */
 
-public class FindTeacherEntity {
+public class MasterDetailEntity {
 
     @SerializedName("code")
-    private int _$Code71; // FIXME check this code
+    private int _$Code209; // FIXME check this code
     private String message;
     private DataBean data;
 
-    public int get_$Code71() {
-        return _$Code71;
+    public int get_$Code209() {
+        return _$Code209;
     }
 
-    public void set_$Code71(int _$Code71) {
-        this._$Code71 = _$Code71;
+    public void set_$Code209(int _$Code209) {
+        this._$Code209 = _$Code209;
     }
 
     public String getMessage() {
@@ -42,195 +40,123 @@ public class FindTeacherEntity {
     }
 
     public static class DataBean {
-        @SerializedName("pageNum")
-        private int _$PageNum296; // FIXME check this code
-        private int pageSize;
-        private int size;
-        private int startRow;
-        private int endRow;
-        private int total;
-        private int pages;
-        private int prePage;
-        private int nextPage;
-        private boolean isFirstPage;
-        private boolean isLastPage;
-        private boolean hasPreviousPage;
-        private boolean hasNextPage;
-        private int navigatePages;
-        private int navigateFirstPage;
-        private int navigateLastPage;
-        private int firstPage;
-        private int lastPage;
-        private List<ListBean> list;
-        private List<Integer> navigatepageNums;
+        @SerializedName("isAttention")
+        private int _$IsAttention257; // FIXME check this code
+        private int liveCount;
+        private int postsCount;
+        private double price;
+        private int coachingCount;
+        private int attentionCount;
+        private int fansCount;
+        private int homewokPublishCount;
+        private UserBean user;
+        private PraiseBean praise;
+        private List<?> courses;
+        private List<?> liveCourses;
 
-        public int get_$PageNum296() {
-            return _$PageNum296;
+        public int get_$IsAttention257() {
+            return _$IsAttention257;
         }
 
-        public void set_$PageNum296(int _$PageNum296) {
-            this._$PageNum296 = _$PageNum296;
+        public void set_$IsAttention257(int _$IsAttention257) {
+            this._$IsAttention257 = _$IsAttention257;
         }
 
-        public int getPageSize() {
-            return pageSize;
+        public int getLiveCount() {
+            return liveCount;
         }
 
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
+        public void setLiveCount(int liveCount) {
+            this.liveCount = liveCount;
         }
 
-        public int getSize() {
-            return size;
+        public int getPostsCount() {
+            return postsCount;
         }
 
-        public void setSize(int size) {
-            this.size = size;
+        public void setPostsCount(int postsCount) {
+            this.postsCount = postsCount;
         }
 
-        public int getStartRow() {
-            return startRow;
+        public double getPrice() {
+            return price;
         }
 
-        public void setStartRow(int startRow) {
-            this.startRow = startRow;
+        public void setPrice(double price) {
+            this.price = price;
         }
 
-        public int getEndRow() {
-            return endRow;
+        public int getCoachingCount() {
+            return coachingCount;
         }
 
-        public void setEndRow(int endRow) {
-            this.endRow = endRow;
+        public void setCoachingCount(int coachingCount) {
+            this.coachingCount = coachingCount;
         }
 
-        public int getTotal() {
-            return total;
+        public int getAttentionCount() {
+            return attentionCount;
         }
 
-        public void setTotal(int total) {
-            this.total = total;
+        public void setAttentionCount(int attentionCount) {
+            this.attentionCount = attentionCount;
         }
 
-        public int getPages() {
-            return pages;
+        public int getFansCount() {
+            return fansCount;
         }
 
-        public void setPages(int pages) {
-            this.pages = pages;
+        public void setFansCount(int fansCount) {
+            this.fansCount = fansCount;
         }
 
-        public int getPrePage() {
-            return prePage;
+        public int getHomewokPublishCount() {
+            return homewokPublishCount;
         }
 
-        public void setPrePage(int prePage) {
-            this.prePage = prePage;
+        public void setHomewokPublishCount(int homewokPublishCount) {
+            this.homewokPublishCount = homewokPublishCount;
         }
 
-        public int getNextPage() {
-            return nextPage;
+        public UserBean getUser() {
+            return user;
         }
 
-        public void setNextPage(int nextPage) {
-            this.nextPage = nextPage;
+        public void setUser(UserBean user) {
+            this.user = user;
         }
 
-        public boolean isIsFirstPage() {
-            return isFirstPage;
+        public PraiseBean getPraise() {
+            return praise;
         }
 
-        public void setIsFirstPage(boolean isFirstPage) {
-            this.isFirstPage = isFirstPage;
+        public void setPraise(PraiseBean praise) {
+            this.praise = praise;
         }
 
-        public boolean isIsLastPage() {
-            return isLastPage;
+        public List<?> getCourses() {
+            return courses;
         }
 
-        public void setIsLastPage(boolean isLastPage) {
-            this.isLastPage = isLastPage;
+        public void setCourses(List<?> courses) {
+            this.courses = courses;
         }
 
-        public boolean isHasPreviousPage() {
-            return hasPreviousPage;
+        public List<?> getLiveCourses() {
+            return liveCourses;
         }
 
-        public void setHasPreviousPage(boolean hasPreviousPage) {
-            this.hasPreviousPage = hasPreviousPage;
+        public void setLiveCourses(List<?> liveCourses) {
+            this.liveCourses = liveCourses;
         }
 
-        public boolean isHasNextPage() {
-            return hasNextPage;
-        }
-
-        public void setHasNextPage(boolean hasNextPage) {
-            this.hasNextPage = hasNextPage;
-        }
-
-        public int getNavigatePages() {
-            return navigatePages;
-        }
-
-        public void setNavigatePages(int navigatePages) {
-            this.navigatePages = navigatePages;
-        }
-
-        public int getNavigateFirstPage() {
-            return navigateFirstPage;
-        }
-
-        public void setNavigateFirstPage(int navigateFirstPage) {
-            this.navigateFirstPage = navigateFirstPage;
-        }
-
-        public int getNavigateLastPage() {
-            return navigateLastPage;
-        }
-
-        public void setNavigateLastPage(int navigateLastPage) {
-            this.navigateLastPage = navigateLastPage;
-        }
-
-        public int getFirstPage() {
-            return firstPage;
-        }
-
-        public void setFirstPage(int firstPage) {
-            this.firstPage = firstPage;
-        }
-
-        public int getLastPage() {
-            return lastPage;
-        }
-
-        public void setLastPage(int lastPage) {
-            this.lastPage = lastPage;
-        }
-
-        public List<ListBean> getList() {
-            return list;
-        }
-
-        public void setList(List<ListBean> list) {
-            this.list = list;
-        }
-
-        public List<Integer> getNavigatepageNums() {
-            return navigatepageNums;
-        }
-
-        public void setNavigatepageNums(List<Integer> navigatepageNums) {
-            this.navigatepageNums = navigatepageNums;
-        }
-
-        public static class ListBean{
+        public static class UserBean {
             @SerializedName("id")
-            private int _$Id68; // FIXME check this code
+            private int _$Id121; // FIXME check this code
             private int page;
             private int rows;
             private int pid;
-            private Object salt;
+            private String salt;
             private String nickname;
             private String realname;
             private String photo;
@@ -238,7 +164,7 @@ public class FindTeacherEntity {
             private String intro;
             private String details;
             private String mobile;
-            private Object psw;
+            private String psw;
             private String email;
             private int sex;
             private Object birthday;
@@ -253,7 +179,7 @@ public class FindTeacherEntity {
             private String major;
             private String skilled;
             private Object ip;
-            private Object lastTime;
+            private long lastTime;
             private long createDate;
             private Object idcardFront;
             private Object idcardBack;
@@ -275,55 +201,12 @@ public class FindTeacherEntity {
             private Object flag;
             private int weight;
 
-            protected ListBean(Parcel in) {
-                _$Id68 = in.readInt();
-                page = in.readInt();
-                rows = in.readInt();
-                pid = in.readInt();
-                nickname = in.readString();
-                realname = in.readString();
-                photo = in.readString();
-                images = in.readString();
-                intro = in.readString();
-                details = in.readString();
-                mobile = in.readString();
-                email = in.readString();
-                sex = in.readInt();
-                country = in.readString();
-                city = in.readString();
-                userType = in.readInt();
-                college = in.readString();
-                major = in.readString();
-                skilled = in.readString();
-                createDate = in.readLong();
-                isauth = in.readInt();
-                pushHome = in.readInt();
-                sortTime = in.readLong();
-                status = in.readInt();
-                topTime = in.readInt();
-                videoPath = in.readString();
-                beanAmount = in.readInt();
-                weight = in.readInt();
+            public int get_$Id121() {
+                return _$Id121;
             }
 
-//            public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
-//                @Override
-//                public ListBean createFromParcel(Parcel in) {
-//                    return new ListBean(in);
-//                }
-//
-//                @Override
-//                public ListBean[] newArray(int size) {
-//                    return new ListBean[size];
-//                }
-//            };
-
-            public int get_$Id68() {
-                return _$Id68;
-            }
-
-            public void set_$Id68(int _$Id68) {
-                this._$Id68 = _$Id68;
+            public void set_$Id121(int _$Id121) {
+                this._$Id121 = _$Id121;
             }
 
             public int getPage() {
@@ -350,11 +233,11 @@ public class FindTeacherEntity {
                 this.pid = pid;
             }
 
-            public Object getSalt() {
+            public String getSalt() {
                 return salt;
             }
 
-            public void setSalt(Object salt) {
+            public void setSalt(String salt) {
                 this.salt = salt;
             }
 
@@ -414,11 +297,11 @@ public class FindTeacherEntity {
                 this.mobile = mobile;
             }
 
-            public Object getPsw() {
+            public String getPsw() {
                 return psw;
             }
 
-            public void setPsw(Object psw) {
+            public void setPsw(String psw) {
                 this.psw = psw;
             }
 
@@ -534,11 +417,11 @@ public class FindTeacherEntity {
                 this.ip = ip;
             }
 
-            public Object getLastTime() {
+            public long getLastTime() {
                 return lastTime;
             }
 
-            public void setLastTime(Object lastTime) {
+            public void setLastTime(long lastTime) {
                 this.lastTime = lastTime;
             }
 
@@ -701,63 +584,32 @@ public class FindTeacherEntity {
             public void setWeight(int weight) {
                 this.weight = weight;
             }
+        }
 
-//            @Override
-//            public int describeContents() {
-//                return 0;
-//            }
-//
-//            @Override
-//            public void writeToParcel(Parcel dest, int flags) {
-//                dest.writeInt(_$Id68);
-//                dest.writeInt(page);
-//                dest.writeInt(rows);
-//                dest.writeInt(pid);
-//                dest.writeValue(salt);
-//                dest.writeString(nickname);
-//                dest.writeString(realname);
-//                dest.writeString(photo);
-//                dest.writeString(images);
-//                dest.writeString(intro);
-//                dest.writeString(details);
-//                dest.writeString(mobile);
-//                dest.writeValue(psw);
-//                dest.writeString(email);
-//                dest.writeInt(sex);
-//                dest.writeValue(birthday);
-//                dest.writeString(country);
-//                dest.writeValue(province);
-//                dest.writeString(city);
-//                dest.writeValue(area);
-//                dest.writeValue(salt);
-//                dest.writeInt(userType);
-//                dest.writeValue(post);
-//                dest.writeString(college);
-//                dest.writeString(major);
-//                dest.writeString(skilled);
-//                dest.writeValue(ip);
-//                dest.writeValue(lastTime);
-//                dest.writeLong(createDate);
-//                dest.writeValue(idcardFront);
-//                dest.writeValue(idcardBack);
-//                dest.writeValue(teachCard);
-//                dest.writeInt(isauth);
-//                dest.writeValue(identityAuthTime);
-//                dest.writeInt(pushHome);
-//                dest.writeLong(sortTime);
-//                dest.writeValue(openid);
-//                dest.writeValue(unionid);
-//                dest.writeValue(qqUid);
-//                dest.writeValue(sinaUid);
-//                dest.writeInt(status);
-//                dest.writeInt(topTime);
-//                dest.writeString(videoPath);
-//                dest.writeInt(beanAmount);
-//                dest.writeValue(openidMini);
-//                dest.writeValue(openidWx);
-//                dest.writeValue(flag);
-//                dest.writeInt(weight);
-//            }
+        public static class PraiseBean {
+            /**
+             * praiseCount : 30
+             * isPraise : 0
+             */
+
+            private int praiseCount;
+            private int isPraise;
+
+            public int getPraiseCount() {
+                return praiseCount;
+            }
+
+            public void setPraiseCount(int praiseCount) {
+                this.praiseCount = praiseCount;
+            }
+
+            public int getIsPraise() {
+                return isPraise;
+            }
+
+            public void setIsPraise(int isPraise) {
+                this.isPraise = isPraise;
+            }
         }
     }
 }

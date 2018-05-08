@@ -37,15 +37,13 @@ public class GuidePageActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        guideImage = (ImageView) findViewById(R.id.guideImage);
-        guideImage.setImageResource(R.mipmap.guide);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(GuidePageActivity.this, MainActivity.class));
                 finish();
             }
-        }, 300);
+        }, 2000);
        // handler.postDelayed(runnable, 300);
     }
 }
