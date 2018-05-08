@@ -93,6 +93,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
     public void showLoginData(LoginBean loginBean) {
         Log.d("LoginActivity", "loginBean.getData().getId():" + loginBean.getData().getId());
         anInt = loginBean.getData().getId();
+        sharedPreferences = getSharedPreferences("userState", MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("loginUserId", anInt);
         loginContractInPresenter.sendUserLoginData(anInt);
     }
 
@@ -100,7 +103,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
     public void showLoginSuccessData(LoginSucessBean loginSucessBean) {
 
 
-        if (loginSucessBean.getMessage().equals("成功")){
+        if (loginSucessBean.getMessage().equals("成功")) {
             LoginSucessBean.DataBean data = loginSucessBean.getData();
 //        "nickname": "Sunny",
 //                "realname": null,
@@ -109,20 +112,26 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
 //                "intro": null,
 //                "details": null,
 //                "mobile": "13718620289",
+//            用户名
             String nickname = data.getNickname();
+//            用户头像
             String images = (String) data.getImages();
+//           用户相别
             int sex = data.getSex();
+//            用户手机号
+            String mobile = data.getMobile();
             Log.d("LoginActivity", "sex:" + sex);
 
             sharedPreferences = getSharedPreferences("userState", MODE_PRIVATE);
             SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putBoolean("isLogin",true);
+            edit.putBoolean("isLogin", true);
             edit.putString("nickname", nickname);
-            edit.putInt("sex",sex);
+            edit.putInt("sex", sex);
             edit.putString("images", images);
+            edit.putString("mobile", mobile);
             edit.commit();
             finish();
-        }else {
+        } else {
             Toast.makeText(this, loginSucessBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

@@ -1,9 +1,11 @@
 package com.sunny.univstar.base;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -24,16 +26,20 @@ import qiu.niorgai.StatusBarCompat;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    public BaseFragment lastFragment;
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    public BaseFragment lastFragment;
+    private static String[] PERMISSIONS_STORAGE = {
+            "android.permission.READ_EXTERNAL_STORAGE",
+            "android.permission.WRITE_EXTERNAL_STORAGE" };
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        App.context = this;
         init();
         initData();
-        App.context = this;
     }
 
 
@@ -85,19 +91,35 @@ public abstract class BaseActivity extends AppCompatActivity {
         App.context = this;
     }
 
+
     @Override
-    protected void onStop() {
-        super.onStop();
-//        App.context = null;
+    protected void onPause() {
+        super.onPause();
+        App.context = null;
+    }
+
+    public static void verifyStoragePermissions(Activity activity) {
+
+        try {
+            //检测是否有写的权限
+            int permission = ActivityCompat.checkSelfPermission(activity,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void setTitleTheme(Activity activity,boolean darmode){
         setStatusBarCompat(activity);
 
         setMiuiStatusBarDarkMode(activity, darmode);
-
+//
         setMeizuStatusBarDarkIcon(activity, darmode);
-
+//
         setMStatusBarDarkIcon(activity);
     }
     /**

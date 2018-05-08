@@ -39,31 +39,6 @@ import static com.sunny.univstar.R.id.home_master_work_listView;
 public class MasterFragment extends BaseFragment implements HomeMasterContract.homeMasterInView {
 
     public HomeMasterContract.homeMasterInPresenter homeMasterInPresenter;
-    //    FlyBanner masterFlyBanner;
-//    @Bind(R.id.home_master_find_group)
-//    LinearLayout homeMasterFindGroup;
-//    @Bind(R.id.home_master_look_group)
-//    LinearLayout homeMasterLookGroup;
-//    @Bind(R.id.home_master_work_group)
-//    LinearLayout homeMasterWorkGroup;
-//    @Bind(R.id.home_master_chat_group)
-//    LinearLayout homeMasterChatGroup;
-//    @Bind(R.id.home_master_learn_group)
-//    LinearLayout homeMasterLearnGroup;
-//    @Bind(R.id.home_master_recommend_more)
-//    TextView homeMasterRecommendMore;
-//    @Bind(R.id.home_master_recommend_recyclerView)
-//    RecyclerView homeMasterRecommendRecyclerView;
-//    @Bind(R.id.home_master_live_more)
-//    TextView homeMasterLiveMore;
-//    @Bind(R.id.home_master_live_gridView)
-//    RecyclerView homeMasterLiveGridView;
-//    @Bind(R.id.home_master_fragment_workMore)
-//    TextView homeMasterFragmentWorkMore;
-//    @Bind(home_master_work_listView)
-//    RecyclerView homeMasterWorkListView;
-//    @Bind(R.id.home_master_fragment_chatValuable)
-//    RelativeLayout homeMasterFragmentChatValuable;
     public List<String> flayBanner_list = new ArrayList<>();
 
     @Bind(R.id.masterFlyBanner)
@@ -179,34 +154,36 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     public void showHomeMasterData(HomeMasterBean homeMasterBean) {
 //        Log.d("MasterFragment", "homeMasterBean.getData().getHomewoks().size():" + homeMasterBean.getData().getHomewoks().size());
 //        得到首页轮播图的集合
-        if (homeMasterBean.getData().getSystemAds() != null && homeMasterBean.getData().getSystemAds().size() > 0)
-            systemAdsBeanList = homeMasterBean.getData().getSystemAds();
-        else
-            return;
+        if (homeMasterBean.getCode() == 0) {
+            if (homeMasterBean.getData().getSystemAds() != null && homeMasterBean.getData().getSystemAds().size() > 0)
+                systemAdsBeanList = homeMasterBean.getData().getSystemAds();
+            else
+                return;
 //        得到名师推荐集合
-        if (homeMasterBean.getData().getUsers() != null && homeMasterBean.getData().getUsers().size() > 0)
-            usersBeanList = homeMasterBean.getData().getUsers();
-        else
-            return;
+            if (homeMasterBean.getData().getUsers() != null && homeMasterBean.getData().getUsers().size() > 0)
+                usersBeanList = homeMasterBean.getData().getUsers();
+            else
+                return;
 //        得到推荐作业集合
-        if (homeMasterBean.getData().getHomewoks() != null && homeMasterBean.getData().getHomewoks().size() > 0)
-            homewoksBeanList = homeMasterBean.getData().getHomewoks();
-        else
-            return;
+            if (homeMasterBean.getData().getHomewoks() != null && homeMasterBean.getData().getHomewoks().size() > 0)
+                homewoksBeanList = homeMasterBean.getData().getHomewoks();
+            else
+                return;
 //        得到课程推荐集合
-        if (homeMasterBean.getData().getLiveCourses() != null && homeMasterBean.getData().getLiveCourses().size() > 0)
-            liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
-        else
-            return;
-        //    制作轮播图UI界面
-        flayBannerData();
+            if (homeMasterBean.getData().getLiveCourses() != null && homeMasterBean.getData().getLiveCourses().size() > 0)
+                liveCoursesBeanList = homeMasterBean.getData().getLiveCourses();
+            else
+                return;
+            //    制作轮播图UI界面
+            flayBannerData();
 //        制作名师推荐UI界面
-        usersBeanData();
+            usersBeanData();
 //        制作课程推荐UI界面
-        liveCoursesData();
+            liveCoursesData();
 //        制作推荐作业UI界面
-        homewoksData();
+            homewoksData();
 //        Log.d("MasterFragment", "systemAdsBeanList.size():" + systemAdsBeanList.size());
+        }
     }
 
     //    制作课程推荐UI界面

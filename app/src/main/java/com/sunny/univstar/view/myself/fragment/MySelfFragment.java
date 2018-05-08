@@ -17,6 +17,7 @@ import com.sunny.univstar.view.personal.activity.LoginActivity;
 import com.sunny.univstar.view.personal.activity.LoginSetActivity;
 import com.sunny.univstar.view.personal.activity.RegisterActivity;
 import com.sunny.univstar.view.personal.activity.login.bean.view.HeadImageActivity;
+import com.sunny.univstar.view.personal.activity.login.bean.view.PersonalInformationActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -101,7 +102,7 @@ public class MySelfFragment extends BaseFragment {
                 break;
 //            登录成功后我的信息按钮
             case R.id.home_myself_content:
-
+                startActivity(new Intent(getActivity(), PersonalInformationActivity.class));
                 break;
 //            没有登录时的头像点击事件
             case R.id.user_no_login_img:

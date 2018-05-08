@@ -85,7 +85,7 @@
                         android:layout_marginRight="12dp"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/user_head_portrait"
-                        app:riv_oval="true" />
+                       />
 
 
                     <ImageView

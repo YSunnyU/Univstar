@@ -98,7 +98,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
 
     @Override
     public void showValueFlyBannerData(ValueFlaybannerBean valueFlaybannerBean) {
-        Log.d("ValuableFragment", "valueFlaybannerBean.getData().getList().size():" + valueFlaybannerBean.getData().getList().size());
+//        Log.d("ValuableFragment", "valueFlaybannerBean.getData().getList().size():" + valueFlaybannerBean.getData().getList().size());
         List<ValueFlaybannerBean.DataBean.ListBean> list = valueFlaybannerBean.getData().getList();
         for (int i = 0; i < list.size(); i++) {
             banner_list.add(list.get(i).getMobileImgUrl());

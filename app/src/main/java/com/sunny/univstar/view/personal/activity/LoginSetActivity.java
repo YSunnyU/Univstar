@@ -1,12 +1,18 @@
 package com.sunny.univstar.view.personal.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
+import com.sunny.univstar.model.utils.RetrofitUtils;
+import com.sunny.univstar.view.personal.activity.login.bean.set.AlertPasswordActivity;
+
+import java.io.File;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -31,6 +37,7 @@ public class LoginSetActivity extends BaseActivity {
     @Bind(R.id.setting_aty_tuichu_group)
     RelativeLayout settingAtyTuichuGroup;
     public static SharedPreferences sharedPreferences;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login_set;
@@ -39,6 +46,12 @@ public class LoginSetActivity extends BaseActivity {
     @Override
     protected void init() {
 
+        try {
+            long cache = RetrofitUtils.getFolderSize(new File(Environment.getExternalStorageDirectory().getPath() + "/cache"));
+            settingGlideCahceTv.setText(RetrofitUtils.getFormatSize(cache));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -61,18 +74,21 @@ public class LoginSetActivity extends BaseActivity {
                 break;
 //            修改登录密码
             case R.id.setting_aty_pass_group:
+                startActivity(new Intent(this, AlertPasswordActivity.class));
                 break;
 //            清除缓存
             case R.id.setting_glide_cahce_tv:
+                RetrofitUtils.deleteFile(Environment.getExternalStorageDirectory().getPath() + "/cache");
+                init();
                 break;
 //            关于UnivStar
             case R.id.setting_aty_about_group:
                 break;
 //            退出登录
             case R.id.setting_aty_tuichu_group:
-                sharedPreferences=getSharedPreferences("userState",0);
+                sharedPreferences = getSharedPreferences("userState", 0);
                 SharedPreferences.Editor edit = sharedPreferences.edit();
-                edit.putBoolean("isLogin",false);
+                edit.putBoolean("isLogin", false);
                 edit.commit();
                 finish();
                 break;
