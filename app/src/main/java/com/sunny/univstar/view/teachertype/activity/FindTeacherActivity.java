@@ -62,7 +62,7 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
     private FindTeacherAdapter adapter;
 
     private List<FindTeacherEntity> mList;
-    private String userId;
+    private int userId;
 
     @Override
     protected int getLayoutId() {
@@ -73,10 +73,10 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
     protected void init() {
         mList = new ArrayList<>();
         SharedPreferences userState = getSharedPreferences("userState", 0);
-        userId = userState.getString("userId", "0");
+        userId = userState.getInt("loginUserId", 0);
         findTeacherPresneter = new FindTeacherPresenter(this);
         Map<String,String> map = new HashMap<>();
-        map.put("loginUserId", userId);
+        map.put("loginUserId", userId+"");
         map.put("userType",SORT_TYPE_DASHI);
         map.put("page",1+"");
         findTeacherPresneter.sendFindTeacher(map);
@@ -113,7 +113,7 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 //            大师
             case R.id.find_great_teacher:
                 map.clear();
-                map.put("loginUserId",userId);
+                map.put("loginUserId",userId + "");
                 map.put("userType",SORT_TYPE_DASHI);
                 map.put("page",1+"");
                 findTeacherPresneter.sendFindTeacher(map);
@@ -124,7 +124,7 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 //            名师
             case R.id.find_famous_teacher:
                 map.clear();
-                map.put("loginUserId",userId);
+                map.put("loginUserId",userId + "");
                 map.put("userType",SORT_TYPE_MINGSHI);
                 map.put("page",1+"");
                 findTeacherPresneter.sendFindTeacher(map);
@@ -135,7 +135,7 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 //            达人
             case R.id.find_daren_teacher:
                 map.clear();
-                map.put("loginUserId",userId);
+                map.put("loginUserId",userId + "");
                 map.put("userType",SORT_TYPE_DAREN);
                 map.put("page",1+"");
                 findTeacherPresneter.sendFindTeacher(map);

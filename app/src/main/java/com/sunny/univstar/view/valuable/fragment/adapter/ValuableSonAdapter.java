@@ -29,7 +29,7 @@ import java.util.List;
  * Created by 张玗 on 2018/5/7.
  */
 
-public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.Holder> {
+public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.Holder> implements View.OnClickListener {
     List<HomeValuableBean.DataBean.ArtcircleListBean.ListBean> list;
     Context context;
 
@@ -42,6 +42,7 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_work_content_item, parent, false);
         Holder holder = new Holder(inflate);
+        inflate.setOnClickListener(this);
         return holder;
     }
 
@@ -89,6 +90,7 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
             Glide.with(context).load(list.get(position).getCoverImg()).asBitmap().into(holder.user_content_image);
             holder.comment.setText(list.get(position).getCommentNum() + "");
             holder.praise.setText(list.get(position).getPraiseNum() + "");
+            holder.itemView.setTag(position);
 //        holder.gift.setText(list.get(position).getGiftNum()+"");
         }
     }
@@ -96,6 +98,19 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
     @Override
     public int getItemCount() {
         return list.isEmpty() ? 0 : list.size();
+    }
+
+    public interface OnClickItem{
+        void onClickItem(View view,int position);
+    }
+    private OnClickItem onClickItem;
+    public void setOnClickItem(OnClickItem onClickItem){
+        this.onClickItem = onClickItem;
+    }
+    @Override
+    public void onClick(View v) {
+        if (onClickItem != null)
+            onClickItem.onClickItem(v,(int)v.getTag());
     }
 
 

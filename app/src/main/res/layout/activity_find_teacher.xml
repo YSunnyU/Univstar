@@ -11,18 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
-
         <ImageView
-            android:id="@+id/find_teacher_return"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:id="@+id/find_teacher_return"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@mipmap/register_return" />
 
         <TextView
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:text="名师"
             android:textColor="#0073ff"
             android:textSize="18sp" />

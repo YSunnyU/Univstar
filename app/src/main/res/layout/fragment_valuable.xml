@@ -7,7 +7,7 @@
     <!-- 第一部分:CoordinatorLayout -->
     <android.support.design.widget.CoordinatorLayout
 
-
+        android:visibility="gone"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/scrollview"
         android:layout_width="fill_parent"
@@ -75,4 +75,22 @@
         </android.support.v4.view.ViewPager>
 
     </android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:id="@+id/note_work_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@mipmap/empty_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="15dp"
+            android:textColor="#333"
+            android:text="暂无内容"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>

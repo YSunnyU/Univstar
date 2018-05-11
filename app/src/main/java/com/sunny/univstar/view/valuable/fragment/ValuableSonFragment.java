@@ -1,6 +1,7 @@
 package com.sunny.univstar.view.valuable.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.sunny.univstar.base.BaseFragment;
 import com.sunny.univstar.contract.HomeValuableContract;
 import com.sunny.univstar.presenter.HomeValuablePresenter;
 import com.sunny.univstar.view.valuable.fragment.adapter.ValuableSonAdapter;
+import com.sunny.univstar.view.work.activity.WorkDetailedActivity;
 
 import java.util.List;
 
@@ -72,6 +74,17 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             valuableSonRecyclerView.setLayoutManager(linearLayoutManager);
             ValuableSonAdapter valuableSonAdapter = new ValuableSonAdapter(list, getActivity());
+            valuableSonAdapter.setOnClickItem(new ValuableSonAdapter.OnClickItem() {
+                @Override
+                public void onClickItem(View view, int position) {
+                    if (list != null && list.size() > 0) {
+                        Intent intent = new Intent(getContext(), WorkDetailedActivity.class);
+                        intent.putExtra("homewokId", list.get(position).getId() + "");
+                        intent.putExtra("type","宝典");
+                        startActivity(intent);
+                    }
+                }
+            });
             valuableSonRecyclerView.setAdapter(valuableSonAdapter);
         }
 

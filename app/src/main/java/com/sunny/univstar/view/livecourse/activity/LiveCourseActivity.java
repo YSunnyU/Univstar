@@ -62,7 +62,7 @@ public class LiveCourseActivity extends BaseActivity implements LiveCourseContra
         liveCoursePresenter = new LiveCoursePresneter(this);
         SharedPreferences userState = getSharedPreferences("userState", 0);
         Map<String, String> map = new HashMap<>();
-        map.put("loginUserId", userState.getString("userId", "0") + "");
+        map.put("loginUserId", userState.getInt("loginUserId", 0) + "");
         map.put("type", "讲堂");
         map.put("page", "1");
         liveCoursePresenter.sendLiveCourse(map);
@@ -92,7 +92,7 @@ public class LiveCourseActivity extends BaseActivity implements LiveCourseContra
         switch (view.getId()) {
             case R.id.course_btn:
                 map.clear();
-                map.put("loginUserId", userState.getString("userId", "0") + "");
+                map.put("loginUserId", userState.getInt("loginUserId", 0) + "");
                 map.put("type", "讲堂");
                 map.put("page", "1");
                 liveCoursePresenter.sendLiveCourse(map);
@@ -101,7 +101,7 @@ public class LiveCourseActivity extends BaseActivity implements LiveCourseContra
                 break;
             case R.id.live_course:
                 map.clear();
-                map.put("loginUserId", userState.getString("userId", "0") + "");
+                map.put("loginUserId", userState.getInt("loginUserId", 0) + "");
                 map.put("type", "私塾");
                 map.put("page", "1");
                 liveCoursePresenter.sendLiveCourse(map);

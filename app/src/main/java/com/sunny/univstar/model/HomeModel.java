@@ -9,6 +9,10 @@ import com.sunny.univstar.model.service.MasterDetailService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
 import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
+import com.sunny.univstar.model.service.TeacherFanService;
+import com.sunny.univstar.model.service.TeacherLiveService;
+import com.sunny.univstar.model.service.ValuableDetailedService;
+import com.sunny.univstar.model.service.WorkDetailedService;
 import com.sunny.univstar.model.utils.RetrofitUtils;
 
 /**
@@ -60,5 +64,25 @@ public class HomeModel implements IHomeModel{
     @Override
     public MyFollowPraiseService getMyFollowPraiseService() {
         return RetrofitUtils.getInstance().getMyFollowPraiseService();
+    }
+
+    @Override
+    public WorkDetailedService getWorkDetailedService() {
+        return RetrofitUtils.getInstance().getWorkDetailedService();
+    }
+
+    @Override
+    public ValuableDetailedService getValuableDetailedService() {
+        return RetrofitUtils.getInstance().getValuableDetailedService();
+    }
+
+    @Override
+    public TeacherFanService getTeacherFanService() {
+        return RetrofitUtils.getInstance().getTeacherFan();
+    }
+
+    @Override
+    public TeacherLiveService getTeacherLiveService() {
+        return RetrofitUtils.getInstance().getTeacherLive();
     }
 }

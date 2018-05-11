@@ -104,6 +104,7 @@
         android:layout_weight="1">
 
         <LinearLayout
+            android:id="@+id/master_user_reply_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -123,25 +124,24 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/master_user_praise_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/praise_normal" />
-
-            <TextView
-                android:layout_marginLeft="8dp"
+            <CheckBox
+                android:paddingLeft="30dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/praise_check_tv_bg"
                 android:id="@+id/master_user_praise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/master_praise_img_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -162,6 +162,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/master_user_share_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

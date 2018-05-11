@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".app.App"
@@ -29,6 +31,59 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!--新浪-->
+        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            >
+
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+        <!--微信-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--QQ-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+
         <activity android:name=".view.preference.PreferenceActivity" />
         <activity android:name=".view.personal.activity.RegisterActivity" />
         <activity android:name=".view.personal.activity.PerfectUserInfoActivity" />
@@ -42,6 +97,10 @@
         <activity android:name=".view.livecourse.activity.LiveCourseDetailedActivity" />
         <activity android:name=".view.notice.activity.NoticeDetailedActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AlertPasswordActivity" />
+        <activity android:name=".view.personal.activity.login.bean.set.NewPswActivity" />
+        <activity android:name=".view.work.activity.WorkDetailedActivity" />
+        <activity android:name=".view.teachertype.activity.TeacherFanActivity" />
+        <activity android:name=".view.teachertype.activity.TeacherLiveActivity"></activity>
         <activity android:name=".view.personal.activity.login.bean.set.NewPswActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.SocialNumBindActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AboutUnivStarActivity" />

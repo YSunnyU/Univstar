@@ -258,6 +258,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/shape"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -270,7 +271,6 @@
                 android:src="@mipmap/share_default" />
 
             <TextView
-                android:id="@+id/shape"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp" />

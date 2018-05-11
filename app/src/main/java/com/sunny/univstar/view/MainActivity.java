@@ -1,6 +1,5 @@
 package com.sunny.univstar.view;
 
-import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -83,7 +82,16 @@ public class MainActivity extends BaseActivity {
     public void myself(){
         headToolbar.setVisibility(View.GONE);
         fragmentRepeat(R.id.container, MySelfFragment.class);
+            case R.id.home_myself_btn:
+                myself();
+                break;
+        }
     }
+    public void myself(){
+        headToolbar.setVisibility(View.GONE);
+        fragmentRepeat(R.id.container, MySelfFragment.class);
+    }
+
     public void notice() {
         headToolbar.setVisibility(View.VISIBLE);
         fragmentRepeat(R.id.container, NoticeFragment.class);

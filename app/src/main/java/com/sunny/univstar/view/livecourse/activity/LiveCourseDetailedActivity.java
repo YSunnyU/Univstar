@@ -3,15 +3,14 @@ package com.sunny.univstar.view.livecourse.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,16 +21,20 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
+import com.sunny.univstar.contract.FollowPraiseContract;
 import com.sunny.univstar.contract.LiveCourseDetailedContract;
 import com.sunny.univstar.model.entity.LiveCourseDetailedEntity;
+import com.sunny.univstar.model.utils.ShapeUtils;
+import com.sunny.univstar.presenter.FollowPraiisePresenter;
 import com.sunny.univstar.presenter.LiveCourseDetailedPresenter;
+import com.sunny.univstar.view.personal.activity.LoginActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LiveCourseDetailedActivity extends BaseActivity implements View.OnClickListener,LiveCourseDetailedContract.LiveCourseDetailedView {
+public class LiveCourseDetailedActivity extends BaseActivity implements View.OnClickListener,LiveCourseDetailedContract.LiveCourseDetailedView,FollowPraiseContract.FollowPraiseView{
 
 
     private CheckBox live_course_detailed_collect;
@@ -53,7 +56,12 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
     private ImageView live_course_detailed_return;
     private ImageView live_course_detailed_share;
     private LiveCourseDetailedContract.LiveCourseDetailedPresenter liveCourseDetailedPresenter;
+    private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
     private String id;
+    private boolean isLogin;
+    private String teacherId;
+    private int keChengId;
+    private int userId;
 
     @Override
     protected int getLayoutId() {
@@ -63,8 +71,10 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
     @Override
     protected void init() {
         liveCourseDetailedPresenter = new LiveCourseDetailedPresenter(this);
+        followPraisePresenter = new FollowPraiisePresenter(this);
 //        收藏按钮
           live_course_detailed_collect = (CheckBox) findViewById(R.id.live_course_detailed_collect);
+        live_course_detailed_collect.setOnClickListener(this);
 //        购买
           live_course_detailed_buy = (LinearLayout) findViewById(R.id.live_course_detailed_buy);
         live_course_detailed_buy.setOnClickListener(this);
@@ -84,17 +94,7 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
           live_course_detailed_synopsis = (TextView) findViewById(R.id.live_course_detailed_synopsis);
 //        关注
           live_course_detailed_follow_check = (CheckBox) findViewById(R.id.live_course_detailed_follow_check);
-        live_course_detailed_follow_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        live_course_detailed_follow_check.setText("已关注");
-                        live_course_detailed_follow_check.setTextColor(Color.parseColor("#9c9c9c"));
-                    } else {
-                        live_course_detailed_follow_check.setText("关注");
-                    }
-            }
-        });
+        live_course_detailed_follow_check.setOnClickListener(this);
 //        标签
           live_course_detailed_type = (LinearLayout) findViewById(R.id.live_course_detailed_type);
 //        已预约数
@@ -113,11 +113,13 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
         live_course_detailed_share.setOnClickListener(this);
         webSetting();
         SharedPreferences userState = getSharedPreferences("userState", 0);
+        isLogin = userState.getBoolean("isLogin", false);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        String userId = userState.getString("userId", "0");
+        teacherId = intent.getStringExtra("teacherId");
+        userId = userState.getInt("loginUserId", 0);
         Map<String,String> map = new HashMap<>();
-        map.put("loginUserId",userId);
+        map.put("loginUserId", userId + "");
 //        直播课程Id
         map.put("id",id);
         liveCourseDetailedPresenter.sendLiveCourseDetailed(map);
@@ -160,21 +162,72 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.live_course_detailed_buy:
+                if (!isLogin)
+                    startActivity(new Intent(LiveCourseDetailedActivity.this, LoginActivity.class));
+                else
+                    return;
                 Toast.makeText(this, "购买", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.live_course_detailed_return:
                 finish();
                 break;
             case R.id.live_course_detailed_share:
+                ShapeUtils shapeUtils = new ShapeUtils(this);
+                shapeUtils.setWeb("http://share.univstar.com/share/teacher-live-detail.html?id="+teacherId,
+                        null,"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.live_course_detailed_follow_check:
+                if (!isLogin) {
+                    live_course_detailed_follow_check.setChecked(false);
+                    startActivity(new Intent(LiveCourseDetailedActivity.this, LoginActivity.class));
+                    return;
+                }
+
+                if (isAttention) {
+                    isAttention = false;
+                    prasre("https://www.univstar.com/v1/m/user/attention/cancel",teacherId);
+                    live_course_detailed_follow_check.setText("关注");
+                    live_course_detailed_follow_check.setActivated(true);
+                } else {
+                    isAttention = true;
+                    prasre("https://www.univstar.com/v1/m/user/attention",teacherId);
+                    live_course_detailed_follow_check.setText("已关注");
+                    live_course_detailed_follow_check.setActivated(false);
+                }
+                break;
+//            收藏
+            case R.id.live_course_detailed_collect:
+                if (!isLogin) {
+                    live_course_detailed_follow_check.setChecked(false);
+                    startActivity(new Intent(LiveCourseDetailedActivity.this, LoginActivity.class));
+                    return;
+                }else {
+                    if (live_course_detailed_collect.isChecked()){
+                        Map<String,String> map = new HashMap<>();
+                        map.put("loginUserId",userId+"");
+                        map.put("id",keChengId+"");
+                        map.put("type","直播课");
+                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite",map);
+                    }else {
+                        Map<String,String> map = new HashMap<>();
+                        map.put("loginUserId",userId+"");
+                        map.put("id",keChengId+"");
+                        map.put("type","直播课");
+                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite/cancel",map);
+                    }
+                }
                 break;
         }
     }
+
+    private boolean isAttention;
 
     @Override
     public void getLiveCourseDetailedData(LiveCourseDetailedEntity liveCourseDetailedEntity) {
           if (liveCourseDetailedEntity.getCode() == 0){
 //              加载头图片
+              keChengId = liveCourseDetailedEntity.getData().getId();
               Glide.with(this).load(liveCourseDetailedEntity.getData().getCoverImg())
                       .asBitmap()
                       .into(live_course_detailed_msg_img);
@@ -183,7 +236,11 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
               Date date = new Date(liveCourseDetailedEntity.getData().getStartDate());
               live_course_detailed_course_time.setText(""+sdf.format(date));
-
+              if (liveCourseDetailedEntity.getData().getIsFavorite() == 0){
+                  live_course_detailed_collect.setChecked(false);
+              }else {
+                  live_course_detailed_collect.setChecked(true);
+              }
 //              設置頭像
               Glide.with(this)
                       .load(liveCourseDetailedEntity.getData().getPhoto())
@@ -209,6 +266,21 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
                   live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_blue);
               }
 
+              int attention = liveCourseDetailedEntity.getData().getAttention();
+              if (attention == 0) {
+                  live_course_detailed_follow_check.setText("关注");
+                  live_course_detailed_follow_check.setActivated(true);
+                  isAttention = false;
+              } else if (attention == 1) {
+                  live_course_detailed_follow_check.setText("已关注");
+                  live_course_detailed_follow_check.setActivated(false);
+                  isAttention = true;
+              } else if (attention == 2) {
+                  live_course_detailed_follow_check.setText("相互关注");
+                  live_course_detailed_follow_check.setActivated(false);
+                  isAttention = true;
+              }
+
 //              老師類別
               live_course_detailed_synopsis.setText(liveCourseDetailedEntity.getData().getIntro());
 //              已預約數
@@ -219,9 +291,31 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
               live_course_detailed_item_price.setText(""+liveCourseDetailedEntity.getData().getPrice());
 
 //              webView和JS交互
-                live_course_detailed_web.loadUrl("http://share.univstar.com/view/live.html?id="+id);
+                live_course_detailed_web.loadUrl("http://share.univstar.com/view/live.html?id="+ this.id);
           }else {
               Toast.makeText(this, liveCourseDetailedEntity.getMessage(), Toast.LENGTH_SHORT).show();
           }
+    }
+
+    @Override
+    public void getFollowPraise(String msg) {
+
+    }
+
+    private void prasre(String url,String attentionId){
+        Map<String,String> map = new HashMap<>();
+        map.put("attentionId",attentionId+"");
+        map.put("loginUserId",userId+"");
+        followPraisePresenter.sendFollowPraise(url,map);
+    }
+
+    private void prasre2(String url,String attentionId,String type){
+        Log.e("userIdaaaaaaaa",userId+"");
+        Map<String,String> map = new HashMap<>();
+        map.put("userId",attentionId+"");
+        map.put("loginUserId",userId+"");
+        map.put("id",attentionId+"");
+        map.put("type",type);
+        followPraisePresenter.sendFollowPraise(url,map);
     }
 }

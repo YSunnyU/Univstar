@@ -33,6 +33,10 @@ import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
 import com.sunny.univstar.model.service.RechargeService;
 import com.sunny.univstar.model.service.UpdateUserMessService;
+import com.sunny.univstar.model.service.TeacherFanService;
+import com.sunny.univstar.model.service.TeacherLiveService;
+import com.sunny.univstar.model.service.ValuableDetailedService;
+import com.sunny.univstar.model.service.WorkDetailedService;
 
 import java.io.File;
 import java.io.IOException;
@@ -108,6 +112,7 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -127,7 +132,11 @@ public class RetrofitUtils {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-//        手机权限问题
+////        手机权限问题
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
+//            ActivityCompat.requestPermissions(context, mPermissionList, 123);
+//        }
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
             ActivityCompat.requestPermissions(App.context, mPermissionList, 123);
@@ -382,5 +391,17 @@ public class RetrofitUtils {
 //    订单详情
     public OrderDetailService getOrderDetailService(){
         return retrofit.create(OrderDetailService.class);
+    }
+    public WorkDetailedService getWorkDetailedService(){
+        return retrofit.create(WorkDetailedService.class);
+    }
+    public ValuableDetailedService getValuableDetailedService(){
+        return retrofit.create(ValuableDetailedService.class);
+    }
+    public TeacherFanService getTeacherFan(){
+        return retrofit.create(TeacherFanService.class);
+    }
+    public TeacherLiveService getTeacherLive(){
+        return retrofit.create(TeacherLiveService.class);
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/comment_listitem_head_img"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:textColor="#333"
+            android:id="@+id/comment_listitem_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/comment_listitem_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/comment_listitem_content"
+            android:layout_marginTop="6dp"
+            android:layout_below="@+id/comment_listitem_name"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/comment_listitem_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:button="@null"
+                android:checked="false"
+                android:id="@+id/comment_listitem_praise_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#9e9e9e"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/praise_check_tv_bg"/>
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/comment_listitem_praise_cb"
+                android:gravity="right"
+                android:text="回复"
+                android:textColor="#147eff"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

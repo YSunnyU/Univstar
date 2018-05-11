@@ -5,7 +5,7 @@
     <string name="home_valuable">宝典</string>
     <string name="home_notice">预告</string>
     <string name="home_myself">我的</string>
-
+    <item name="work_detailed_check" type="id" />
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
