@@ -6,9 +6,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:background="#fff"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:background="#fff">
 
         <ImageView
             android:id="@+id/notice_item_img"
@@ -126,7 +126,7 @@
     </LinearLayout>
 
     <View
-        android:background="#efefef"
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp"
+        android:background="#efefef" />
 </LinearLayout>

@@ -24,10 +24,15 @@ import com.sunny.univstar.model.service.LiveCourseDetailedService;
 import com.sunny.univstar.model.service.LiveCourseService;
 import com.sunny.univstar.model.service.MasterDetailService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
+import com.sunny.univstar.model.service.MyOrderService;
+import com.sunny.univstar.model.service.NewPswService;
 import com.sunny.univstar.model.service.NoticeDetailedService;
+import com.sunny.univstar.model.service.OrderDetailService;
 import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
+import com.sunny.univstar.model.service.RechargeService;
+import com.sunny.univstar.model.service.UpdateUserMessService;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,19 +75,6 @@ public class RetrofitUtils {
                     .build();
         }
     };
-    /*OkHttpClient client = new OkHttpClient
-            .Builder()
-//          .addInterceptor(addQueryParameterInterceptor())  //参数添加
-//          .addInterceptor(addHeaderInterceptor()) // token过滤
-//          .addInterceptor(new LogInterceptor().setLevel(LogInterceptor.Level.BODY))
-            .addInterceptor(new AddCookiesInterceptor(App.context))
-            .cache(cache)  //添加缓存
-            .connectTimeout(60l, TimeUnit.SECONDS)
-            .readTimeout(60l, TimeUnit.SECONDS)
-            .writeTimeout(60l, TimeUnit.SECONDS)
-            .addNetworkInterceptor(interceptor)
-            .build();*/
-
     public static void deleteFile(String filePath) {
         if (!TextUtils.isEmpty(filePath)) {
             try {
@@ -116,7 +108,6 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -136,11 +127,7 @@ public class RetrofitUtils {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-////        手机权限问题
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
-//            ActivityCompat.requestPermissions(context, mPermissionList, 123);
-//        }
+//        手机权限问题
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
             ActivityCompat.requestPermissions(App.context, mPermissionList, 123);
@@ -302,6 +289,10 @@ public class RetrofitUtils {
     public AlertPasswordService getAlertPasswordService(){
         return retrofit.create(AlertPasswordService.class);
     }
+//    设置新的密码
+    public NewPswService getNewPswService(){
+        return retrofit.create(NewPswService.class);
+    }
 
     // 获取文件
     // Context.getExternalFilesDir() --> SDCard/Android/data/你的应用的包名/files/
@@ -374,5 +365,22 @@ public class RetrofitUtils {
     }
     public MyFollowPraiseService getMyFollowPraiseService(){
         return retrofit.create(MyFollowPraiseService.class);
+    }
+//   金豆充值价格
+    public RechargeService getRechargeService(){
+
+        return retrofit.create(RechargeService.class);
+    }
+//    更改用户信息
+    public UpdateUserMessService getUpdateUserMessService(){
+        return retrofit.create(UpdateUserMessService.class);
+    }
+//    我的订单
+    public MyOrderService getMyOrderService(){
+        return retrofit.create(MyOrderService.class);
+    }
+//    订单详情
+    public OrderDetailService getOrderDetailService(){
+        return retrofit.create(OrderDetailService.class);
     }
 }

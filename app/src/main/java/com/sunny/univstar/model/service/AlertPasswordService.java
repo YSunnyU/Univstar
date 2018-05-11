@@ -16,13 +16,6 @@ public interface AlertPasswordService {
     @FormUrlEncoded
     @POST("/v1/m/user/verify/authcode")
     Observable<AlertPswBean> getIsAlertPasswordTureData(@Field("mobile") String  mobel, @Field("authCode") String authCode);
-
-//    //    修改密码
-//    @FormUrlEncoded
-//    @POST("/v1/m/user/setting/password")
-//    Observable<AlertPswBean> getAlertPasswordData(@Field("loginUserId") int str, @Field("password") String password);
-
-
     //    获取验证码
     @FormUrlEncoded
     @POST("/v1/m/user/authcode")

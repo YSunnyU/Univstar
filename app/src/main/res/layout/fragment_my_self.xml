@@ -91,19 +91,21 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginTop="40dp"
-            android:layout_toStartOf="@+id/home_myself_message"
+            android:layout_toLeftOf="@+id/home_myself_message"
             android:src="@mipmap/myself_setting" />
 
     </RelativeLayout>
     <!--未登录界面-->
     <LinearLayout
 
+
         android:id="@+id/user_no_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <TextView
             android:layout_width="match_parent"
@@ -256,6 +258,7 @@
             android:weightSum="4">
 
             <LinearLayout
+                android:id="@+id/home_myself_yesLogin_pay"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -276,6 +279,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/home_myself_yesLogin_user"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -296,6 +300,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/home_myself_yesLogin_reverse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -316,6 +321,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/home_myself_yesLogin_order"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -343,6 +349,7 @@
             android:background="#e9e9e9" />
 
         <RelativeLayout
+            android:id="@+id/home_myself_yesLogin_myPay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -385,6 +392,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/home_myself_yesLogin_myGift"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -414,6 +422,7 @@
             android:background="#e9e9e9" />
 
         <RelativeLayout
+            android:id="@+id/home_myself_yesLogin_myCollection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -443,6 +452,7 @@
             android:background="#e9e9e9" />
 
         <RelativeLayout
+            android:id="@+id/home_myself_yesLogin_myHobby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -472,6 +482,7 @@
             android:background="#e9e9e9" />
 
         <RelativeLayout
+            android:id="@+id/home_myself_yesLogin_goCertification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -495,6 +506,7 @@
                 android:src="@mipmap/home_myself_right_arrow" />
 
             <TextView
+                android:id="@+id/home_myself_yesLogin_certification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"

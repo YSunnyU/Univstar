@@ -16,10 +16,11 @@ import com.sunny.univstar.presenter.AlertPasswordPresenter;
 import com.sunny.univstar.view.personal.activity.login.bean.AlertPswBean;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-
+//修改密码登录密码第一个页面
 public class AlertPasswordActivity extends BaseActivity implements AlertPasswordContract.AlertPasswordInView {
 
     public AlertPasswordContract.AlertPasswordInPresenter alertPasswordInPresenter;
@@ -46,6 +47,7 @@ public class AlertPasswordActivity extends BaseActivity implements AlertPassword
 
     @Override
     protected void init() {
+        timer = new Timer();
         alertPasswordInPresenter = new AlertPasswordPresenter(this);
         sharedPreferences = getSharedPreferences("userState", MODE_PRIVATE);
         mobile = sharedPreferences.getString("mobile", "");
@@ -65,7 +67,8 @@ public class AlertPasswordActivity extends BaseActivity implements AlertPassword
                 finish();
                 break;
             case R.id.alertPsw_getValidateCode:
-               /* //    计时器
+                alertPasswordInPresenter.sendValidateCodeData(mobile);
+                //    计时器
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -73,7 +76,6 @@ public class AlertPasswordActivity extends BaseActivity implements AlertPassword
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                alertPasswordInPresenter.sendValidateCodeData(mobile);
                                 alertPswGetValidateCode.setText(codeInt + "s");
                                 alertPswGetValidateCode.setEnabled(false);
                                 if (codeInt < 1) {
@@ -86,8 +88,8 @@ public class AlertPasswordActivity extends BaseActivity implements AlertPassword
                         });
 
                     }
-                }, 0, 1000);*/
-                alertPasswordInPresenter.sendValidateCodeData(mobile);
+                }, 0, 1000);
+//                alertPasswordInPresenter.sendValidateCodeData(mobile);
                 break;
             case R.id.alertPsw_btn:
                 alertPasswordInPresenter.sendIsValidateCodeDataTrueData(mobile, alertPswValidateCode.getText().toString());
@@ -115,6 +117,7 @@ public class AlertPasswordActivity extends BaseActivity implements AlertPassword
 //            mobile = sharedPreferences.getString("mobile", "");
 //            Log.d("AlertPasswordActivity", alertPswBean.getMessage());
             Intent intent = new Intent(AlertPasswordActivity.this, NewPswActivity.class);
+            startActivity(intent);
         }
             Toast.makeText(this, alertPswBean.getMessage(), Toast.LENGTH_SHORT).show();
     }

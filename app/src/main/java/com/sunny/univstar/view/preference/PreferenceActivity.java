@@ -7,9 +7,6 @@ import android.widget.TextView;
 
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
-import com.sunny.univstar.contract.PreferenceContract;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -18,7 +15,7 @@ import butterknife.OnClick;
  * Created by 张玗 on 2018/5/3.
  */
 
-public class PreferenceActivity extends BaseActivity implements PreferenceContract.PreferenceInView {
+public class PreferenceActivity extends BaseActivity  {
 
 
     @Bind(R.id.presenter_back)
@@ -69,10 +66,5 @@ public class PreferenceActivity extends BaseActivity implements PreferenceContra
     }
 
 
-    @Override
-    public void showPreferenceData(PreferenceAboveBean preferenceAboveBean) {
-        List<PreferenceAboveBean.DataBean.CollegesBean> colleges = preferenceAboveBean.getData().getColleges();
-        List<PreferenceAboveBean.DataBean.MajorsBean> majors = preferenceAboveBean.getData().getMajors();
 
-    }
 }

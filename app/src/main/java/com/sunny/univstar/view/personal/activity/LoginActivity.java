@@ -96,6 +96,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
         sharedPreferences = getSharedPreferences("userState", MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt("loginUserId", anInt);
+        edit.commit();
         loginContractInPresenter.sendUserLoginData(anInt);
     }
 
@@ -129,7 +130,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
             edit.putInt("sex", sex);
             edit.putString("images", images);
             edit.putString("mobile", mobile);
+            edit.putString("area",null);
             edit.commit();
+
             finish();
         } else {
             Toast.makeText(this, loginSucessBean.getMessage(), Toast.LENGTH_SHORT).show();

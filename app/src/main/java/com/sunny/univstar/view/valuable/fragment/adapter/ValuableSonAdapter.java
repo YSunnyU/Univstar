@@ -21,6 +21,8 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.view.valuable.fragment.HomeValuableBean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,6 +77,10 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
             }else {
                 holder.gift_img.setImageResource(R.mipmap.reward_normal);
             }
+            //            时间转换
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+            Date date = new Date(list.get(position).getCreateDate());
+            holder.user_time.setText(sdf.format(date));
             holder.gift.setText(list.get(position).getFavoriteNum()+"");
             holder.user_name.setText(list.get(position).getNickname());
             holder.value_btn.setText(list.get(position).getContentType());

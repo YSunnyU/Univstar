@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sunny.univstar.view.personal.activity.login.bean.view.MyMessage.order.OrderDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@mipmap/fudao_detail_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="15dp"
+                android:drawableLeft="@mipmap/message_time_lable"
+                android:text="等待付款"
+                android:textColor="#fff"
+
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="12:00"
+                android:textColor="#fff" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/myOrderItem_skipNotice"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <TextView
+                android:id="@+id/myOrderDetail_title"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Sunny啊" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_payStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="代付款"
+                android:textColor="#f91c32" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <ImageView
+                android:id="@+id/myOrderDetail_Image"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="7dp"
+                android:src="@mipmap/looklive_land_stop_bg" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_toRightOf="@+id/myOrderDetail_Image"
+                android:text="体验开播  :"
+                android:textColor="#c4c4c4" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/myOrderDetail_one"
+                android:text="2018" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/myOrderDetail_one"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_toRightOf="@+id/myOrderDetail_Image"
+                android:text="￥1730"
+                android:textColor="#ffe134"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/myOrderDetail_pay"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_bluetwo_bg"
+                android:text="付款"
+                android:textColor="#fff"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e9e9e9" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/myOrderDetail_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="订单编号  :  "
+                android:textColor="#a9a9a9"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_orderNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@+id/myOrderDetail_order"
+                android:text="2345678"
+                android:textColor="#a9a9a9" />
+
+            <Button
+                android:id="@+id/myOrderDetail_copyOrder"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/myOrderDetail_orderNum"
+                android:background="@drawable/valuable_blue_btn"
+
+                android:text="复制"
+                android:textColor="#7EC0EE" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/myOrderDetail_startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="下单时间  :  "
+                android:textColor="#a9a9a9"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/myOrderDetail_Num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@+id/myOrderDetail_startTime"
+                android:text="2345678"
+                android:textColor="#a9a9a9" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:background="#e6e6e6">
+
+        <Button
+            android:id="@+id/myOrderDetail_deleteBtn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_bluetwo_bg"
+            android:text="删除订单"
+            android:textColor="#fff" />
+
+    </RelativeLayout>
+</LinearLayout>

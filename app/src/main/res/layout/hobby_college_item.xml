@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <CheckedTextView
+
+        android:id="@+id/college_multiChoice_item_tv"
+        style="@style/usermajor_school_select_item_tvstyle"
+        android:layout_width="114dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/usermajor_select_item_bg"
+        android:textColor="@drawable/usermajor_select_item_tv_bg" />
+</RelativeLayout>

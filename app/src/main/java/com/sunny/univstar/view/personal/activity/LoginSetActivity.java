@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
 import com.sunny.univstar.model.utils.RetrofitUtils;
+import com.sunny.univstar.view.personal.activity.login.bean.set.AboutUnivStarActivity;
 import com.sunny.univstar.view.personal.activity.login.bean.set.AlertPasswordActivity;
+import com.sunny.univstar.view.personal.activity.login.bean.set.SocialNumBindActivity;
 
 import java.io.File;
 
@@ -65,12 +67,16 @@ public class LoginSetActivity extends BaseActivity {
         switch (view.getId()) {
 //            返回键
             case R.id.setting_aty_cancle:
+                finish();
                 break;
 //            换绑手机
             case R.id.setting_aty_changephone_group:
+                startActivity(new Intent(this, AlertPasswordActivity.class));
+
                 break;
 //            社交账号绑定
             case R.id.setting_aty_bind_group:
+                startActivity(new Intent(this,SocialNumBindActivity.class));
                 break;
 //            修改登录密码
             case R.id.setting_aty_pass_group:
@@ -83,6 +89,7 @@ public class LoginSetActivity extends BaseActivity {
                 break;
 //            关于UnivStar
             case R.id.setting_aty_about_group:
+                startActivity(new Intent(LoginSetActivity.this, AboutUnivStarActivity.class));
                 break;
 //            退出登录
             case R.id.setting_aty_tuichu_group:
