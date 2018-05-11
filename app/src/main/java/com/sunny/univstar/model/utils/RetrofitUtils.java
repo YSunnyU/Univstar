@@ -112,7 +112,6 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
