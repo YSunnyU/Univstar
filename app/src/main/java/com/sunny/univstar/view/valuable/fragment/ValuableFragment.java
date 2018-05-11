@@ -2,6 +2,7 @@ package com.sunny.univstar.view.valuable.fragment;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -44,6 +45,8 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
     CoordinatorLayout scrollview;
     @Bind(R.id.valuable_viewPager)
     ViewPager valuableViewPager;
+    @Bind(R.id.note_work_bg)
+    LinearLayout noteWorkBg;
     private List<String> title_list;
     private List<HomeValuableBean.DataBean.ArtcircleCategoriesBean> dataArtcircleCategories;
     private List<String> banner_list = new ArrayList<>();
@@ -74,33 +77,42 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
 
     @Override
     public void showHomeValuableData(HomeValuableBean homeValuableBean) {
-        HomeValuableBean.DataBean data = homeValuableBean.getData();
-        dataArtcircleCategories = data.getArtcircleCategories();
-        ValuableSonFragment valuableSonFragment = null;
-        for (int i = 0; i < dataArtcircleCategories.size(); i++) {
-            title_list.add(dataArtcircleCategories.get(i).getName());
+        if (homeValuableBean.getCode() == 0) {
+            scrollview.setVisibility(View.VISIBLE);
+            noteWorkBg.setVisibility(View.GONE);
+            HomeValuableBean.DataBean data = homeValuableBean.getData();
+            dataArtcircleCategories = data.getArtcircleCategories();
+            ValuableSonFragment valuableSonFragment = null;
+            for (int i = 0; i < dataArtcircleCategories.size(); i++) {
+                title_list.add(dataArtcircleCategories.get(i).getName());
 
+            }
+            SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
+            int loginUserId = userState.getInt("loginUserId", 0);
+            for (int i = 1; i < title_list.size(); i++) {
+                valuableSonFragment = new ValuableSonFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("page", i + "");
+                bundle.putString("rows", 20 + "");
+                bundle.putString("sortord", i + "");
+                bundle.putString("loginUserId", loginUserId+"");
+                bundle.putInt("size", i);
+                valuableSonFragment.setArguments(bundle);
+                son_frag.add(valuableSonFragment);
+            }
+
+            ValuableAdapter vva;
+            vva = new ValuableAdapter(getChildFragmentManager(), title_list, son_frag);
+            valuableViewPager.setAdapter(vva);
+            valuableTabLayout.setupWithViewPager(valuableViewPager);
+            valuableTabLayout.setTabMode(View.HAPTIC_FEEDBACK_ENABLED);
+            reflex(valuableTabLayout);
+
+            Log.d("ValuableFragment", "title_list.size():" + title_list.size());
+        } else {
+            scrollview.setVisibility(View.GONE);
+            noteWorkBg.setVisibility(View.VISIBLE);
         }
-        for (int i = 0; i < title_list.size(); i++) {
-            valuableSonFragment = new ValuableSonFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("page", i + "");
-            bundle.putString("rows", 20 + "");
-            bundle.putString("sortord", i + "");
-            bundle.putString("loginUserId", "0");
-            bundle.putInt("size", i);
-            valuableSonFragment.setArguments(bundle);
-            son_frag.add(valuableSonFragment);
-        }
-
-        ValuableAdapter vva;
-        vva = new ValuableAdapter(getChildFragmentManager(), title_list, son_frag);
-        valuableViewPager.setAdapter(vva);
-        valuableTabLayout.setupWithViewPager(valuableViewPager);
-        valuableTabLayout.setTabMode(View.HAPTIC_FEEDBACK_ENABLED);
-        reflex(valuableTabLayout);
-
-        Log.d("ValuableFragment", "title_list.size():" + title_list.size());
     }
 
     @Override
@@ -116,7 +128,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
 
     }
 
-    public void reflex(final TabLayout tabLayout){
+    public void reflex(final TabLayout tabLayout) {
         //了解源码得知 线的宽度是根据 tabView的宽度来设置的
         tabLayout.post(new Runnable() {
             @Override
@@ -129,7 +141,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
 
                     for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                         View tabView = mTabStrip.getChildAt(i);
-                        tabView.measure(0,0);
+                        tabView.measure(0, 0);
                         //拿到tabView的mTextView属性  tab的字数不固定一定用反射取mTextView
                         Field mTextViewField = tabView.getClass().getDeclaredField("mTextView");
                         mTextViewField.setAccessible(true);
@@ -148,7 +160,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
 
                         //设置tab左右间距为10dp  注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
-                        params.width = width ;
+                        params.width = width;
                         params.leftMargin = dp10;
                         params.rightMargin = dp10;
                         tabView.setLayoutParams(params);
@@ -165,6 +177,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
         });
 
     }
+
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */

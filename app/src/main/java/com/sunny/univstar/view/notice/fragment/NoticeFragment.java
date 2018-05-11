@@ -176,8 +176,8 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
                 map.put("rows", "10");
 //        用户ID
                 SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
-                String userId = userState.getString("userId", "0");
-                map.put("loginUserId", userId);
+                int userId = userState.getInt("loginUserId", 0);
+                map.put("loginUserId", userId+"");
 //        开课时间
                 map.put("startDate", startText.getText().toString());
 //        结课时间

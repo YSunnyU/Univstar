@@ -9,6 +9,10 @@ import com.sunny.univstar.model.service.MasterDetailService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
 import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
+import com.sunny.univstar.model.service.TeacherFanService;
+import com.sunny.univstar.model.service.TeacherLiveService;
+import com.sunny.univstar.model.service.ValuableDetailedService;
+import com.sunny.univstar.model.service.WorkDetailedService;
 
 /**
  * Created by DELL on 2018/5/3.
@@ -24,4 +28,8 @@ public interface IHomeModel {
     LiveCourseDetailedService getLiveCourseDetailed();
     NoticeDetailedService getNoticeDetailedService();
     MyFollowPraiseService getMyFollowPraiseService();
+    WorkDetailedService getWorkDetailedService();
+    ValuableDetailedService getValuableDetailedService();
+    TeacherFanService getTeacherFanService();
+    TeacherLiveService getTeacherLiveService();
 }

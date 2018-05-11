@@ -2,6 +2,7 @@ package com.sunny.univstar.view.notice.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -18,6 +19,7 @@ import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseActivity;
 import com.sunny.univstar.contract.NoticeDetailedContract;
 import com.sunny.univstar.model.entity.NoticeDetailedEntity;
+import com.sunny.univstar.model.utils.ShapeUtils;
 import com.sunny.univstar.presenter.NoticeDetailedPresenter;
 
 import java.text.SimpleDateFormat;
@@ -79,6 +81,8 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
 
     private NoticeDetailedContract.NoticeDetailedPresenter noticeDetailedPresenter;
     private String id;
+    private String mobile;
+    private int noticeId;
 
     @Override
     protected int getLayoutId() {
@@ -89,12 +93,12 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
     protected void init() {
         noticeDetailedPresenter = new NoticeDetailedPresenter(this);
         SharedPreferences userState = getSharedPreferences("userState", 0);
-        String userId = userState.getString("userId", "0");
+        int userId = userState.getInt("loginUserId",0);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         Log.e("aaaaaaaaaaaaaaa",id+"");
         Map<String,String> map = new HashMap<>();
-        map.put("loginUserId",userId);
+        map.put("loginUserId",userId+"");
         map.put("courseId", id);
         noticeDetailedPresenter.sendNoticeDetailed(map);
         webSetting(liveCourseDetailedWeb);
@@ -110,6 +114,7 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.notice_detailed_phone:
+                call(mobile);
                 break;
             case R.id.notice_detailed_buy:
                 break;
@@ -117,16 +122,25 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
                 finish();
                 break;
             case R.id.notice_detailed_share:
+                ShapeUtils shapeUtils = new ShapeUtils(this);
+                shapeUtils.setWeb("http://share.univstar.com/share/trailer-detail.html?courseId="+noticeId,
+                        null,"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
+    private void call(String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phone));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     @Override
     public void getNoticeDetailedData(NoticeDetailedEntity noticeDetailedEntity) {
         Log.e("aaaaaaaaaaaaaaa",noticeDetailedEntity.getMessage());
         if (noticeDetailedEntity.getCode() == 0){
             NoticeDetailedEntity.DataBean data = noticeDetailedEntity.getData();
+            noticeId = data.getId();
+            mobile = data.getMobile();
 //            设置内容图片
             Glide.with(this).load(data.getCoverImg())
                     .asBitmap()
@@ -147,7 +161,7 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
 //            设置价格
             noticeDetailedPrice.setText(data.getPrice()+"");
 
-            liveCourseDetailedWeb.loadUrl("http://share.univstar.com/view/course.html?courseid="+id);
+            liveCourseDetailedWeb.loadUrl("http://share.univstar.com/view/course.html?courseid="+ this.id);
         }else {
             Toast.makeText(this, noticeDetailedEntity.getMessage(), Toast.LENGTH_SHORT).show();
         }

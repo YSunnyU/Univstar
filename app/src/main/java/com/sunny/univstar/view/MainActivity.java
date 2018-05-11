@@ -71,12 +71,14 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.home_myself_btn:
-                headToolbar.setVisibility(View.GONE);
-                fragmentRepeat(R.id.container, MySelfFragment.class);
+                myself();
                 break;
         }
     }
-
+    public void myself(){
+        headToolbar.setVisibility(View.GONE);
+        fragmentRepeat(R.id.container, MySelfFragment.class);
+    }
     public void notice() {
         headToolbar.setVisibility(View.VISIBLE);
         fragmentRepeat(R.id.container, NoticeFragment.class);

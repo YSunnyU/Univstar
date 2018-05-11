@@ -28,6 +28,10 @@ import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
+import com.sunny.univstar.model.service.TeacherFanService;
+import com.sunny.univstar.model.service.TeacherLiveService;
+import com.sunny.univstar.model.service.ValuableDetailedService;
+import com.sunny.univstar.model.service.WorkDetailedService;
 
 import java.io.File;
 import java.io.IOException;
@@ -116,7 +120,6 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -374,5 +377,17 @@ public class RetrofitUtils {
     }
     public MyFollowPraiseService getMyFollowPraiseService(){
         return retrofit.create(MyFollowPraiseService.class);
+    }
+    public WorkDetailedService getWorkDetailedService(){
+        return retrofit.create(WorkDetailedService.class);
+    }
+    public ValuableDetailedService getValuableDetailedService(){
+        return retrofit.create(ValuableDetailedService.class);
+    }
+    public TeacherFanService getTeacherFan(){
+        return retrofit.create(TeacherFanService.class);
+    }
+    public TeacherLiveService getTeacherLive(){
+        return retrofit.create(TeacherLiveService.class);
     }
 }

@@ -96,6 +96,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
         sharedPreferences = getSharedPreferences("userState", MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt("loginUserId", anInt);
+        edit.commit();
         loginContractInPresenter.sendUserLoginData(anInt);
     }
 

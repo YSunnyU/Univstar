@@ -1,6 +1,7 @@
 package com.sunny.univstar.view.work.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -19,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.sunny.univstar.R;
 import com.sunny.univstar.model.entity.HomeWokListModel;
+import com.sunny.univstar.view.work.activity.WorkDetailedActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import static com.sunny.univstar.app.App.context;
  * Created by DELL on 2018/5/3.
  */
 
-public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder> {
+public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder> implements View.OnClickListener {
     private RecyclerView mRecyclerView;
 
     private List<HomeWokListModel.DataBean.ListBean> data = new ArrayList<>();
@@ -54,12 +56,15 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View home_work_content_item = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_work_content_item, parent, false);
         Holder holder = new Holder(home_work_content_item);
-
+        home_work_content_item.setOnClickListener(this);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(final Holder holder, int position) {
+    public void onBindViewHolder(final Holder holder, final int position) {
+        if (data.size() < 1 && mContext == null){
+            return;
+        }
         Glide.with(mContext)
                 .load(data.get(position).getPhoto())
                 .asBitmap()
@@ -69,7 +74,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
                     protected void setResource(Bitmap resource) {
                         super.setResource(resource);
                         RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                                RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
                         circularBitmapDrawable.setCircular(true); //设置圆角弧度
                         holder.user_img.setImageDrawable(circularBitmapDrawable);
                     }
@@ -98,6 +103,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
         holder.comment.setText(data.get(position).getCommentNum()+"");
         holder.praise.setText(data.get(position).getPraiseNum()+"");
         holder.gift.setText(data.get(position).getGiftNum()+"");
+        holder.user_title.setText(data.get(position).getTIntro());
         if (data.get(position).getTRealname()!=null){
             holder.user_son.setVisibility(View.VISIBLE);
             Glide.with(mContext)
@@ -116,14 +122,25 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
                     });
             holder.user_son_name.setText(data.get(position).getTRealname());
             holder.user_son_detail.setText(data.get(position).getTIntro());
-
+            holder.shape.setOnClickListener(this);
+            holder.shape.setTag(position);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WorkDetailedActivity.class);
+                    intent.putExtra("homewokId",data.get(position).getId()+"");
+                    context.startActivity(intent);
+                }
+            });
         }
+        holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return data.isEmpty() ? 0 : data.size();
+        return data.size() > 0 ? data.size() : 0;
     }
+
 
     public class Holder extends RecyclerView.ViewHolder {
         public ImageView user_img;
@@ -146,10 +163,11 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
         public TextView praise;
         public ImageView gift_img;
         public TextView gift;
-        public TextView shape;
-
+        public LinearLayout shape;
+        public TextView user_title;
         public Holder(View itemView) {
             super(itemView);
+            user_title = itemView.findViewById(R.id.user_title);
             this.user_img = (ImageView) itemView.findViewById(R.id.user_img);
             this.user_name = (TextView) itemView.findViewById(R.id.user_name);
             this.value_btn = (Button) itemView.findViewById(R.id.value_btn);
@@ -163,6 +181,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
             this.user_son_name = (TextView) itemView.findViewById(R.id.user_son_name);
             this.user_son_detail = (TextView) itemView.findViewById(R.id.user_son_detail);
             this.user_son_btn = (Button) itemView.findViewById(R.id.user_son_btn);
+
             this.user_son = (RelativeLayout) itemView.findViewById(R.id.user_son);
             this.value_collectText = (TextView) itemView.findViewById(R.id.value_collectText);
             this.value_collection = (LinearLayout) itemView.findViewById(R.id.value_collection);
@@ -170,11 +189,22 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.Holder
             this.praise = (TextView) itemView.findViewById(R.id.praise);
             this.gift_img = (ImageView) itemView.findViewById(R.id.gift_img);
             this.gift = (TextView) itemView.findViewById(R.id.gift);
-            this.shape = (TextView) itemView.findViewById(R.id.shape);
+            this.shape = (LinearLayout) itemView.findViewById(R.id.shape);
         }
     }
 
-
+    public interface OnClickItem{
+        void onClickItem(View view,int position);
+    }
+    private OnClickItem onClickItem;
+    public void setOnClickItem(OnClickItem onClickItem){
+        this.onClickItem = onClickItem;
+    }
+    @Override
+    public void onClick(View v) {
+        if (onClickItem != null)
+            onClickItem.onClickItem(v,(int)v.getTag());
+    }
 
     /*@Override
     public HomeWorkAdapter.WorkHolder onCreateViewHolder(ViewGroup parent, int viewType) {

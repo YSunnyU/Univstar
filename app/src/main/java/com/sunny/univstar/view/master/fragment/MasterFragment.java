@@ -2,11 +2,15 @@ package com.sunny.univstar.view.master.fragment;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,7 +19,10 @@ import com.baoyz.widget.PullRefreshLayout;
 import com.recker.flybanner.FlyBanner;
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseFragment;
+import com.sunny.univstar.contract.FollowPraiseContract;
 import com.sunny.univstar.contract.HomeMasterContract;
+import com.sunny.univstar.model.utils.ShapeUtils;
+import com.sunny.univstar.presenter.FollowPraiisePresenter;
 import com.sunny.univstar.presenter.HomeMasterPresenter;
 import com.sunny.univstar.view.MainActivity;
 import com.sunny.univstar.view.livecourse.activity.LiveCourseActivity;
@@ -29,7 +36,9 @@ import com.sunny.univstar.view.teachertype.activity.FindTeacherActivity;
 import com.sunny.univstar.view.teachertype.activity.FindTeacherDetailsActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -39,7 +48,7 @@ import static com.sunny.univstar.R.id.home_master_work_listView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MasterFragment extends BaseFragment implements HomeMasterContract.homeMasterInView {
+public class MasterFragment extends BaseFragment implements HomeMasterContract.homeMasterInView ,FollowPraiseContract.FollowPraiseView{
 
     public HomeMasterContract.homeMasterInPresenter homeMasterInPresenter;
     //    FlyBanner masterFlyBanner;
@@ -99,11 +108,13 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     MyScrollView homeMasterFragmentScrollview;
     //    @Bind(R.id.home_master_fragment_swipe)
     PullRefreshLayout homeMasterFragmentSwipe;
+    private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
     private List<HomeMasterBean.DataBean.SystemAdsBean> systemAdsBeanList;
     private List<HomeMasterBean.DataBean.UsersBean> usersBeanList;
     private List<HomeMasterBean.DataBean.HomewoksBean> homewoksBeanList;
     private List<HomeMasterBean.DataBean.LiveCoursesBean> liveCoursesBeanList;
     private MainActivity activity;
+    private int loginUserId;
 
     @Override
     protected int getLayoutId() {
@@ -116,6 +127,7 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         homeMasterFragmentSwipe = getView().findViewById(R.id.home_master_fragment_swipe);
 //        实例化P 层
         homeMasterInPresenter = new HomeMasterPresenter(this);
+        followPraisePresenter = new FollowPraiisePresenter(this);
         homeMasterInPresenter.sendHomeMaster(getActivity());
 
     }
@@ -237,9 +249,44 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         homeMasterWorkListView.setLayoutManager(linearLayoutManager);
         HomewoksAdapter homewoksAdapter = new HomewoksAdapter(homewoksBeanList, getActivity());
+        SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
+        loginUserId = userState.getInt("loginUserId", 0);
+        homewoksAdapter.setOnClickItem(new HomewoksAdapter.OnClickItem() {
+            @Override
+            public void onClickItem(View view, int position) {
+                switch (view.getId()){
+                    case R.id.master_user_praise:
+                        CheckBox checkBox = view.findViewById(R.id.master_user_praise);
+
+                        if (checkBox.isChecked()){
+                            checkBox.setTextColor(Color.parseColor("#FFB300"));
+
+                            prasre("https://www.univstar.com/v1/m/user/praise",homewoksBeanList.get(position).getStudentId(),homewoksBeanList.get(position).getId(),"作业评论");
+                            homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() + 1);
+                            checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
+                        }else {
+                            checkBox.setTextColor(Color.parseColor("#9E9E9E"));
+                            prasre("https://www.univstar.com/v1/m/user/praise/cancel",homewoksBeanList.get(position).getStudentId(),homewoksBeanList.get(position).getId(),"作业评论");
+                            if (homewoksBeanList.get(position).getPraiseNum() == 0) {
+                                checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
+                            } else {
+                                homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() - 1);
+                                checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
+                            }
+
+                        }
+                        break;
+                    case R.id.master_user_share_linear:
+                        ShapeUtils shapeUtils = new ShapeUtils(getContext());
+                        shapeUtils.setWeb("http://share.univstar.com/share/work-detail.html?homewokId="+homewoksBeanList.get(position).getId(),
+                                homewoksBeanList.get(position).getContent(),"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
+                        break;
+                }
+
+            }
+        });
         homeMasterWorkListView.setAdapter(homewoksAdapter);
     }
-
     //        制作名师推荐UI界面
     private void usersBeanData() {
         //        设置名师推荐布局管理器
@@ -281,5 +328,23 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
                 }
             }
         });
+    }
+
+    @Override
+    public void getFollowPraise(String msg) {
+
+    }
+    private void prasre(String url,int studentId,int attentionId,String type){
+        SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
+        int userId = userState.getInt("loginUserId", 0);
+        Log.e("userId",userId+"");
+        Log.e("studentId",studentId+"");
+        Log.e("attentionId",attentionId+"");
+        Map<String,String> map = new HashMap<>();
+        map.put("id",attentionId+"");
+        map.put("loginUserId",userId+"");
+        map.put("userId",studentId+"");
+        map.put("type",type);
+        followPraisePresenter.sendFollowPraise(url,map);
     }
 }
