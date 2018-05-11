@@ -196,6 +196,7 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
                     live_course_detailed_follow_check.setActivated(false);
                 }
                 break;
+//            收藏
             case R.id.live_course_detailed_collect:
                 if (!isLogin) {
                     live_course_detailed_follow_check.setChecked(false);
