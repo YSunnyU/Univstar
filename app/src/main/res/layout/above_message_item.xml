@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <ImageView
+        android:id="@+id/aboveMessageItem_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/about_log" />
+
+    <TextView
+        android:id="@+id/aboveMessageItem_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/aboveMessageItem_image"
+        android:text="订单提醒" />
+
+    <TextView
+        android:id="@+id/aboveMessageItem_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboveMessageItem_one"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/aboveMessageItem_image"
+        android:text="234324"
+        android:textColor="#9f9f9f" />
+
+    <TextView
+        android:id="@+id/aboveMessageItem_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="were" />
+    <TextView
+        android:layout_below="@+id/aboveMessageItem_image"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e4e4e4"/>
+</RelativeLayout>
