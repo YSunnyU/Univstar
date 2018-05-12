@@ -11,6 +11,7 @@ import com.sunny.univstar.R;
 import com.sunny.univstar.app.App;
 import com.sunny.univstar.base.BaseActivity;
 import com.sunny.univstar.view.master.fragment.MasterFragment;
+import com.sunny.univstar.view.message.AboveMessageActivity;
 import com.sunny.univstar.view.myself.fragment.MySelfFragment;
 import com.sunny.univstar.view.notice.fragment.NoticeFragment;
 import com.sunny.univstar.view.valuable.fragment.ValuableFragment;
@@ -69,7 +70,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.AboveMessage:
-
+                startActivity(new Intent(MainActivity.this, AboveMessageActivity.class));
                 break;
             case R.id.AboveCreation:
                 break;

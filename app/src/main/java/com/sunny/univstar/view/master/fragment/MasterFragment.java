@@ -81,7 +81,7 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     RelativeLayout homeMasterFragmentChatValuable;
     @Bind(R.id.home_master_fragment_scrollview)
     MyScrollView homeMasterFragmentScrollview;
-    //    @Bind(R.id.home_master_fragment_swipe)
+     //@Bind(R.id.home_master_fragment_swipe)
     PullRefreshLayout homeMasterFragmentSwipe;
     private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
     private List<HomeMasterBean.DataBean.SystemAdsBean> systemAdsBeanList;

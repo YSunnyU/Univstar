@@ -118,6 +118,7 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
+
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -409,6 +410,9 @@ public class RetrofitUtils {
     public TeacherLiveService getTeacherLive(){
         return retrofit.create(TeacherLiveService.class);
     }
+    public ReplyListService getReplyList(){
+        return retrofit.create(ReplyListService.class);
+    }
 //    我的收藏
 //    直播教程
     public CollectLivingService getMyCollectLivingService(){
@@ -431,7 +435,6 @@ public class RetrofitUtils {
     public AboveMessageService getAboveMessageService(){
         return retrofit.create(AboveMessageService.class);
     }
-    public ReplyListService getReplyList(){
-        return retrofit.create(ReplyListService.class);
-    }
+
+
 }
