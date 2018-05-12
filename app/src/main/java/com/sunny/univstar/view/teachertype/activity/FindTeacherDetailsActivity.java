@@ -222,9 +222,10 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
             case R.id.masterdetail_coachbtn:
                 if (!isLogin)
                     startActivity(new Intent(FindTeacherDetailsActivity.this, LoginActivity.class));
-                else
-                    return;
-
+//                跳转到亲求辅导页面
+                Intent intent2 = new Intent(this, CoachActivity.class);
+                intent2.putExtra("name",mList2.get(0).getData().getUser().getNickname());
+                startActivity(intent2);
                 break;
             case R.id.teacher_details_coures_linear:
                 Toast.makeText(this, "课程", Toast.LENGTH_SHORT).show();

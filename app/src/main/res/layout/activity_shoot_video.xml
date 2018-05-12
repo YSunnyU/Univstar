@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sunny.univstar.view.teachertype.activity.ShootVideoActivity">
+    <SurfaceView
+        android:id="@+id/shoot_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:id="@+id/reaxxx"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:textColor="#fff"
+            android:textSize="13sp"
+            android:text="亮度调节"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="10"
+            android:progress="3" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/reaxx"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/reaxxx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:id="@+id/shoot_video_go"
+            android:src="@mipmap/btn_continue_recorder_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Chronometer
+            android:layout_marginRight="10dp"
+            android:id="@+id/record_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:format="%s" />
+        <ImageView
+            android:id="@+id/shoot_video_delete"
+            android:src="@mipmap/btn_del_back_b"
+            android:layout_marginRight="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/shoot_video_go"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <ImageView
+            android:id="@+id/shoot_video_next"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/btn_next_step_c"
+            android:layout_toRightOf="@+id/shoot_video_go"
+            android:layout_marginLeft="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/btn_capture_frame"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <ImageView
+            android:id="@+id/shoot_video_prepose"
+            android:layout_marginLeft="13dp"
+            android:src="@mipmap/btn_switch_camera"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <ImageView
+            android:id="@+id/shoot_video_flashlight"
+            android:layout_marginLeft="13dp"
+            android:src="@mipmap/btn_flash_off"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+    </LinearLayout>
+</RelativeLayout>

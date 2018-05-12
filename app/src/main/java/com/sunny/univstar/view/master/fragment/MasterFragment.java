@@ -240,7 +240,6 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
                         if (checkBox != null) {
                             if (checkBox.isChecked()) {
                                 checkBox.setTextColor(Color.parseColor("#FFB300"));
-
                                 prasre("https://www.univstar.com/v1/m/user/praise", homewoksBeanList.get(position).getStudentId(), homewoksBeanList.get(position).getId(), "作业评论");
                                 homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() + 1);
                                 checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
@@ -278,7 +277,6 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         userBeanAdapter.setOnClickItem(new UserBeanAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
-
                 HomeMasterBean.DataBean.UsersBean usersBean = usersBeanList.get(position);
                 Intent intent = new Intent(getContext(), FindTeacherDetailsActivity.class);
                 intent.putExtra("teacherId",usersBean.getId()+"");
