@@ -41,7 +41,6 @@ import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
 import com.sunny.univstar.model.service.ValuableDetailedService;
 import com.sunny.univstar.model.service.WorkDetailedService;
-import com.sunny.univstar.model.service.mycollect.CollectPostsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,7 +116,7 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
-
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -407,7 +406,6 @@ public class RetrofitUtils {
         return retrofit.create(TeacherFanService.class);
     }
     public TeacherLiveService getTeacherLive(){
-
         return retrofit.create(TeacherLiveService.class);
     }
 //    我的收藏
@@ -431,5 +429,8 @@ public class RetrofitUtils {
 //    消息提醒列表
     public AboveMessageService getAboveMessageService(){
         return retrofit.create(AboveMessageService.class);
+    }
+    public ReplyListService getReplyList(){
+        return retrofit.create(ReplyListService.class);
     }
 }

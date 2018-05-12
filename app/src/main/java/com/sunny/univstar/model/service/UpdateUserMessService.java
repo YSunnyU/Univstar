@@ -1,11 +1,18 @@
 package com.sunny.univstar.model.service;
 
+import com.sunny.univstar.model.entity.UpLoadImgModel;
 import com.sunny.univstar.view.personal.activity.login.bean.view.MyMessage.UpdateUserBean;
 
+import java.util.List;
+import java.util.Map;
+
 import io.reactivex.Observable;
-import retrofit2.http.Field;
+import okhttp3.MultipartBody;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * Created by 张玗 on 2018/5/10.
@@ -14,14 +21,9 @@ import retrofit2.http.POST;
 public interface UpdateUserMessService {
     @FormUrlEncoded
     @POST("/v1/m/user/info/edit")
-    Observable<UpdateUserBean> postUserInfo(@Field("id") Integer id,
-                                            @Field("nickname") String nickname,
-//                                            @Field("realname") String realname,
-//                                            @Field("photo") String photo,
-//                                            @Field("images") String images,
-//                                            @Field("intro") String intro,
-//                                            @Field("details") String details,
-                                            @Field("sex") int sex,
-                                            @Field("birthday") String birthday,
-                                            @Field("address") String address);
+    Observable<UpdateUserBean> postUserInfo(@FieldMap Map<String,String> map);
+
+    @Multipart
+    @POST("/v1/m/qiniu/qiniuUpload")
+    Observable<UpLoadImgModel> upUserImg(@Part List<MultipartBody.Part> file);
 }

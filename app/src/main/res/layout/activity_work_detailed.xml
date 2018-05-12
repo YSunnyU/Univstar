@@ -2,38 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wok_detail_aty_groupaaa"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/wok_detail_aty_groupaaa"
     tools:context="com.sunny.univstar.view.work.activity.WorkDetailedActivity">
+
     <RelativeLayout
-        android:gravity="center_vertical"
         android:id="@+id/reaaa_2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
         <ImageView
-            android:layout_marginLeft="10dp"
             android:id="@+id/work_detailed_return"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
             android:src="@mipmap/register_return" />
 
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:text="作业详情"
             android:textColor="#0073ff"
             android:textSize="18sp" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/realsss_2"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+
         <RelativeLayout
             android:id="@+id/work_detailed__input_group"
             android:layout_width="match_parent"
@@ -109,6 +113,7 @@
 
             </RelativeLayout>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/wok_detail_aty_pinglun_input_group"
             android:layout_width="match_parent"
@@ -149,13 +154,12 @@
     </RelativeLayout>
 
 
-
     <com.sunny.univstar.view.master.fragment.autoui.MyScrollView
         android:id="@+id/myScrollViewHehe"
-        android:layout_above="@+id/realsss_2"
-        android:layout_below="@+id/reaaa_2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/realsss_2"
+        android:layout_below="@+id/reaaa_2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,7 +225,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="54dp"
                     android:layout_marginTop="20dp" />
-
                 <ImageView
                     android:id="@+id/work_detailed_content_img"
                     android:layout_width="wrap_content"
@@ -259,10 +262,10 @@
                     android:gravity="center">
 
                     <TextView
-                        android:layout_centerHorizontal="true"
                         android:id="@+id/work_detailed_award"
                         android:layout_width="80dp"
                         android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/work_award_btn"
                         android:gravity="center"
@@ -270,11 +273,11 @@
                         android:textColor="#fff" />
 
                     <android.support.v7.widget.RecyclerView
-                        android:layout_centerHorizontal="true"
                         android:id="@+id/work_detailed_award_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/work_detailed_award"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp">
 
                     </android.support.v7.widget.RecyclerView>
@@ -326,28 +329,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></com.sunny.univstar.view.work.activity.NestedListView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/fayan"
-                android:paddingLeft="15dp"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:orientation="vertical"
+                android:paddingLeft="15dp">
 
                 <ImageView
                     android:layout_width="77dp"
-                    android:src="@mipmap/detail_no_comment"
-                    android:layout_height="51dp" />
+                    android:layout_height="51dp"
+                    android:src="@mipmap/detail_no_comment" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="还没有人发言呢！"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:textColor="#9e9e9e"
-                    android:layout_height="wrap_content" />
+                    android:text="还没有人发言呢！"
+                    android:textColor="#9e9e9e" />
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/gengduo"
                 android:layout_width="match_parent"

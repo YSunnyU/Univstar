@@ -9,6 +9,7 @@ import com.sunny.univstar.model.service.MasterDetailService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
 import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
+import com.sunny.univstar.model.service.ReplyListService;
 import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
 import com.sunny.univstar.model.service.ValuableDetailedService;
@@ -32,4 +33,5 @@ public interface IHomeModel {
     ValuableDetailedService getValuableDetailedService();
     TeacherFanService getTeacherFanService();
     TeacherLiveService getTeacherLiveService();
+    ReplyListService getReplyListService();
 }

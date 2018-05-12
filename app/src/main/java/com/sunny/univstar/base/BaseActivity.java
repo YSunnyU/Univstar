@@ -60,7 +60,20 @@ public abstract class BaseActivity extends AppCompatActivity {
             "android.permission.WRITE_EXTERNAL_STORAGE" };
 
 
+    public static void verifyStoragePermissions(Activity activity) {
 
+        try {
+            //检测是否有写的权限
+            int permission = ActivityCompat.checkSelfPermission(activity,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //    fragment复用
     protected BaseFragment fragmentRepeat(int contaired, Class<? extends BaseFragment> baseFragment) {
@@ -115,13 +128,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                     "android.permission.WRITE_EXTERNAL_STORAGE");
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 // 没有写的权限，去申请写的权限，会弹出对话框
-                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    protected void onPause() {
+        super.onPause();
+        App.context = null;
     }
-
 
     protected void setTitleTheme(Activity activity, boolean darmode){
         setStatusBarCompat(activity);

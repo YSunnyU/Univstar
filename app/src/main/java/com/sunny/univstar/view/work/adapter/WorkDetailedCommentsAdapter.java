@@ -52,7 +52,7 @@ public class WorkDetailedCommentsAdapter extends BaseAdapter implements View.OnC
     }
     private boolean isPraise;
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Log.e("aaaaa",commentsList.get(0).getList().size()+"");
         ViewHolder viewHolder = null;
         if (convertView == null) {
@@ -63,6 +63,8 @@ public class WorkDetailedCommentsAdapter extends BaseAdapter implements View.OnC
             viewHolder.ccomment_listitem_time = convertView.findViewById(R.id.comment_listitem_time);
             viewHolder.comment_listitem_content =  convertView.findViewById(R.id.comment_listitem_content);
             viewHolder.comment_listitem_praise_cb =  convertView.findViewById(R.id.comment_listitem_praise_cb);
+            viewHolder.comments_geng_duo = convertView.findViewById(R.id.comments_geng_duo);
+            viewHolder.comments_huifu = convertView.findViewById(R.id.comments_huifu);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -104,13 +106,23 @@ public class WorkDetailedCommentsAdapter extends BaseAdapter implements View.OnC
             viewHolder.comment_listitem_praise_cb.setText(commentsList.get(0).getList().get(position).getPraiseNum()+"");
 //            viewHolder.comment_listitem_praise_cb.setText(commentsList.get(0).getList().get(position).getPraiseNum()+"");
             viewHolder.comment_listitem_praise_cb.setOnClickListener(this);
-            viewHolder.comment_listitem_praise_cb.setTag(R.id.work_detailed_check,position);
+            viewHolder.comment_listitem_praise_cb.setTag(position);
+            if (commentsList.get(0).getList().get(position).getReplyNum() > 0){
+                viewHolder.comments_geng_duo.setVisibility(View.VISIBLE);
+                viewHolder.comments_geng_duo.setText("共"+commentsList.get(0).getList().get(position).getReplyNum()+"条回复");
+            }else {
+                viewHolder.comments_geng_duo.setVisibility(View.GONE);
+            }
+            viewHolder.comments_geng_duo.setTag(position);
+            viewHolder.comments_geng_duo.setOnClickListener(this);
+            viewHolder.comments_huifu.setOnClickListener(this);
+            viewHolder.comments_huifu.setTag(position);
     }
         return convertView;
     }
 
     public interface OnClickItem{
-        void onClickItem(View view,boolean isPraise,int position);
+        void onClickItem(View view,int position);
     }
     private OnClickItem onClickItem;
     public void setOnClickItem(OnClickItem onClickItem){
@@ -119,7 +131,7 @@ public class WorkDetailedCommentsAdapter extends BaseAdapter implements View.OnC
     @Override
     public void onClick(View v) {
         if (onClickItem != null)
-            onClickItem.onClickItem(v, isPraise, (int) v.getTag(R.id.work_detailed_check));
+            onClickItem.onClickItem(v, (int) v.getTag());
     }
 
 
@@ -129,5 +141,7 @@ public class WorkDetailedCommentsAdapter extends BaseAdapter implements View.OnC
         private TextView ccomment_listitem_time;
         private TextView comment_listitem_content;
         private CheckBox comment_listitem_praise_cb;
+        private TextView comments_geng_duo;
+        private TextView comments_huifu;
     }
 }
