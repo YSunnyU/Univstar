@@ -32,6 +32,7 @@ import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
 import com.sunny.univstar.model.service.RechargeService;
+import com.sunny.univstar.model.service.ReplyListService;
 import com.sunny.univstar.model.service.UpdateUserMessService;
 import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
@@ -402,5 +403,8 @@ public class RetrofitUtils {
     }
     public TeacherLiveService getTeacherLive(){
         return retrofit.create(TeacherLiveService.class);
+    }
+    public ReplyListService getReplyList(){
+        return retrofit.create(ReplyListService.class);
     }
 }

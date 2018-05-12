@@ -3,14 +3,12 @@ package com.sunny.univstar.view.master.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -256,25 +254,26 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
             public void onClickItem(View view, int position) {
                 switch (view.getId()){
                     case R.id.master_user_praise:
-                        CheckBox checkBox = view.findViewById(R.id.master_user_praise);
-
-                        if (checkBox.isChecked()){
-                            checkBox.setTextColor(Color.parseColor("#FFB300"));
-
-                            prasre("https://www.univstar.com/v1/m/user/praise",homewoksBeanList.get(position).getStudentId(),homewoksBeanList.get(position).getId(),"作业评论");
-                            homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() + 1);
-                            checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
-                        }else {
-                            checkBox.setTextColor(Color.parseColor("#9E9E9E"));
-                            prasre("https://www.univstar.com/v1/m/user/praise/cancel",homewoksBeanList.get(position).getStudentId(),homewoksBeanList.get(position).getId(),"作业评论");
-                            if (homewoksBeanList.get(position).getPraiseNum() == 0) {
-                                checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
-                            } else {
-                                homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() - 1);
-                                checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
-                            }
-
-                        }
+//                        CheckBox checkBox = view.findViewById(R.id.master_user_praise);
+//                        if (checkBox != null) {
+//                            if (checkBox.isChecked()) {
+//                                checkBox.setTextColor(Color.parseColor("#FFB300"));
+//
+//                                prasre("https://www.univstar.com/v1/m/user/praise", homewoksBeanList.get(position).getStudentId(), homewoksBeanList.get(position).getId(), "作业评论");
+//                                homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() + 1);
+//                                checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
+//                            } else {
+//                                checkBox.setTextColor(Color.parseColor("#9E9E9E"));
+//                                prasre("https://www.univstar.com/v1/m/user/praise/cancel", homewoksBeanList.get(position).getStudentId(), homewoksBeanList.get(position).getId(), "作业评论");
+//                                if (homewoksBeanList.get(position).getPraiseNum() == 0) {
+//                                    checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
+//                                } else {
+//                                    homewoksBeanList.get(position).setPraiseNum(homewoksBeanList.get(position).getPraiseNum() - 1);
+//                                    checkBox.setText(homewoksBeanList.get(position).getPraiseNum() + "");
+//                                }
+//
+//                            }
+//                        }
                         break;
                     case R.id.master_user_share_linear:
                         ShapeUtils shapeUtils = new ShapeUtils(getContext());

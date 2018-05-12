@@ -34,41 +34,38 @@
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
-        <!--新浪-->
-        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <!-- 新浪 -->
+        <activity
+            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            >
-
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
-            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
 
-        <!--微信-->
+        <!-- 微信 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--QQ-->
+        <!-- QQ -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -80,9 +77,73 @@
         </activity>
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <!-- 实时推送 -->
+        <!-- Required SDK 核心功能 -->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:process=":mult"
+            tools:replace="android:process">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+
+                <category android:name="com.ice.timecollector" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
+                <category android:name="com.ice.timecollector" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="001b78b1bcce3110305799ec" /> <!-- </>值来自开发者平台取得的AppKey -->
 
         <activity android:name=".view.preference.PreferenceActivity" />
         <activity android:name=".view.personal.activity.RegisterActivity" />
@@ -100,8 +161,7 @@
         <activity android:name=".view.personal.activity.login.bean.set.NewPswActivity" />
         <activity android:name=".view.work.activity.WorkDetailedActivity" />
         <activity android:name=".view.teachertype.activity.TeacherFanActivity" />
-        <activity android:name=".view.teachertype.activity.TeacherLiveActivity"></activity>
-        <activity android:name=".view.personal.activity.login.bean.set.NewPswActivity" />
+        <activity android:name=".view.teachertype.activity.TeacherLiveActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.SocialNumBindActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AboutUnivStarActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AboutIntroActivity" />
@@ -122,7 +182,8 @@
         <activity android:name=".view.personal.activity.login.bean.view.MyMessage.UpdateNikenameActivity" />
         <activity android:name=".view.personal.activity.login.bean.view.MyMessage.order.MyOrderActivity" />
         <activity android:name=".view.personal.activity.login.bean.view.MyMessage.order.OrderDetailActivity" />
-        <activity android:name=".view.personal.activity.login.bean.view.MyMessage.collection.MyCollectionActivity"></activity>
+        <activity android:name=".view.personal.activity.login.bean.view.MyMessage.collection.MyCollectionActivity" />
+        <activity android:name=".view.work.activity.ReplyListActivity"></activity>
     </application>
 
 </manifest>

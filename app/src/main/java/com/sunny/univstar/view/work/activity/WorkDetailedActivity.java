@@ -93,12 +93,12 @@ public class WorkDetailedActivity extends BaseActivity implements View.OnClickLi
     private WorkDetailedRewardAdapter mAdapter;
     private WorkDetailedEntity.DataBean.HomewokBean homewokBean;
     private ValuableDetailedEntity.DataBean.ArtcircleBean artcircleBean;
-
     private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
     private ValuableDetailedContract.ValuableDetailedPresenter valuableDetailedPresenter;
     private boolean isPraise;
     private int userId;
     private String type;
+    private String homewokId;
 
     @Override
     protected int getLayoutId() {
@@ -113,7 +113,9 @@ public class WorkDetailedActivity extends BaseActivity implements View.OnClickLi
         valuableCommentsList = new ArrayList<>();
         rewardUserList = new ArrayList<>();
         workDetailedPresenter = new WorkDetailedPresenter(this);
-//        返回按钮
+
+
+
           work_detailed_return = (ImageView) findViewById(R.id.work_detailed_return);
         work_detailed_return.setOnClickListener(this);
 //        头像
@@ -178,24 +180,45 @@ public class WorkDetailedActivity extends BaseActivity implements View.OnClickLi
         adapter = new WorkDetailedCommentsAdapter(commentsList,this);
         adapter.setOnClickItem(new WorkDetailedCommentsAdapter.OnClickItem() {
             @Override
-            public void onClickItem(View view, boolean isPraise, int position) {
-                CheckBox checkBox = view.findViewById(R.id.comment_listitem_praise_cb);
-                if (checkBox.isChecked()) {
-                    prasre("https://www.univstar.com/v1/m/user/praise", commentsList.get(0).getList().get(position).getUserId(),commentsList.get(0).getList().get(position).getId(), "作业评论");
+            public void onClickItem(View view, int position) {
+                switch (view.getId()){
+                    case R.id.comment_listitem_praise_cb:
+                        CheckBox checkBox = view.findViewById(R.id.comment_listitem_praise_cb);
+                        if (checkBox.isChecked()) {
+                            prasre("https://www.univstar.com/v1/m/user/praise", commentsList.get(0).getList().get(position).getUserId(),commentsList.get(0).getList().get(position).getId(), "作业评论");
 
-                    commentsList.get(0).getList().get(position).setPraiseNum(commentsList.get(0).getList().get(position).getPraiseNum() + 1);
-                    checkBox.setText(commentsList.get(0).getList().get(position).getPraiseNum() + "");
-                } else {
-                    prasre("https://www.univstar.com/v1/m/user/praise/cancel", commentsList.get(0).getList().get(position).getUserId(),commentsList.get(0).getList().get(position).getId(), "作业评论");
-                    if (commentsList.get(0).getList().get(position).getPraiseNum() == 0) {
-                        checkBox.setText(commentsList.get(0).getList().get(position).getPraiseNum() + "");
-                    } else {
-                        commentsList.get(0).getList().get(position).setPraiseNum(commentsList.get(0).getList().get(position).getPraiseNum() - 1);
-                        checkBox.setText(commentsList.get(0).getList().get(position).getPraiseNum() + "");
-                    }
+                            commentsList.get(0).getList().get(position).setPraiseNum(commentsList.get(0).getList().get(position).getPraiseNum() + 1);
+                            checkBox.setText(commentsList.get(0).getList().get(position).getPraiseNum() + "");
+                        } else {
+                            prasre("https://www.univstar.com/v1/m/user/praise/cancel", commentsList.get(0).getList().get(position).getUserId(),commentsList.get(0).getList().get(position).getId(), "作业评论");
+                            if (commentsList.get(0).getList().get(position).getPraiseNum() == 0) {
+                                checkBox.setText(commentsList.get(0).getList().get(position).getPraiseNum() + "");
+                            } else {
+                                commentsList.get(0).getList().get(position).setPraiseNum(commentsList.get(0).getList().get(position).getPraiseNum() - 1);
+                                checkBox.setText(commentsList.get(0).getList().get(position).getPraiseNum() + "");
+                            }
 
 
+                        }
+                        break;
+                    case R.id.comments_geng_duo:
+                        Intent intent = new Intent(WorkDetailedActivity.this, ReplyListActivity.class);
+                        intent.putExtra("workId",homewokId+"");
+                        intent.putExtra("pid",commentsList.get(0).getList().get(position).getId()+"");
+                        intent.putExtra("toContent",commentsList.get(0).getList().get(position).getContent()+"");
+                        intent.putExtra("toId",commentsList.get(0).getList().get(position).getUserId()+"");
+                        startActivity(intent);
+                        break;
+                    case R.id.comments_huifu:
+                        Intent intent2 = new Intent(WorkDetailedActivity.this, ReplyListActivity.class);
+                        intent2.putExtra("workId",homewokId+"");
+                        intent2.putExtra("pid",commentsList.get(0).getList().get(position).getId()+"");
+                        intent2.putExtra("toContent",commentsList.get(0).getList().get(position).getContent()+"");
+                        intent2.putExtra("toId",commentsList.get(0).getList().get(position).getUserId()+"");
+                        startActivity(intent2);
+                        break;
                 }
+
             }
         });
         work_detailed_discuss.setAdapter(adapter);
@@ -214,9 +237,9 @@ public class WorkDetailedActivity extends BaseActivity implements View.OnClickLi
         });
         work_detailed_award_list.setAdapter(mAdapter);
         Intent intent = getIntent();
-        String homewokId = intent.getStringExtra("homewokId");
+        homewokId = intent.getStringExtra("homewokId");
         type = intent.getStringExtra("type");
-        Log.e("aaaaax",homewokId+"");
+        Log.e("aaaaax", homewokId +"");
         SharedPreferences userState = getSharedPreferences("userState", 0);
         userId = userState.getInt("loginUserId",0);
 

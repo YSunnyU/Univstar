@@ -9,6 +9,7 @@ import com.sunny.univstar.model.service.MasterDetailService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
 import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
+import com.sunny.univstar.model.service.ReplyListService;
 import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
 import com.sunny.univstar.model.service.ValuableDetailedService;
@@ -84,5 +85,10 @@ public class HomeModel implements IHomeModel{
     @Override
     public TeacherLiveService getTeacherLiveService() {
         return RetrofitUtils.getInstance().getTeacherLive();
+    }
+
+    @Override
+    public ReplyListService getReplyListService() {
+        return RetrofitUtils.getInstance().getReplyList();
     }
 }
