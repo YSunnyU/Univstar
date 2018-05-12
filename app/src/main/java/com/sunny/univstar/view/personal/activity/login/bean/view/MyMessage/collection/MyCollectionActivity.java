@@ -1,7 +1,11 @@
 package com.sunny.univstar.view.personal.activity.login.bean.view.MyMessage.collection;
 
-import android.support.v7.widget.RecyclerView;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,12 +43,11 @@ public class MyCollectionActivity extends BaseActivity {
     TextView myCollectionPostsLine;
     @Bind(R.id.myCollection_posts)
     RelativeLayout myCollectionPosts;
-    @Bind(R.id.myCollection_recyView)
-    RecyclerView myCollectionRecyView;
-    @Bind(R.id.myCollection_emptyImage)
-    ImageView myCollectionEmptyImage;
-    @Bind(R.id.myCollection_empty)
-    RelativeLayout myCollectionEmpty;
+
+
+
+    @Bind(R.id.myCollection_frag)
+    FrameLayout myCollectionFrag;
 
     @Override
     protected int getLayoutId() {
@@ -54,6 +57,20 @@ public class MyCollectionActivity extends BaseActivity {
     @Override
     protected void init() {
 
+        //            帖子
+        myCollectionPostsTv.setTextSize(14);
+        myCollectionPostsLine.setVisibility(View.GONE);
+
+//          直播课程
+        myCollectionLivingTv.setTextSize(16);
+        myCollectionLivingLine.setVisibility(View.VISIBLE);
+//            偷听更多
+        myCollectionEavesdropTv.setTextSize(14);
+        myCollectionEavesdropLine.setVisibility(View.GONE);
+//           体验课程
+        myCollectionExperienceTv.setTextSize(14);
+        myCollectionExperienceLine.setVisibility(View.GONE);
+        replce(new CollectLivingFragment());
     }
 
     @Override
@@ -62,7 +79,7 @@ public class MyCollectionActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.myCollection_back, R.id.myCollection_Living, R.id.myCollection_experience, R.id.myCollection_eavesdrop, R.id.myCollection_posts, R.id.myCollection_empty})
+    @OnClick({R.id.myCollection_back, R.id.myCollection_Living, R.id.myCollection_experience, R.id.myCollection_eavesdrop, R.id.myCollection_posts})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.myCollection_back:
@@ -72,6 +89,7 @@ public class MyCollectionActivity extends BaseActivity {
                 //            帖子
                 myCollectionPostsTv.setTextSize(14);
                 myCollectionPostsLine.setVisibility(View.GONE);
+
 //          直播课程
                 myCollectionLivingTv.setTextSize(16);
                 myCollectionLivingLine.setVisibility(View.VISIBLE);
@@ -81,6 +99,7 @@ public class MyCollectionActivity extends BaseActivity {
 //           体验课程
                 myCollectionExperienceTv.setTextSize(14);
                 myCollectionExperienceLine.setVisibility(View.GONE);
+                replce(new CollectLivingFragment());
                 break;
             case R.id.myCollection_experience:
                 //            帖子
@@ -95,6 +114,8 @@ public class MyCollectionActivity extends BaseActivity {
 //           体验课程
                 myCollectionExperienceTv.setTextSize(16);
                 myCollectionExperienceLine.setVisibility(View.VISIBLE);
+
+                replce(new CollectExperienceFragment());
                 break;
             case R.id.myCollection_eavesdrop:
                 //            帖子
@@ -109,6 +130,8 @@ public class MyCollectionActivity extends BaseActivity {
 //           体验课程
                 myCollectionExperienceTv.setTextSize(14);
                 myCollectionExperienceLine.setVisibility(View.GONE);
+
+                replce(new CollectEavesdropFragment());
                 break;
             case R.id.myCollection_posts:
                 //            帖子
@@ -123,9 +146,19 @@ public class MyCollectionActivity extends BaseActivity {
 //           体验课程
                 myCollectionExperienceTv.setTextSize(14);
                 myCollectionExperienceLine.setVisibility(View.GONE);
+
+                replce(new CollectPostsFragment());
                 break;
-            case R.id.myCollection_empty:
-                break;
+
         }
     }
+
+    private void replce(Fragment fragment) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.myCollection_frag, fragment);
+        transaction.commit();
+    }
+
+
 }

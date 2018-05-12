@@ -23,6 +23,10 @@ import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.LiveCourseDetailedService;
 import com.sunny.univstar.model.service.LiveCourseService;
 import com.sunny.univstar.model.service.MasterDetailService;
+import com.sunny.univstar.model.service.abovemessage.AboveMessageService;
+import com.sunny.univstar.model.service.mycollect.CollectEavesdropService;
+import com.sunny.univstar.model.service.mycollect.CollectExperienceService;
+import com.sunny.univstar.model.service.mycollect.CollectLivingService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
 import com.sunny.univstar.model.service.MyOrderService;
 import com.sunny.univstar.model.service.NewPswService;
@@ -37,6 +41,7 @@ import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
 import com.sunny.univstar.model.service.ValuableDetailedService;
 import com.sunny.univstar.model.service.WorkDetailedService;
+import com.sunny.univstar.model.service.mycollect.CollectPostsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -112,7 +117,7 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
@@ -402,6 +407,29 @@ public class RetrofitUtils {
         return retrofit.create(TeacherFanService.class);
     }
     public TeacherLiveService getTeacherLive(){
+
         return retrofit.create(TeacherLiveService.class);
+    }
+//    我的收藏
+//    直播教程
+    public CollectLivingService getMyCollectLivingService(){
+        return retrofit.create(CollectLivingService.class);
+    }
+//    体验课程
+    public CollectExperienceService getCollectExperienceService(){
+        return retrofit.create(CollectExperienceService.class);
+    }
+//    偷听更多
+    public CollectEavesdropService getCollectEavesdropService(){
+        return retrofit.create(CollectEavesdropService.class);
+    }
+//    帖子
+    public CollectPostsService getCollectPostsService(){
+        return retrofit.create(CollectPostsService.class);
+    }
+//    全部消息
+//    消息提醒列表
+    public AboveMessageService getAboveMessageService(){
+        return retrofit.create(AboveMessageService.class);
     }
 }

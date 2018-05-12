@@ -1,8 +1,10 @@
 package com.sunny.univstar.view;
 
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.sunny.univstar.R;
@@ -35,8 +37,14 @@ public class MainActivity extends BaseActivity {
     public RadioButton homeValuableBtn;
     @Bind(R.id.home_notice_btn)
     public RadioButton homeNoticeBtn;
-    @Bind(home_myself_btn)
-    public RadioButton homeMyselfBtn;
+
+    @Bind(R.id.AboveMessage)
+    ImageView AboveMessage;
+    @Bind(R.id.AboveCreation)
+    ImageView AboveCreation;
+
+    @Bind(R.id.home_myself_btn)
+    RadioButton homeMyselfBtn;
 
 
     @Override
@@ -47,7 +55,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
 
-        setTitleTheme(this,true);
+        setTitleTheme(this, true);
         fragmentRepeat(R.id.container, MasterFragment.class);
     }
 
@@ -57,9 +65,14 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.home_master_btn, R.id.home_work_btn, R.id.home_valuable_btn, R.id.home_notice_btn, home_myself_btn})
+    @OnClick({R.id.AboveMessage, R.id.AboveCreation, R.id.home_master_btn, R.id.home_work_btn, R.id.home_valuable_btn, R.id.home_notice_btn, R.id.home_myself_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.AboveMessage:
+
+                break;
+            case R.id.AboveCreation:
+                break;
             case R.id.home_master_btn:
                 headToolbar.setVisibility(View.VISIBLE);
                 fragmentRepeat(R.id.container, MasterFragment.class);
@@ -79,15 +92,16 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
-    public void myself(){
-        headToolbar.setVisibility(View.GONE);
-        fragmentRepeat(R.id.container, MySelfFragment.class);
-            case R.id.home_myself_btn:
-                myself();
-                break;
-        }
-    }
-    public void myself(){
+
+    /* public void myself(){
+         headToolbar.setVisibility(View.GONE);
+         fragmentRepeat(R.id.container, MySelfFragment.class);
+             case R.id.home_myself_btn:
+                 myself();
+                 break;
+         }
+     }*/
+    public void myself() {
         headToolbar.setVisibility(View.GONE);
         fragmentRepeat(R.id.container, MySelfFragment.class);
     }
@@ -97,11 +111,12 @@ public class MainActivity extends BaseActivity {
         fragmentRepeat(R.id.container, NoticeFragment.class);
     }
 
-    public void homeWork(){
+    public void homeWork() {
         headToolbar.setVisibility(View.VISIBLE);
         fragmentRepeat(R.id.container, WorkFragment.class);
     }
-    public void valuable(){
+
+    public void valuable() {
         headToolbar.setVisibility(View.VISIBLE);
         fragmentRepeat(R.id.container, ValuableFragment.class);
     }
@@ -111,7 +126,7 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         Intent intent = getIntent();
         String upDataPsw = intent.getStringExtra("upDataPsw");
-        if ("aab".equals(upDataPsw)){
+        if ("aab".equals(upDataPsw)) {
             homeMyselfBtn.setChecked(true);
             myself();
         }

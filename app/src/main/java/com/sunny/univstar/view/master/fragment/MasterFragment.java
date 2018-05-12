@@ -51,31 +51,6 @@ import static com.sunny.univstar.R.id.home_master_work_listView;
 public class MasterFragment extends BaseFragment implements HomeMasterContract.homeMasterInView ,FollowPraiseContract.FollowPraiseView{
 
     public HomeMasterContract.homeMasterInPresenter homeMasterInPresenter;
-    //    FlyBanner masterFlyBanner;
-//    @Bind(R.id.home_master_find_group)
-//    LinearLayout homeMasterFindGroup;
-//    @Bind(R.id.home_master_look_group)
-//    LinearLayout homeMasterLookGroup;
-//    @Bind(R.id.home_master_work_group)
-//    LinearLayout homeMasterWorkGroup;
-//    @Bind(R.id.home_master_chat_group)
-//    LinearLayout homeMasterChatGroup;
-//    @Bind(R.id.home_master_learn_group)
-//    LinearLayout homeMasterLearnGroup;
-//    @Bind(R.id.home_master_recommend_more)
-//    TextView homeMasterRecommendMore;
-//    @Bind(R.id.home_master_recommend_recyclerView)
-//    RecyclerView homeMasterRecommendRecyclerView;
-//    @Bind(R.id.home_master_live_more)
-//    TextView homeMasterLiveMore;
-//    @Bind(R.id.home_master_live_gridView)
-//    RecyclerView homeMasterLiveGridView;
-//    @Bind(R.id.home_master_fragment_workMore)
-//    TextView homeMasterFragmentWorkMore;
-//    @Bind(home_master_work_listView)
-//    RecyclerView homeMasterWorkListView;
-//    @Bind(R.id.home_master_fragment_chatValuable)
-//    RelativeLayout homeMasterFragmentChatValuable;
     public List<String> flayBanner_list = new ArrayList<>();
 
     @Bind(R.id.masterFlyBanner)
@@ -232,7 +207,8 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
     private void liveCoursesData() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         homeMasterLiveGridView.setLayoutManager(gridLayoutManager);
-        LiveCoursesAdapter liveCoursesAdapter = new LiveCoursesAdapter(liveCoursesBeanList, getActivity());
+        List<Object> list=new ArrayList<>();
+        LiveCoursesAdapter liveCoursesAdapter = new LiveCoursesAdapter(list, getActivity());
         liveCoursesAdapter.setOnClickItem(new LiveCoursesAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
@@ -297,6 +273,7 @@ public class MasterFragment extends BaseFragment implements HomeMasterContract.h
         userBeanAdapter.setOnClickItem(new UserBeanAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
+
                 HomeMasterBean.DataBean.UsersBean usersBean = usersBeanList.get(position);
                 Intent intent = new Intent(getContext(), FindTeacherDetailsActivity.class);
                 intent.putExtra("teacherId",usersBean.getId()+"");

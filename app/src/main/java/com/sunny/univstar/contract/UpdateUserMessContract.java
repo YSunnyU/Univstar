@@ -12,7 +12,7 @@ public interface UpdateUserMessContract {
     }
     interface UpdateUserDataInPresenter{
         /*@Field("id") Integer id,
-                                            @Field("nickname") String nickname,
+                                         @Field("nickname") String nickname,
                                             @Field("realname") String realname,
                                             @Field("photo") String photo,
                                             @Field("images") String images,
