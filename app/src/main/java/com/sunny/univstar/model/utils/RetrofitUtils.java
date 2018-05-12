@@ -23,10 +23,6 @@ import com.sunny.univstar.model.service.IHomeWork;
 import com.sunny.univstar.model.service.LiveCourseDetailedService;
 import com.sunny.univstar.model.service.LiveCourseService;
 import com.sunny.univstar.model.service.MasterDetailService;
-import com.sunny.univstar.model.service.abovemessage.AboveMessageService;
-import com.sunny.univstar.model.service.mycollect.CollectEavesdropService;
-import com.sunny.univstar.model.service.mycollect.CollectExperienceService;
-import com.sunny.univstar.model.service.mycollect.CollectLivingService;
 import com.sunny.univstar.model.service.MyFollowPraiseService;
 import com.sunny.univstar.model.service.MyOrderService;
 import com.sunny.univstar.model.service.NewPswService;
@@ -36,11 +32,17 @@ import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
 import com.sunny.univstar.model.service.PreferenceService;
 import com.sunny.univstar.model.service.RechargeService;
-import com.sunny.univstar.model.service.UpdateUserMessService;
+import com.sunny.univstar.model.service.ReplyListService;
 import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
+import com.sunny.univstar.model.service.UpdateUserMessService;
 import com.sunny.univstar.model.service.ValuableDetailedService;
 import com.sunny.univstar.model.service.WorkDetailedService;
+import com.sunny.univstar.model.service.abovemessage.AboveMessageService;
+import com.sunny.univstar.model.service.mycollect.CollectEavesdropService;
+import com.sunny.univstar.model.service.mycollect.CollectExperienceService;
+import com.sunny.univstar.model.service.mycollect.CollectLivingService;
+import com.sunny.univstar.model.service.mycollect.CollectPostsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -116,7 +118,6 @@ public class RetrofitUtils {
             loadApptoken(context);
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addNetworkInterceptor(interceptor)//添加网络缓存
