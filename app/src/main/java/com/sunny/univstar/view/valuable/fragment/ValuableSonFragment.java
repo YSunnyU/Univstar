@@ -70,22 +70,24 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
             valuableSonRecyclerView.setVisibility(View.GONE);
         }else {
             HomeValuableBean.DataBean.ArtcircleListBean artcircleList = homeValuableBean.getData().getArtcircleList();
-            list = artcircleList.getList();
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            valuableSonRecyclerView.setLayoutManager(linearLayoutManager);
-            ValuableSonAdapter valuableSonAdapter = new ValuableSonAdapter(list, getActivity());
-            valuableSonAdapter.setOnClickItem(new ValuableSonAdapter.OnClickItem() {
-                @Override
-                public void onClickItem(View view, int position) {
-                    if (list != null && list.size() > 0) {
-                        Intent intent = new Intent(getContext(), WorkDetailedActivity.class);
-                        intent.putExtra("homewokId", list.get(position).getId() + "");
-                        intent.putExtra("type","宝典");
-                        startActivity(intent);
+            if (artcircleList != null && artcircleList.getList() != null && artcircleList.getList().size() > 0) {
+                list = artcircleList.getList();
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                valuableSonRecyclerView.setLayoutManager(linearLayoutManager);
+                ValuableSonAdapter valuableSonAdapter = new ValuableSonAdapter(list, getActivity());
+                valuableSonAdapter.setOnClickItem(new ValuableSonAdapter.OnClickItem() {
+                    @Override
+                    public void onClickItem(View view, int position) {
+                        if (list != null && list.size() > 0) {
+                            Intent intent = new Intent(getContext(), WorkDetailedActivity.class);
+                            intent.putExtra("homewokId", list.get(position).getId() + "");
+                            intent.putExtra("type", "宝典");
+                            startActivity(intent);
+                        }
                     }
-                }
-            });
-            valuableSonRecyclerView.setAdapter(valuableSonAdapter);
+                });
+                valuableSonRecyclerView.setAdapter(valuableSonAdapter);
+            }
         }
 
     }
