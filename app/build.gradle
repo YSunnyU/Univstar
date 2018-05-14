@@ -67,4 +67,5 @@ dependencies {
     compile 'com.yalantis:phoenix:1.2.3'
     compile 'junit:junit:4.12'
     compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'fm.jiecao:jiecaovideoplayer:3.6.1'
 }

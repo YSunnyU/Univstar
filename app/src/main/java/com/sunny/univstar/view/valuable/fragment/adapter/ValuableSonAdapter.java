@@ -135,7 +135,7 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
         public TextView praise;
         public ImageView gift_img;
         public TextView gift;
-        public TextView shape;
+        public LinearLayout shape;
         public TextView user_title;
 
         public Holder(View itemView) {
@@ -160,7 +160,7 @@ public class ValuableSonAdapter extends RecyclerView.Adapter<ValuableSonAdapter.
             praise = (TextView) itemView.findViewById(R.id.praise);
             gift_img = (ImageView) itemView.findViewById(R.id.gift_img);
             gift = (TextView) itemView.findViewById(R.id.gift);
-            shape = (TextView) itemView.findViewById(R.id.shape);
+            shape = (LinearLayout) itemView.findViewById(R.id.shape);
             user_title = (TextView) itemView.findViewById(R.id.user_title);
 
         }

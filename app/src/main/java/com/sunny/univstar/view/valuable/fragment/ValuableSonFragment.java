@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.sunny.univstar.R;
@@ -28,14 +27,13 @@ import butterknife.Bind;
 public class ValuableSonFragment extends BaseFragment implements HomeValuableContract.HomeValuableInView {
 
     public HomeValuableContract.HomeValuableInPresenter homeValuableInPresenter;
+
     @Bind(R.id.valuable_son_recyclerView)
     RecyclerView valuableSonRecyclerView;
     @Bind(R.id.empty)
     ImageView empty;
     @Bind(R.id.content_empty)
     RelativeLayout contentEmpty;
-
-
     private int size;
     private List<HomeValuableBean.DataBean.ArtcircleListBean.ListBean> list;
 
@@ -72,24 +70,26 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
         if (size >= 3) {
             contentEmpty.setVisibility(View.VISIBLE);
             valuableSonRecyclerView.setVisibility(View.GONE);
-        } else {
+        }else {
             HomeValuableBean.DataBean.ArtcircleListBean artcircleList = homeValuableBean.getData().getArtcircleList();
-            list = artcircleList.getList();
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            valuableSonRecyclerView.setLayoutManager(linearLayoutManager);
-            ValuableSonAdapter valuableSonAdapter = new ValuableSonAdapter(list, getActivity());
-            valuableSonAdapter.setOnClickItem(new ValuableSonAdapter.OnClickItem() {
-                @Override
-                public void onClickItem(View view, int position) {
-                    if (list != null && list.size() > 0) {
-                        Intent intent = new Intent(getContext(), WorkDetailedActivity.class);
-                        intent.putExtra("homewokId", list.get(position).getId() + "");
-                        intent.putExtra("type", "宝典");
-                        startActivity(intent);
+            if (artcircleList != null && artcircleList.getList() != null && artcircleList.getList().size() > 0) {
+                list = artcircleList.getList();
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                valuableSonRecyclerView.setLayoutManager(linearLayoutManager);
+                ValuableSonAdapter valuableSonAdapter = new ValuableSonAdapter(list, getActivity());
+                valuableSonAdapter.setOnClickItem(new ValuableSonAdapter.OnClickItem() {
+                    @Override
+                    public void onClickItem(View view, int position) {
+                        if (list != null && list.size() > 0) {
+                            Intent intent = new Intent(getContext(), WorkDetailedActivity.class);
+                            intent.putExtra("homewokId", list.get(position).getId() + "");
+                            intent.putExtra("type", "宝典");
+                            startActivity(intent);
+                        }
                     }
-                }
-            });
-            valuableSonRecyclerView.setAdapter(valuableSonAdapter);
+                });
+                valuableSonRecyclerView.setAdapter(valuableSonAdapter);
+            }
         }
 
     }
@@ -98,6 +98,5 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
     public void showValueFlyBannerData(ValueFlaybannerBean valueFlaybannerBean) {
         Log.d("ValuableSonFragment", "aaaaa");
     }
-
 
 }

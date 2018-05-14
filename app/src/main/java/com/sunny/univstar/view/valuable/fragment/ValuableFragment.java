@@ -67,7 +67,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
     protected void init() {
         homeValuableInPresenter = new HomeValuablePresenter(this);
         homeValuableInPresenter.sendFlyBannerData();
-        homeValuableInPresenter.sendHomeValuableData("0", "20", "0", "0");
+        homeValuableInPresenter.sendHomeValuableData("0", "20", "0", "1");
         title_list = new ArrayList<>();
         title_list.add("智能筛选");
         title_list.add("赞数最多");
@@ -95,7 +95,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
             }
             SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
             int loginUserId = userState.getInt("loginUserId", 0);
-            for (int i = 1; i < title_list.size(); i++) {
+            for (int i = 0; i < title_list.size(); i++) {
                 valuableSonFragment = new ValuableSonFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("page", i + "");
