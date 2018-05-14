@@ -18,17 +18,26 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MyHobbyActivity extends BaseActivity implements PreferenceContract.PreferenceInView, MajorAdapter.ItemSelectCallBack ,CollegeAdapter.ItemSelectCallBack{
+public class MyHobbyActivity extends BaseActivity implements PreferenceContract.PreferenceInView, MajorAdapter.ItemSelectCallBack, CollegeAdapter.ItemSelectCallBack {
     PreferenceContract.PreferenceInPresenter preferenceInPresenter;
-    @Bind(R.id.myHobby_back)
+    /*@Bind(R.id.myHobby_back)
     TextView myHobbyBack;
     @Bind(R.id.myHobby_majorRecyView)
     RecyclerView myHobbyMajorRecyView;
     @Bind(R.id.myHobby_CollegeRecyView)
     RecyclerView myHobbyCollegeRecyView;
     @Bind(R.id.myHobby_keepBtn)
-    Button myHobbyKeepBtn;
+    Button myHobbyKeepBtn;*/
     public List<String> majorNums;
+    @Bind(R.id.myHobby_back)
+    TextView myHobbyBack;
+
+    @Bind(R.id.myHobby_majorRecyView)
+    RecyclerView myHobbyMajorRecyView;
+    @Bind(R.id.myHobby_CollegeRecyView)
+    RecyclerView myHobbyCollegeRecyView;
+    @Bind(R.id.myHobby_keepBtn)
+    Button myHobbyKeepBtn;
 
     @OnClick({R.id.myHobby_back, R.id.myHobby_keepBtn})
     public void onViewClicked(View view) {
@@ -118,4 +127,6 @@ public class MyHobbyActivity extends BaseActivity implements PreferenceContract.
         usermajor_select_aty_num.setText(num+"");
     }*/
     }
+
+
 }

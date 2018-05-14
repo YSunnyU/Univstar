@@ -4,7 +4,6 @@
     package="com.sunny.univstar">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
     <uses-permission
@@ -17,13 +16,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission
-        android:name="android.permission.RECORD_AUDIO">
-    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -44,22 +43,21 @@
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <!--新浪-->
-        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+        <activity
+            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
-            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -78,7 +76,7 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -158,8 +156,8 @@
             android:name="JPUSH_APPKEY"
             android:value="001b78b1bcce3110305799ec" /> <!-- </>值来自开发者平台取得的AppKey -->
 
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".view.preference.PreferenceActivity" />
         <activity android:name=".view.personal.activity.RegisterActivity" />
         <activity android:name=".view.personal.activity.PerfectUserInfoActivity" />
@@ -177,8 +175,8 @@
         <activity android:name=".view.work.activity.WorkDetailedActivity" />
         <activity android:name=".view.teachertype.activity.TeacherFanActivity" />
         <activity android:name=".view.teachertype.activity.TeacherLiveActivity" />
-        <activity android:name=".view.personal.activity.login.bean.set.NewPswActivity" />
-        <activity android:name=".view.teachertype.activity.TeacherLiveActivity" />
+
+
         <activity android:name=".view.personal.activity.login.bean.set.SocialNumBindActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AboutUnivStarActivity" />
         <activity android:name=".view.personal.activity.login.bean.set.AboutIntroActivity" />
@@ -201,7 +199,7 @@
         <activity android:name=".view.personal.activity.login.bean.view.MyMessage.order.OrderDetailActivity" />
         <activity android:name=".view.personal.activity.login.bean.view.MyMessage.collection.MyCollectionActivity" />
         <activity android:name=".view.message.AboveMessageActivity" />
-        <activity android:name=".view.personal.activity.login.bean.view.MyMessage.collection.MyCollectionActivity" />
+
         <activity android:name=".view.work.activity.ReplyListActivity" />
         <activity android:name=".view.message.OrderActivity" />
         <activity android:name=".view.message.MessagePariseActivity" />
@@ -209,9 +207,17 @@
         <activity android:name=".view.message.MessageHomeworkActivity" />
         <activity android:name=".view.message.MessageUnivstarActivity" />
         <activity android:name=".view.message.MessageAttentionActivity"></activity>
-        <activity android:name=".view.work.activity.ReplyListActivity" />
+
         <activity android:name=".view.teachertype.activity.CoachActivity" />
-        <activity android:name=".view.teachertype.activity.ShootVideoActivity" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.teachertype.activity.ShootVideoActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".view.myself.jobs.FansActivity"></activity>
+        <activity android:name=".view.myself.jobs.FollowActivity"></activity>
+        <activity android:name=".view.myself.jobs.WorksActivity"></activity>
+        <activity android:name=".view.myself.jobs.PostActivity"></activity>
+
     </application>
 
 </manifest>

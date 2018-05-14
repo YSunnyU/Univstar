@@ -11,6 +11,7 @@ import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +34,44 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-import static com.sunny.univstar.R.id.live_course_detailed_web;
 
-public class NoticeDetailedActivity extends BaseActivity implements NoticeDetailedContract.NoticeDetailedView,FollowPraiseContract.FollowPraiseView{
+public class NoticeDetailedActivity extends BaseActivity implements NoticeDetailedContract.NoticeDetailedView, FollowPraiseContract.FollowPraiseView {
+    @Bind(R.id.notice_detailed_collect)
+    CheckBox noticeDetailedCollect;
+    @Bind(R.id.notice_detailed_phone)
+    TextView noticeDetailedPhone;
+    @Bind(R.id.notice_detailed_buy)
+    LinearLayout noticeDetailedBuy;
+    @Bind(R.id.masterdetail_coachbtn)
+    LinearLayout masterdetailCoachbtn;
+    @Bind(R.id.notice_detailed_msg_img)
+    ImageView noticeDetailedMsgImg;
+    @Bind(R.id.notice_detailed_reservation)
+    TextView noticeDetailedReservation;
+    @Bind(R.id.notice_detailed_subscribe)
+    TextView noticeDetailedSubscribe;
+    @Bind(R.id.notice_detailed_time)
+    TextView noticeDetailedTime;
+    @Bind(R.id.img_re)
+    RelativeLayout imgRe;
+    @Bind(R.id.notice_detailed_type_text)
+    TextView noticeDetailedTypeText;
+    @Bind(R.id.notice_detailed_type)
+    LinearLayout noticeDetailedType;
+    @Bind(R.id.notice_detailed_address)
+    TextView noticeDetailedAddress;
+    @Bind(R.id.notice_detailed_price)
+    TextView noticeDetailedPrice;
+    @Bind(R.id.img_re4)
+    LinearLayout imgRe4;
+    @Bind(R.id.live_course_detailed_web)
+    WebView liveCourseDetailedWeb;
+    @Bind(R.id.notice_detailed_return)
+    ImageView noticeDetailedReturn;
+    @Bind(R.id.notice_detailed_share)
+    ImageView noticeDetailedShare;
 
-//    收藏
+/*//    收藏
     @Bind(R.id.notice_detailed_collect)
     CheckBox noticeDetailedCollect;
 //    咨询电话
@@ -79,7 +113,7 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
     ImageView noticeDetailedReturn;
 //    分享
     @Bind(R.id.notice_detailed_share)
-    ImageView noticeDetailedShare;
+    ImageView noticeDetailedShare;*/
 
 
     private NoticeDetailedContract.NoticeDetailedPresenter noticeDetailedPresenter;
@@ -100,13 +134,13 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
         followPraisePresenter = new FollowPraiisePresenter(this);
         noticeDetailedPresenter = new NoticeDetailedPresenter(this);
         SharedPreferences userState = getSharedPreferences("userState", 0);
-        userId = userState.getInt("loginUserId",0);
+        userId = userState.getInt("loginUserId", 0);
         isLogin = userState.getBoolean("isLogin", false);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        Log.e("aaaaaaaaaaaaaaa",id+"");
-        Map<String,String> map = new HashMap<>();
-        map.put("loginUserId", userId +"");
+        Log.e("aaaaaaaaaaaaaaa", id + "");
+        Map<String, String> map = new HashMap<>();
+        map.put("loginUserId", userId + "");
         map.put("courseId", id);
         noticeDetailedPresenter.sendNoticeDetailed(map);
         webSetting(liveCourseDetailedWeb);
@@ -118,7 +152,7 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
     }
 
 
-    @OnClick({R.id.notice_detailed_collect,R.id.notice_detailed_phone, R.id.notice_detailed_buy, R.id.notice_detailed_return, R.id.notice_detailed_share})
+    @OnClick({R.id.notice_detailed_collect, R.id.notice_detailed_phone, R.id.notice_detailed_buy, R.id.notice_detailed_return, R.id.notice_detailed_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.notice_detailed_collect:
@@ -126,19 +160,19 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
                     noticeDetailedCollect.setChecked(false);
                     startActivity(new Intent(this, LoginActivity.class));
                     return;
-                }else {
-                    if (noticeDetailedCollect.isChecked()){
-                        Map<String,String> map = new HashMap<>();
-                        map.put("loginUserId",userId+"");
-                        map.put("id",noticeId+"");
-                        map.put("type","体验课");
-                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite",map);
-                    }else {
-                        Map<String,String> map = new HashMap<>();
-                        map.put("loginUserId",userId+"");
-                        map.put("id",noticeId+"");
-                        map.put("type","体验课");
-                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite/cancel",map);
+                } else {
+                    if (noticeDetailedCollect.isChecked()) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("loginUserId", userId + "");
+                        map.put("id", noticeId + "");
+                        map.put("type", "体验课");
+                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite", map);
+                    } else {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("loginUserId", userId + "");
+                        map.put("id", noticeId + "");
+                        map.put("type", "体验课");
+                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite/cancel", map);
                     }
                 }
                 break;
@@ -152,27 +186,29 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
                 break;
             case R.id.notice_detailed_share:
                 ShapeUtils shapeUtils = new ShapeUtils(this);
-                shapeUtils.setWeb("http://share.univstar.com/share/trailer-detail.html?courseId="+noticeId,
-                        null,"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
+                shapeUtils.setWeb("http://share.univstar.com/share/trailer-detail.html?courseId=" + noticeId,
+                        null, "风里雨里,心愿艺考等你", R.mipmap.ic_launcher);
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
+
     private void call(String phone) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phone));
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     @Override
     public void getNoticeDetailedData(NoticeDetailedEntity noticeDetailedEntity) {
-        Log.e("aaaaaaaaaaaaaaa",noticeDetailedEntity.getMessage());
-        if (noticeDetailedEntity.getCode() == 0){
+        Log.e("aaaaaaaaaaaaaaa", noticeDetailedEntity.getMessage());
+        if (noticeDetailedEntity.getCode() == 0) {
             NoticeDetailedEntity.DataBean data = noticeDetailedEntity.getData();
             noticeId = data.getId();
             mobile = data.getMobile();
-            if (data.getFavorite() == 0){
+            if (data.getFavorite() == 0) {
                 noticeDetailedCollect.setChecked(false);
-            }else {
+            } else {
                 noticeDetailedCollect.setChecked(true);
             }
 //            设置内容图片
@@ -181,8 +217,8 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
                     .into(noticeDetailedMsgImg);
 
 //            设置预约
-            noticeDetailedReservation.setText(""+data.getSubscribeNum());
-            noticeDetailedSubscribe.setText(data.getReservationNum()+"");
+            noticeDetailedReservation.setText("" + data.getSubscribeNum());
+            noticeDetailedSubscribe.setText(data.getReservationNum() + "");
 
 //            设置开课时间
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -193,15 +229,15 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
             noticeDetailedAddress.setText(data.getAddress());
 
 //            设置价格
-            noticeDetailedPrice.setText(data.getPrice()+"");
+            noticeDetailedPrice.setText(data.getPrice() + "");
 
-            liveCourseDetailedWeb.loadUrl("http://share.univstar.com/view/course.html?courseid="+ this.id);
-        }else {
+            liveCourseDetailedWeb.loadUrl("http://share.univstar.com/view/course.html?courseid=" + this.id);
+        } else {
             Toast.makeText(this, noticeDetailedEntity.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void webSetting(WebView webView){
+    private void webSetting(WebView webView) {
         //声明WebSettings子类
         WebSettings webSettings = webView.getSettings();
 
@@ -233,4 +269,5 @@ public class NoticeDetailedActivity extends BaseActivity implements NoticeDetail
     public void getFollowPraise(String msg) {
 
     }
+
 }

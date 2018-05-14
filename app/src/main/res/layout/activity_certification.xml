@@ -137,11 +137,13 @@
                 android:id="@+id/myCertification_postIcCard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="12dp"
                 android:background="@drawable/ic_card_bg"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:layout_alignTop="@+id/myCertification_showIcCard"
+                android:layout_alignLeft="@+id/myCertification_showIcCard"
+                android:layout_alignStart="@+id/myCertification_showIcCard">
 
 
                 <ImageView

@@ -35,15 +35,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
+
+import static com.sunny.univstar.R.id.net_work_bg;
+import static com.sunny.univstar.R.id.notice_list;
+import static com.sunny.univstar.R.id.notice_pullRefresh;
+import static com.sunny.univstar.R.id.time_bolting;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NoticeFragment extends BaseFragment implements HomeNoticeContract.HomeNoticeView, View.OnClickListener {
+    @Bind(time_bolting)
+    TextView timeBolting;
+    @Bind(notice_list)
+    RecyclerView noticeList;
+    @Bind(notice_pullRefresh)
+    PullRefreshLayout noticePullRefresh;
+    @Bind(net_work_bg)
+    LinearLayout netWorkBg;
 
 
-    private TextView time_bolting;
-    private RecyclerView notice_list;
-    private PullRefreshLayout notice_pullRefresh;
+//    private TextView time_bolting;
+//    private RecyclerView notice_list;
+//    private PullRefreshLayout notice_pullRefresh;
     private HomeNoticeContract.HomeNoticePresenter homeNoticePresenter;
     private List<HomeNoticeEntity.DataBean.ListBean> listData;
     private List<HomeNoticeEntity.DataBean> list;
@@ -53,7 +68,7 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
     private TextView startText;
     private TextView endText;
     private Calendar calendar;
-    private LinearLayout net_work_bg;
+//    private LinearLayout net_work_bg;
 
     @Override
     protected int getLayoutId() {
@@ -67,25 +82,25 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
         list = new ArrayList<>();
         homeNoticePresenter = new HomeNoticePresenter(this);
 //        实例化预告
-        net_work_bg = getView().findViewById(R.id.net_work_bg);
-        time_bolting = getView().findViewById(R.id.time_bolting);
-        time_bolting.setOnClickListener(this);
-        notice_list = getView().findViewById(R.id.notice_list);
-        notice_pullRefresh = getView().findViewById(R.id.notice_pullRefresh);
-//        notice_pullRefresh.setBackgroundColor(Color.parseColor("#00000000"));
+        netWorkBg = getView().findViewById(net_work_bg);
+        timeBolting = getView().findViewById(time_bolting);
+        timeBolting.setOnClickListener(this);
+        noticeList = getView().findViewById(notice_list);
+//        notice_pullRefresh = getView().findViewById(R.id.notice_pullRefresh);
+        noticePullRefresh.setBackgroundColor(Color.parseColor("#00000000"));
         initTimeFilterPopup();
         adapter = new HomeNoticeAdapter(listData);
         adapter.setOnClickItem(new HomeNoticeAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
                 Intent intent = new Intent(getContext(), NoticeDetailedActivity.class);
-                intent.putExtra("id",listData.get(position).getId()+"");
+                intent.putExtra("id", listData.get(position).getId() + "");
                 startActivity(intent);
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        notice_list.setLayoutManager(linearLayoutManager);
-        notice_list.setAdapter(adapter);
+        noticeList.setLayoutManager(linearLayoutManager);
+        noticeList.setAdapter(adapter);
 //        请求网络数据所需参数
         Map<String, String> map = new HashMap<>();
 //        页数
@@ -104,19 +119,19 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
 
     @Override
     protected void initData() {
-        notice_pullRefresh.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+        noticePullRefresh.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                notice_pullRefresh.postDelayed(new Runnable() {
+                noticePullRefresh.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        notice_pullRefresh.setRefreshing(false);
+                        noticePullRefresh.setRefreshing(false);
                     }
                 }, 2000);
             }
         });
 //        homeMasterFragmentSwipe.setRefreshing(false);
-        notice_pullRefresh.setRefreshStyle(PullRefreshLayout.STYLE_CIRCLES);
+        noticePullRefresh.setRefreshStyle(PullRefreshLayout.STYLE_CIRCLES);
     }
 
 
@@ -128,27 +143,27 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
             list.clear();
             list.add(homeNoticeEntity.getData());
             adapter.notifyDataSetChanged();
-            notice_pullRefresh.setVisibility(View.VISIBLE);
-            net_work_bg.setVisibility(View.GONE);
+            noticePullRefresh.setVisibility(View.VISIBLE);
+            netWorkBg.setVisibility(View.GONE);
         } else {
-            notice_pullRefresh.setVisibility(View.GONE);
-            net_work_bg.setVisibility(View.VISIBLE);
+            noticePullRefresh.setVisibility(View.GONE);
+            netWorkBg.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.time_bolting:
+            case time_bolting:
                 if (isTimeFilter) {
 //                    notice_pullRefresh.setAlpha(0.5);
-                    notice_pullRefresh.setAlpha(0.4f);
-                    time_bolting.setText("取消");
+                    noticePullRefresh.setAlpha(0.4f);
+                    timeBolting.setText("取消");
                     isTimeFilter = !isTimeFilter;
-                    popupWindow.showAsDropDown(time_bolting, 0, 0, Gravity.BOTTOM);
+                    popupWindow.showAsDropDown(timeBolting, 0, 0, Gravity.BOTTOM);
                 } else {
-                    notice_pullRefresh.setAlpha(1);
-                    time_bolting.setText("时间筛选");
+                    noticePullRefresh.setAlpha(1);
+                    timeBolting.setText("时间筛选");
                     isTimeFilter = !isTimeFilter;
                     popupWindow.dismiss();
                 }
@@ -177,7 +192,7 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
 //        用户ID
                 SharedPreferences userState = getActivity().getSharedPreferences("userState", 0);
                 int userId = userState.getInt("loginUserId", 0);
-                map.put("loginUserId", userId+"");
+                map.put("loginUserId", userId + "");
 //        开课时间
                 map.put("startDate", startText.getText().toString());
 //        结课时间
@@ -207,8 +222,8 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                notice_pullRefresh.setAlpha(1);
-                time_bolting.setText("时间筛选");
+                noticePullRefresh.setAlpha(1);
+                timeBolting.setText("时间筛选");
                 isTimeFilter = !isTimeFilter;
             }
         });
@@ -230,4 +245,6 @@ public class NoticeFragment extends BaseFragment implements HomeNoticeContract.H
                 , calendar.get(Calendar.MONTH)
                 , calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
+
+
 }

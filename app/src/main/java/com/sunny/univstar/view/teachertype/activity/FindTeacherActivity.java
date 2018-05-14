@@ -24,9 +24,15 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class FindTeacherActivity extends BaseActivity implements FindTeacherContract.FindTeacherView{
+public class FindTeacherActivity extends BaseActivity implements FindTeacherContract.FindTeacherView {
 
 
+    //达人
+    private static final String SORT_TYPE_DAREN = "2";
+    //名师
+    private static final String SORT_TYPE_MINGSHI = "3";
+    //大师
+    private static final String SORT_TYPE_DASHI = "4";
     @Bind(R.id.find_teacher_return)
     ImageView findTeacherReturn;
     @Bind(R.id.find_great_teacher_text)
@@ -50,13 +56,6 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
     @Bind(R.id.find_teacher_list)
     RecyclerView findTeacherList;
 
-    //达人
-    private static final String SORT_TYPE_DAREN = "2";
-    //名师
-    private static final String SORT_TYPE_MINGSHI = "3";
-    //大师
-    private static final String SORT_TYPE_DASHI = "4";
-
     private FindTeacherContract.FindTeacherPresneter findTeacherPresneter;
 
     private FindTeacherAdapter adapter;
@@ -75,22 +74,22 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
         SharedPreferences userState = getSharedPreferences("userState", 0);
         userId = userState.getInt("loginUserId", 0);
         findTeacherPresneter = new FindTeacherPresenter(this);
-        Map<String,String> map = new HashMap<>();
-        map.put("loginUserId", userId+"");
-        map.put("userType",SORT_TYPE_DASHI);
-        map.put("page",1+"");
+        Map<String, String> map = new HashMap<>();
+        map.put("loginUserId", userId + "");
+        map.put("userType", SORT_TYPE_DASHI);
+        map.put("page", 1 + "");
         findTeacherPresneter.sendFindTeacher(map);
-        findTeacherList.setLayoutManager(new GridLayoutManager(this,2));
+        findTeacherList.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new FindTeacherAdapter(mList);
         adapter.setOnClickItem(new FindTeacherAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
-                Intent intent = new Intent(FindTeacherActivity.this,FindTeacherDetailsActivity.class);
+                Intent intent = new Intent(FindTeacherActivity.this, FindTeacherDetailsActivity.class);
 //                Bundle bundle = new Bundle();
 //                bundle.putParcelable("teacherId",mList.get(0).getData().getList().get(position));
 //                intent.putExtras(bundle);
                 int id68 = mList.get(0).getData().getList().get(position).get_$Id68();
-                intent.putExtra("teacherId",mList.get(0).getData().getList().get(position).get_$Id68()+"");
+                intent.putExtra("teacherId", mList.get(0).getData().getList().get(position).get_$Id68() + "");
                 startActivity(intent);
             }
         });
@@ -104,7 +103,7 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 
     @OnClick({R.id.find_teacher_return, R.id.find_great_teacher, R.id.find_famous_teacher, R.id.find_daren_teacher})
     public void onViewClicked(View view) {
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         switch (view.getId()) {
 //            返回按钮
             case R.id.find_teacher_return:
@@ -113,9 +112,9 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 //            大师
             case R.id.find_great_teacher:
                 map.clear();
-                map.put("loginUserId",userId + "");
-                map.put("userType",SORT_TYPE_DASHI);
-                map.put("page",1+"");
+                map.put("loginUserId", userId + "");
+                map.put("userType", SORT_TYPE_DASHI);
+                map.put("page", 1 + "");
                 findTeacherPresneter.sendFindTeacher(map);
                 findGreatTeacherLine.setVisibility(View.VISIBLE);
                 findFamousTeacherLine.setVisibility(View.GONE);
@@ -124,9 +123,9 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 //            名师
             case R.id.find_famous_teacher:
                 map.clear();
-                map.put("loginUserId",userId + "");
-                map.put("userType",SORT_TYPE_MINGSHI);
-                map.put("page",1+"");
+                map.put("loginUserId", userId + "");
+                map.put("userType", SORT_TYPE_MINGSHI);
+                map.put("page", 1 + "");
                 findTeacherPresneter.sendFindTeacher(map);
                 findGreatTeacherLine.setVisibility(View.GONE);
                 findFamousTeacherLine.setVisibility(View.VISIBLE);
@@ -135,9 +134,9 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
 //            达人
             case R.id.find_daren_teacher:
                 map.clear();
-                map.put("loginUserId",userId + "");
-                map.put("userType",SORT_TYPE_DAREN);
-                map.put("page",1+"");
+                map.put("loginUserId", userId + "");
+                map.put("userType", SORT_TYPE_DAREN);
+                map.put("page", 1 + "");
                 findTeacherPresneter.sendFindTeacher(map);
                 findGreatTeacherLine.setVisibility(View.GONE);
                 findFamousTeacherLine.setVisibility(View.GONE);
@@ -152,4 +151,5 @@ public class FindTeacherActivity extends BaseActivity implements FindTeacherCont
         mList.add(findTeacherEntity);
         adapter.notifyDataSetChanged();
     }
+
 }

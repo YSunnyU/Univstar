@@ -3,7 +3,6 @@ package com.sunny.univstar.view.myself.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +12,10 @@ import android.widget.TextView;
 
 import com.sunny.univstar.R;
 import com.sunny.univstar.base.BaseFragment;
+import com.sunny.univstar.view.myself.jobs.FansActivity;
+import com.sunny.univstar.view.myself.jobs.FollowActivity;
+import com.sunny.univstar.view.myself.jobs.PostActivity;
+import com.sunny.univstar.view.myself.jobs.WorksActivity;
 import com.sunny.univstar.view.personal.activity.LoginActivity;
 import com.sunny.univstar.view.personal.activity.LoginSetActivity;
 import com.sunny.univstar.view.personal.activity.RegisterActivity;
@@ -27,10 +30,6 @@ import com.sunny.univstar.view.personal.activity.login.bean.view.PersonalInforma
 import butterknife.Bind;
 import butterknife.OnClick;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MySelfFragment extends BaseFragment {
 
     //没有登录时注册按钮
@@ -93,6 +92,34 @@ public class MySelfFragment extends BaseFragment {
     LinearLayout homeMyselfYesLoginReverse;
     @Bind(R.id.home_myself_yesLogin_order)
     LinearLayout homeMyselfYesLoginOrder;
+//    @Bind(R.id.user_yes_login_img)
+//    ImageView userYesLoginImg;
+    @Bind(R.id.jobsWorks_btn)
+    LinearLayout jobsWorksBtn;
+    @Bind(R.id.jobsPosts_btn)
+    LinearLayout jobsPostsBtn;
+    @Bind(R.id.jobsFollow_btn)
+    LinearLayout jobsFollowBtn;
+    @Bind(R.id.jobsFans_btn)
+    LinearLayout jobsFansBtn;
+    @Bind(R.id.czzx_go)
+    ImageView czzxGo;
+    @Bind(R.id.czzx_sl)
+    TextView czzxSl;
+//    @Bind(R.id.home_myself_yesLogin_myPay)
+//    RelativeLayout homeMyselfYesLoginMyPay;
+//    @Bind(R.id.home_myself_yesLogin_myGift)
+//    RelativeLayout homeMyselfYesLoginMyGift;
+//    @Bind(R.id.home_myself_yesLogin_myCollection)
+//    RelativeLayout homeMyselfYesLoginMyCollection;
+//    @Bind(R.id.home_myself_yesLogin_myHobby)
+//    RelativeLayout homeMyselfYesLoginMyHobby;
+    @Bind(R.id.wyrz_go)
+    ImageView wyrzGo;
+//    @Bind(R.id.home_myself_yesLogin_certification)
+//    TextView homeMyselfYesLoginCertification;
+//    @Bind(R.id.user_yes_login)
+//    LinearLayout userYesLogin;
     private Intent myOrderIntent;
 
     @Override
@@ -111,7 +138,7 @@ public class MySelfFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.user_yes_login_img, R.id.home_myself_content, R.id.user_no_login_img, R.id.home_myself_btn_register, R.id.home_myself_btn_login, R.id.home_myself_settiog, R.id.home_myself_yesLogin_myPay, R.id.home_myself_yesLogin_myGift, R.id.home_myself_yesLogin_myCollection, R.id.home_myself_yesLogin_myHobby, R.id.home_myself_yesLogin_goCertification, R.id.home_myself_yesLogin_pay, R.id.home_myself_yesLogin_user, R.id.home_myself_yesLogin_reverse, R.id.home_myself_yesLogin_order})
+    @OnClick({R.id.user_yes_login_img, R.id.home_myself_content, R.id.user_no_login_img, R.id.home_myself_btn_register, R.id.home_myself_btn_login, R.id.home_myself_settiog, R.id.home_myself_yesLogin_myPay, R.id.home_myself_yesLogin_myGift, R.id.home_myself_yesLogin_myCollection, R.id.home_myself_yesLogin_myHobby, R.id.home_myself_yesLogin_goCertification, R.id.home_myself_yesLogin_pay, R.id.home_myself_yesLogin_user, R.id.home_myself_yesLogin_reverse, R.id.home_myself_yesLogin_order,R.id.jobsWorks_btn, R.id.jobsPosts_btn, R.id.jobsFollow_btn, R.id.jobsFans_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //            没有登录时的头像点击事件
@@ -176,23 +203,38 @@ public class MySelfFragment extends BaseFragment {
             //代付款
             case R.id.home_myself_yesLogin_pay:
 
-                myOrderIntent.putExtra("order","one");
+                myOrderIntent.putExtra("order", "one");
                 startActivity(myOrderIntent);
                 break;
 //            待使用
             case R.id.home_myself_yesLogin_user:
-                myOrderIntent.putExtra("order","two");
+                myOrderIntent.putExtra("order", "two");
                 startActivity(myOrderIntent);
                 break;
 //            待退货
             case R.id.home_myself_yesLogin_reverse:
-                myOrderIntent.putExtra("order","three");
+                myOrderIntent.putExtra("order", "three");
                 startActivity(myOrderIntent);
                 break;
 //            我的订单
             case R.id.home_myself_yesLogin_order:
-                myOrderIntent.putExtra("order","four");
+                myOrderIntent.putExtra("order", "four");
                 startActivity(myOrderIntent);
+                break;
+            case R.id.jobsWorks_btn:
+                startActivity(new Intent(getActivity(), WorksActivity.class));
+                break;
+            case R.id.jobsPosts_btn:
+                startActivity(new Intent(getActivity(), PostActivity.class));
+
+                break;
+            case R.id.jobsFollow_btn:
+                startActivity(new Intent(getActivity(), FollowActivity.class));
+
+                break;
+            case R.id.jobsFans_btn:
+                startActivity(new Intent(getActivity(), FansActivity.class));
+
                 break;
         }
     }
@@ -219,4 +261,8 @@ public class MySelfFragment extends BaseFragment {
         }
 
     }
+
+
+
+
 }

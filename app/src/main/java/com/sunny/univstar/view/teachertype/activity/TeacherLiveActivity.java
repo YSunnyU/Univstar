@@ -24,7 +24,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class TeacherLiveActivity extends BaseActivity implements TeacherLiveContract.TeacherLiveView{
+public class TeacherLiveActivity extends BaseActivity implements TeacherLiveContract.TeacherLiveView {
 
 
     @Bind(R.id.course_return)
@@ -36,6 +36,7 @@ public class TeacherLiveActivity extends BaseActivity implements TeacherLiveCont
     private TeacherLiveContract.TeacherLivePresenter teacherLivePresenter;
     private List<LiveCourseEntity.DataBean.ListBean> mList;
     private LiveCourseAdapter adapter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_teacher_live;
@@ -55,18 +56,18 @@ public class TeacherLiveActivity extends BaseActivity implements TeacherLiveCont
             public void onClickItem(View view, int position) {
                 Intent intent = new Intent(TeacherLiveActivity.this, LiveCourseDetailedActivity.class);
 //                课程ID
-                intent.putExtra("id",mList.get(position).getId()+"");
+                intent.putExtra("id", mList.get(position).getId() + "");
                 startActivity(intent);
             }
         });
         LinearLayoutManager linearLayout = new LinearLayoutManager(this);
         liveCourseList.setLayoutManager(linearLayout);
         liveCourseList.setAdapter(adapter);
-        Map<String,String> map = new HashMap<>();
-        map.put("page","1");
-        map.put("rows","20");
-        map.put("teacherId",teacherId+"");
-        map.put("loginUserId",loginUserId+"");
+        Map<String, String> map = new HashMap<>();
+        map.put("page", "1");
+        map.put("rows", "20");
+        map.put("teacherId", teacherId + "");
+        map.put("loginUserId", loginUserId + "");
         teacherLivePresenter.sendTeacherLive(map);
     }
 
@@ -94,9 +95,10 @@ public class TeacherLiveActivity extends BaseActivity implements TeacherLiveCont
             mList.clear();
             mList.addAll(liveCourseEntity.getData().getList());
             adapter.notifyDataSetChanged();
-        }else {
+        } else {
             courseNoBg.setVisibility(View.VISIBLE);
             liveCourseList.setVisibility(View.GONE);
         }
     }
+
 }

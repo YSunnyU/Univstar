@@ -22,6 +22,7 @@ import butterknife.OnClick;
 public class LoginSetActivity extends BaseActivity {
 
 
+    public static SharedPreferences sharedPreferences;
     @Bind(R.id.setting_aty_cancle)
     TextView settingAtyCancle;
     @Bind(R.id.setting_aty_phone_tv)
@@ -38,7 +39,6 @@ public class LoginSetActivity extends BaseActivity {
     RelativeLayout settingAtyAboutGroup;
     @Bind(R.id.setting_aty_tuichu_group)
     RelativeLayout settingAtyTuichuGroup;
-    public static SharedPreferences sharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -76,7 +76,7 @@ public class LoginSetActivity extends BaseActivity {
                 break;
 //            社交账号绑定
             case R.id.setting_aty_bind_group:
-                startActivity(new Intent(this,SocialNumBindActivity.class));
+                startActivity(new Intent(this, SocialNumBindActivity.class));
                 break;
 //            修改登录密码
             case R.id.setting_aty_pass_group:
@@ -101,4 +101,6 @@ public class LoginSetActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }

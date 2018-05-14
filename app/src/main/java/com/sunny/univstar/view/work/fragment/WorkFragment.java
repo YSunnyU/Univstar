@@ -33,7 +33,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeWorkView{
+public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeWorkView {
+
     @Bind(R.id.home_work_fragment_publishwok_group)
     LinearLayout homeWorkFragmentPublishwokGroup;
     @Bind(R.id.home_work_fragment_publishaskwok_group)
@@ -94,8 +95,8 @@ public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeW
             @Override
             public void onClickItem(View view, int position) {
                 ShapeUtils shapeUtils = new ShapeUtils(getContext());
-                shapeUtils.setWeb("http://share.univstar.com/share/work-detail.html?homewokId="+mList.get(position).getId(),
-                        null,"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
+                shapeUtils.setWeb("http://share.univstar.com/share/work-detail.html?homewokId=" + mList.get(position).getId(),
+                        null, "风里雨里,心愿艺考等你", R.mipmap.ic_launcher);
             }
         });
 //        设置RecyclerView样式
@@ -178,4 +179,6 @@ public class WorkFragment extends BaseFragment implements HomeWorkContract.HomeW
                 break;
         }
     }
+
+
 }

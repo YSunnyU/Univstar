@@ -49,6 +49,8 @@ import static com.sunny.univstar.app.App.context;
 
 public class PersonalInformationActivity extends BaseActivity implements UpdateUserMessContract.UpdateUserDataInView {
 
+
+    public static SharedPreferences sharedPreferences;
     @Bind(R.id.userInfo_back)
     ImageView userInfoBack;
     @Bind(R.id.userInfo_avatar)
@@ -71,7 +73,6 @@ public class PersonalInformationActivity extends BaseActivity implements UpdateU
     TextView userInfoChangeBirthdayBirthday;
     @Bind(R.id.userInfo_changeBirthday)
     RelativeLayout userInfoChangeBirthday;
-    public static SharedPreferences sharedPreferences;
     private Uri mUri;
     private Bitmap head;
     private Intent intent;
@@ -287,4 +288,6 @@ public class PersonalInformationActivity extends BaseActivity implements UpdateU
         }
         return file;
     }
+
+
 }

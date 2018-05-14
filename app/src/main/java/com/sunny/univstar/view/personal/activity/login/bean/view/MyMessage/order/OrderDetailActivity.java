@@ -20,6 +20,31 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class OrderDetailActivity extends BaseActivity implements OrderDetailContract.OrederDetailInView {
+    //    @Bind(R.id.myOrderDetail_timer)
+//    TextView myOrderDetailTimer;
+//    @Bind(R.id.myOrderDetail_title)
+//    TextView myOrderDetailTitle;
+//    @Bind(R.id.myOrderDetail_payStatus)
+//    TextView myOrderDetailPayStatus;
+//    @Bind(R.id.myOrderItem_skipNotice)
+//    RelativeLayout myOrderItemSkipNotice;
+//    @Bind(R.id.myOrderDetail_Image)
+//    ImageView myOrderDetailImage;
+//    @Bind(R.id.myOrderDetail_time)
+//    TextView myOrderDetailTime;
+//    @Bind(R.id.myOrderDetail_money)
+//    TextView myOrderDetailMoney;
+//    @Bind(R.id.myOrderDetail_pay)
+//    Button myOrderDetailCPay;
+//    @Bind(R.id.myOrderDetail_orderNum)
+//    TextView myOrderDetailOrderNum;
+//    @Bind(R.id.myOrderDetail_Num)
+//    TextView myOrderDetailNum;
+//    @Bind(R.id.myOrderDetail_deleteBtn)
+//    Button myOrderDetailDeleteBtn;
+//    @Bind(R.id.myOrderDetail_copyOrder)
+//    Button myOrderDetailCopyOrder;
+    public OrderDetailContract.OrderDetailinPresenter orderDetailInPredenter;
     @Bind(R.id.myOrderDetail_timer)
     TextView myOrderDetailTimer;
     @Bind(R.id.myOrderDetail_title)
@@ -30,21 +55,26 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
     RelativeLayout myOrderItemSkipNotice;
     @Bind(R.id.myOrderDetail_Image)
     ImageView myOrderDetailImage;
+    @Bind(R.id.myOrderDetail_one)
+    TextView myOrderDetailOne;
     @Bind(R.id.myOrderDetail_time)
     TextView myOrderDetailTime;
     @Bind(R.id.myOrderDetail_money)
     TextView myOrderDetailMoney;
     @Bind(R.id.myOrderDetail_pay)
-    Button myOrderDetailCPay;
+    Button myOrderDetailPay;
+    @Bind(R.id.myOrderDetail_order)
+    TextView myOrderDetailOrder;
     @Bind(R.id.myOrderDetail_orderNum)
     TextView myOrderDetailOrderNum;
+    @Bind(R.id.myOrderDetail_copyOrder)
+    Button myOrderDetailCopyOrder;
+    @Bind(R.id.myOrderDetail_startTime)
+    TextView myOrderDetailStartTime;
     @Bind(R.id.myOrderDetail_Num)
     TextView myOrderDetailNum;
     @Bind(R.id.myOrderDetail_deleteBtn)
     Button myOrderDetailDeleteBtn;
-    @Bind(R.id.myOrderDetail_copyOrder)
-    Button myOrderDetailCopyOrder;
-    public OrderDetailContract.OrderDetailinPresenter orderDetailInPredenter;
 
     @Override
     protected int getLayoutId() {
@@ -99,13 +129,7 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
         myOrderDetailNum.setText(sdff.format(datee));
 
 
-
-
     }
-
-    /*@OnClick(R.id.myOrderDetail_deleteBtn)
-    public void onViewClicked() {
-    }*/
 
 
 }

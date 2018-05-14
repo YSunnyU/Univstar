@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.sunny.univstar.view.personal.activity.login.bean.successview.recharge.MyRechargeActivity">
+    tools:context=".view.personal.activity.login.bean.successview.recharge.MyRechargeActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

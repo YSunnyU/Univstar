@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sunny.univstar.view.message.AboveMessageActivity">
+    tools:context=".view.message.AboveMessageActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -45,6 +45,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
     LinearLayout loginAtyQqBtn;
     @Bind(R.id.login_aty_weibo_btn)
     LinearLayout loginAtyWeiboBtn;
+
     private int anInt;
     public SharedPreferences sharedPreferences;
 
@@ -130,7 +131,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
             edit.putInt("sex", sex);
             edit.putString("images", images);
             edit.putString("mobile", mobile);
-            edit.putString("area",null);
+            edit.putString("area", null);
             edit.commit();
 
             finish();
@@ -138,4 +139,5 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginCo
             Toast.makeText(this, loginSucessBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
 }

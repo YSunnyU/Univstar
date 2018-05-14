@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -36,17 +38,21 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
     public HomeValuableContract.HomeValuableInPresenter homeValuableInPresenter;
     @Bind(R.id.valuable_banner)
     FlyBanner valuableBanner;
+    @Bind(R.id.collapsing_tool_bar_test_ctl)
+    CollapsingToolbarLayout collapsingToolBarTestCtl;
     @Bind(R.id.valuable_tabLayout)
     TabLayout valuableTabLayout;
-
+    @Bind(R.id.id_appbarlayout)
+    AppBarLayout idAppbarlayout;
     @Bind(R.id.myMainScrollView)
     NestedScrollView myMainScrollView;
-    @Bind(R.id.scrollview)
-    CoordinatorLayout scrollview;
     @Bind(R.id.valuable_viewPager)
     ViewPager valuableViewPager;
+    @Bind(R.id.scrollview)
+    CoordinatorLayout scrollview;
     @Bind(R.id.note_work_bg)
     LinearLayout noteWorkBg;
+
     private List<String> title_list;
     private List<HomeValuableBean.DataBean.ArtcircleCategoriesBean> dataArtcircleCategories;
     private List<String> banner_list = new ArrayList<>();
@@ -95,7 +101,7 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
                 bundle.putString("page", i + "");
                 bundle.putString("rows", 20 + "");
                 bundle.putString("sortord", i + "");
-                bundle.putString("loginUserId", loginUserId+"");
+                bundle.putString("loginUserId", loginUserId + "");
                 bundle.putInt("size", i);
                 valuableSonFragment.setArguments(bundle);
                 son_frag.add(valuableSonFragment);
@@ -193,4 +199,6 @@ public class ValuableFragment extends BaseFragment implements HomeValuableContra
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
+
+
 }

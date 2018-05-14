@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.sunny.univstar.view.livecourse.activity.LiveCourseActivity">
+    tools:context=".view.livecourse.activity.LiveCourseActivity">
     <RelativeLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"

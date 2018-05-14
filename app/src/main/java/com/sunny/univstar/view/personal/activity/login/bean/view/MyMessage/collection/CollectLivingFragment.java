@@ -2,10 +2,10 @@ package com.sunny.univstar.view.personal.activity.login.bean.view.MyMessage.coll
 
 
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.sunny.univstar.R;
@@ -18,17 +18,21 @@ import java.util.List;
 
 import butterknife.Bind;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CollectLivingFragment extends BaseFragment implements CollectLivingContract.MyCollectionInView {
 
     public CollectLivingContract.MyCollectionInPresenter myCollectionInPresenter;
     @Bind(R.id.myCollectLiving_RecyView)
     RecyclerView myCollectLivingRecyView;
-    public SharedPreferences sharedPreferences;
+    @Bind(R.id.myCollectionLiving_emptyImage)
+    ImageView myCollectionLivingEmptyImage;
     @Bind(R.id.myCollectionLiving_empty)
     RelativeLayout myCollectionLivingEmpty;
+    public SharedPreferences sharedPreferences;
+    /*@Bind(R.id.myCollectLiving_RecyView)
+    RecyclerView myCollectLivingRecyView;
+
+    @Bind(R.id.myCollectionLiving_empty)
+    RelativeLayout myCollectionLivingEmpty;*/
 
     //    public static SharedPreferences sharedPreferences;
     @Override
@@ -64,5 +68,6 @@ public class CollectLivingFragment extends BaseFragment implements CollectLiving
             myCollectLivingRecyView.setAdapter(collectLivingAdapter);
         }
     }
+
 
 }

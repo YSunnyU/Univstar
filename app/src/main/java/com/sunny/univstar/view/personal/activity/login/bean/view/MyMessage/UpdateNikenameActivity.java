@@ -13,7 +13,7 @@ import com.sunny.univstar.base.BaseActivity;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class UpdateNikenameActivity extends BaseActivity{
+public class UpdateNikenameActivity extends BaseActivity {
     @Bind(R.id.update_back)
     ImageView updateBack;
     @Bind(R.id.update_title)
@@ -22,6 +22,14 @@ public class UpdateNikenameActivity extends BaseActivity{
     Button updateKeep;
     @Bind(R.id.update_message)
     EditText updateMessage;
+    //    @Bind(R.id.update_back)
+//    ImageView updateBack;
+//    @Bind(R.id.update_title)
+//    TextView updateTitle;
+//    @Bind(R.id.update_keep)
+//    Button updateKeep;
+//    @Bind(R.id.update_message)
+//    EditText updateMessage;
     private Intent intent;
     private String loginUserId;
 
@@ -95,4 +103,6 @@ public class UpdateNikenameActivity extends BaseActivity{
                 break;
         }
     }
+
+
 }

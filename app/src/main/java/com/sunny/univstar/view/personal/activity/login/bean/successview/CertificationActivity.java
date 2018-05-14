@@ -29,6 +29,21 @@ public class CertificationActivity extends BaseActivity {
     @Bind(R.id.myCertification_postBtn)
     Button myCertificationPostBtn;
 
+    /*@Bind(R.id.myCertification_back)
+        ImageView myCertificationBack;
+        @Bind(R.id.myCertification_name)
+        EditText myCertificationName;
+        @Bind(R.id.myCertification_majors)
+        EditText myCertificationMajors;
+        @Bind(R.id.myCertification_inputMess)
+        EditText myCertificationInputMess;
+        @Bind(R.id.myCertification_showIcCard)
+        ImageView myCertificationShowIcCard;
+        @Bind(R.id.myCertification_postIcCard)
+        LinearLayout myCertificationPostIcCard;
+        @Bind(R.id.myCertification_postBtn)
+        Button myCertificationPostBtn;
+    */
     @Override
     protected int getLayoutId() {
         return R.layout.activity_certification;
@@ -57,4 +72,5 @@ public class CertificationActivity extends BaseActivity {
                 break;
         }
     }
+
 }

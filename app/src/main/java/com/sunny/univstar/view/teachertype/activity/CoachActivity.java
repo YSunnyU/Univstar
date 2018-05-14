@@ -22,6 +22,8 @@ public class CoachActivity extends BaseActivity {
     TextView coactReturn;
     @Bind(R.id.coact_major)
     RecyclerView coactMajor;
+    @Bind(R.id.ms_text)
+    TextView msText;
     @Bind(R.id.coact_teacher_name)
     TextView coactTeacherName;
     @Bind(R.id.coact_add)
@@ -44,7 +46,7 @@ public class CoachActivity extends BaseActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         videoPath = intent.getExtras().getString("videoPath");
-        File sourceVideoFile  = new File(videoPath);
+        File sourceVideoFile = new File(videoPath);
         coactTeacherName.setText(name);
     }
 
@@ -60,10 +62,11 @@ public class CoachActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.coact_add:
-                startActivity(new Intent(this,ShootVideoActivity.class));
+                startActivity(new Intent(this, ShootVideoActivity.class));
                 break;
             case R.id.coact_permission:
                 break;
         }
     }
+
 }

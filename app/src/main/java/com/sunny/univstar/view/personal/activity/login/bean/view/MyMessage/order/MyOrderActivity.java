@@ -20,6 +20,34 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class MyOrderActivity extends BaseActivity implements MyOrderContract.MyOrderInView {
+//    @Bind(R.id.myOrder_back)
+//    ImageView myOrderBack;
+//    @Bind(R.id.myOrder_aboveText)
+//    TextView myOrderAboveText;
+//    @Bind(R.id.myOrder_aboveLine)
+//    TextView myOrderAboveLine;
+//    @Bind(R.id.myOrder_above)
+//    RelativeLayout myOrderAbove;
+//    @Bind(R.id.myOrder_payText)
+//    TextView myOrderPayText;
+//    @Bind(R.id.myOrder_payLine)
+//    TextView myOrderPayLine;
+//    @Bind(R.id.myOrder_pay)
+//    RelativeLayout myOrderPay;
+//    @Bind(R.id.myOrder_useText)
+//    TextView myOrderUseText;
+//    @Bind(R.id.myOrder_useLine)
+//    TextView myOrderUseLine;
+//    @Bind(R.id.myOrder_use)
+//    RelativeLayout myOrderUse;
+//    @Bind(R.id.myOrder_reverseText)
+//    TextView myOrderReverseText;
+//    @Bind(R.id.myOrder_reverseLine)
+//    TextView myOrderReverseLine;
+//    @Bind(R.id.myOrder_reverse)
+//    RelativeLayout myOrderReverse;
+
+    public MyOrderContract.MyOrderInPresenter OrderInPresenter;
     @Bind(R.id.myOrder_back)
     ImageView myOrderBack;
     @Bind(R.id.myOrder_aboveText)
@@ -46,12 +74,16 @@ public class MyOrderActivity extends BaseActivity implements MyOrderContract.MyO
     TextView myOrderReverseLine;
     @Bind(R.id.myOrder_reverse)
     RelativeLayout myOrderReverse;
-
-    public MyOrderContract.MyOrderInPresenter OrderInPresenter;
     @Bind(R.id.myOrder_recyView)
     RecyclerView myOrderRecyView;
+    @Bind(R.id.myOrder_empty)
+    ImageView myOrderEmpty;
     @Bind(R.id.myOrder_emptyContent)
     RelativeLayout myOrderEmptyContent;
+//    @Bind(R.id.myOrder_recyView)
+//    RecyclerView myOrderRecyView;
+//    @Bind(R.id.myOrder_emptyContent)
+//    RelativeLayout myOrderEmptyContent;
 
     @Override
     protected int getLayoutId() {
@@ -223,6 +255,7 @@ public class MyOrderActivity extends BaseActivity implements MyOrderContract.MyO
             myOrderRecyView.setAdapter(myOrderAdapter);
         }
     }
+
 
 
 }

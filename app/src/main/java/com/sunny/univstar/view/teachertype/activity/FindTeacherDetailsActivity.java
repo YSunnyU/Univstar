@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,46 +50,52 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
     TextView teacherDetailsClassify;
     @Bind(R.id.teacher_details_praise)
     CheckBox teacherDetailsPraise;
+    @Bind(R.id.img_re)
+    RelativeLayout imgRe;
     @Bind(R.id.teacher_details_header_img)
     ImageView teacherDetailsHeaderImg;
     @Bind(R.id.teacher_details_nick_name)
     TextView teacherDetailsNickName;
+    @Bind(R.id.teacher_details_vip)
+    ImageView teacherDetailsVip;
     @Bind(R.id.teacher_details_synopsis)
     TextView teacherDetailsSynopsis;
     @Bind(R.id.teacher_details_follow_check)
     CheckBox teacherDetailsFollowCheck;
+    @Bind(R.id.img_re2)
+    RelativeLayout imgRe2;
     @Bind(R.id.teacher_details_coures)
     TextView teacherDetailsCoures;
+    @Bind(R.id.teacher_details_coures_linear)
+    LinearLayout teacherDetailsCouresLinear;
     @Bind(R.id.teacher_details_work)
     TextView teacherDetailsWork;
+    @Bind(R.id.teacher_details_work_linear)
+    LinearLayout teacherDetailsWorkLinear;
     @Bind(R.id.teacher_details_coach)
     TextView teacherDetailsCoach;
+    @Bind(R.id.teacher_details_coach_linear)
+    LinearLayout teacherDetailsCoachLinear;
     @Bind(R.id.teacher_details_note)
     TextView teacherDetailsNote;
+    @Bind(R.id.teacher_details_note_linear)
+    LinearLayout teacherDetailsNoteLinear;
     @Bind(R.id.teacher_details_follow)
     TextView teacherDetailsFollow;
+    @Bind(R.id.teacher_details_follow_linear)
+    LinearLayout teacherDetailsFollowLinear;
     @Bind(R.id.teacher_details_etc)
     TextView teacherDetailsEtc;
+    @Bind(R.id.teacher_details_linear)
+    LinearLayout teacherDetailsLinear;
+    @Bind(R.id.img_re3)
+    RelativeLayout imgRe3;
     @Bind(R.id.teacher_details_list)
     RecyclerView teacherDetailsList;
-    @Bind(R.id.teacher_details_vip)
-    ImageView teacherDetailsVip;
     @Bind(R.id.teacher_return)
     ImageView teacherReturn;
     @Bind(R.id.teacher_share)
     ImageView teacherShare;
-    @Bind(R.id.teacher_details_coures_linear)
-    LinearLayout teacherDetailsCouresLinear;
-    @Bind(R.id.teacher_details_work_linear)
-    LinearLayout teacherDetailsWorkLinear;
-    @Bind(R.id.teacher_details_coach_linear)
-    LinearLayout teacherDetailsCoachLinear;
-    @Bind(R.id.teacher_details_note_linear)
-    LinearLayout teacherDetailsNoteLinear;
-    @Bind(R.id.teacher_details_follow_linear)
-    LinearLayout teacherDetailsFollowLinear;
-    @Bind(R.id.teacher_details_linear)
-    LinearLayout teacherDetailsLinear;
     private MyTeacherDetailsAdapter mAdapter;
     private List<String> mList;
     private MasterDetailContract.MasterDetailPresenter masterDetailPresenter;
@@ -207,7 +214,7 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
 
     }
 
-    @OnClick({R.id.masterdetail_coachbtn, R.id.teacher_details_coures_linear, R.id.teacher_details_work_linear, R.id.teacher_details_coach_linear, R.id.teacher_details_note_linear, R.id.teacher_details_follow_linear, R.id.teacher_details_linear,R.id.teacher_return, R.id.teacher_share, R.id.teacher_details_coures, R.id.teacher_details_work, R.id.teacher_details_coach, R.id.teacher_details_note, R.id.teacher_details_follow, R.id.teacher_details_etc})
+    @OnClick({R.id.masterdetail_coachbtn, R.id.teacher_details_coures_linear, R.id.teacher_details_work_linear, R.id.teacher_details_coach_linear, R.id.teacher_details_note_linear, R.id.teacher_details_follow_linear, R.id.teacher_details_linear, R.id.teacher_return, R.id.teacher_share, R.id.teacher_details_coures, R.id.teacher_details_work, R.id.teacher_details_coach, R.id.teacher_details_note, R.id.teacher_details_follow, R.id.teacher_details_etc})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.teacher_return:
@@ -215,8 +222,8 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
                 break;
             case R.id.teacher_share:
                 ShapeUtils shapeUtils = new ShapeUtils(this);
-                shapeUtils.setWeb("http://share.univstar.com/share/teacher-home.html?teacherId="+teacherId,
-                        null,"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
+                shapeUtils.setWeb("http://share.univstar.com/share/teacher-home.html?teacherId=" + teacherId,
+                        null, "风里雨里,心愿艺考等你", R.mipmap.ic_launcher);
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.masterdetail_coachbtn:
@@ -224,13 +231,13 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
                     startActivity(new Intent(FindTeacherDetailsActivity.this, LoginActivity.class));
 //                跳转到亲求辅导页面
                 Intent intent2 = new Intent(this, CoachActivity.class);
-                intent2.putExtra("name",mList2.get(0).getData().getUser().getNickname());
+                intent2.putExtra("name", mList2.get(0).getData().getUser().getNickname());
                 startActivity(intent2);
                 break;
             case R.id.teacher_details_coures_linear:
                 Toast.makeText(this, "课程", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(this, TeacherLiveActivity.class);
-                intent1.putExtra("teacherId",mList2.get(0).getData().getUser().get_$Id121()+"");
+                intent1.putExtra("teacherId", mList2.get(0).getData().getUser().get_$Id121() + "");
                 startActivity(intent1);
                 break;
             case R.id.teacher_details_work_linear:
@@ -252,7 +259,7 @@ public class FindTeacherDetailsActivity extends BaseActivity implements MasterDe
             case R.id.teacher_details_linear:
                 Toast.makeText(this, "粉丝", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, TeacherFanActivity.class);
-                intent.putExtra("title",mList2.get(0).getData().getUser().getNickname());
+                intent.putExtra("title", mList2.get(0).getData().getUser().getNickname());
                 intent.putExtra("teacherId", teacherId + "");
                 startActivity(intent);
                 break;

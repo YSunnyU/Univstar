@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,20 +19,29 @@ import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
 //修改密码登录密码第一个页面
 public class AlertPasswordActivity extends BaseActivity implements AlertPasswordContract.AlertPasswordInView {
 
     public AlertPasswordContract.AlertPasswordInPresenter alertPasswordInPresenter;
-    @Bind(R.id.alertPsw_back)
-    ImageView alertPswBack;
+    @Bind(R.id.alertPsw_phoneNum)
+    TextView alertPswPhoneNum;
     @Bind(R.id.alertPsw_ValidateCode)
     EditText alertPswValidateCode;
     @Bind(R.id.alertPsw_getValidateCode)
     TextView alertPswGetValidateCode;
     @Bind(R.id.alertPsw_btn)
     Button alertPswBtn;
-    @Bind(R.id.alertPsw_phoneNum)
-    TextView alertPswPhoneNum;
+    //    @Bind(R.id.alertPsw_back)
+//    ImageView alertPswBack;
+//    @Bind(R.id.alertPsw_ValidateCode)
+//    EditText alertPswValidateCode;
+//    @Bind(R.id.alertPsw_getValidateCode)
+//    TextView alertPswGetValidateCode;
+//    @Bind(R.id.alertPsw_btn)
+//    Button alertPswBtn;
+//    @Bind(R.id.alertPsw_phoneNum)
+//    TextView alertPswPhoneNum;
     private int codeInt = 60;
     private Timer timer;
     public SharedPreferences sharedPreferences;
@@ -119,9 +127,7 @@ public class AlertPasswordActivity extends BaseActivity implements AlertPassword
             Intent intent = new Intent(AlertPasswordActivity.this, NewPswActivity.class);
             startActivity(intent);
         }
-            Toast.makeText(this, alertPswBean.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, alertPswBean.getMessage(), Toast.LENGTH_SHORT).show();
     }
-
-
 
 }

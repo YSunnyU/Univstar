@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.sunny.univstar.view.myself.fragment.MySelfFragment">
+    android:orientation="vertical">
     <!--头部局-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -105,7 +103,7 @@
         android:layout_marginBottom="100dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -148,7 +146,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -157,6 +155,7 @@
             android:weightSum="4">
 
             <LinearLayout
+                android:id="@+id/jobsWorks_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -179,6 +178,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/jobsPosts_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -201,6 +201,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/jobsFollow_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -223,6 +224,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/jobsFans_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

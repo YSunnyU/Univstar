@@ -7,7 +7,7 @@
     android:background="#fff"
     android:orientation="vertical"
 
-    tools:context="com.sunny.univstar.view.personal.activity.login.bean.successview.hobby.MyHobbyActivity">
+    tools:context=".view.personal.activity.login.bean.successview.hobby.MyHobbyActivity">
 
 
     <RelativeLayout

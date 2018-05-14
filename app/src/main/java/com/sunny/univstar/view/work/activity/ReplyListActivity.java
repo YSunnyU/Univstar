@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sunny.univstar.R;
@@ -31,13 +32,15 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ReplyListActivity extends BaseActivity implements ReplyListContract.ReplyListView,FollowPraiseContract.FollowPraiseView {
+public class ReplyListActivity extends BaseActivity implements ReplyListContract.ReplyListView, FollowPraiseContract.FollowPraiseView {
 
 
     @Bind(R.id.reply_list_return)
     ImageView replyListReturn;
     @Bind(R.id.reply_list_title)
     TextView replyListTitle;
+    @Bind(R.id.relat22)
+    RelativeLayout relat22;
     @Bind(R.id.reply_list)
     RecyclerView replyList;
     @Bind(R.id.work_detailed_pinglun_send)
@@ -54,7 +57,8 @@ public class ReplyListActivity extends BaseActivity implements ReplyListContract
     private int loginUserId;
     private String workId;
     private String replyId;
-    private int posititon = - 1;
+    private int posititon = -1;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_reply_list;
@@ -69,28 +73,28 @@ public class ReplyListActivity extends BaseActivity implements ReplyListContract
         mAdapter.setOnClickItem(new ReplyListAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.reply_list_aite:
-                        replyId = mList.get(0).getComments().getList().get(position).getUserId()+"";
-                        showSoftInputFromWindow(ReplyListActivity.this,workDetailedPinglunInput);
+                        replyId = mList.get(0).getComments().getList().get(position).getUserId() + "";
+                        showSoftInputFromWindow(ReplyListActivity.this, workDetailedPinglunInput);
                         posititon = position;
-                        workDetailedPinglunInput.setText("@"+mList.get(0).getComments().getList().get(position).getNickname());
+                        workDetailedPinglunInput.setText("@" + mList.get(0).getComments().getList().get(position).getNickname());
                         break;
                     case R.id.reply_list_praise:
                         CheckBox checkBox = view.findViewById(R.id.reply_list_praise);
-                            if (checkBox.isChecked()) {
-                                mList.get(0).getComments().getList().get(position).setPraiseNum(mList.get(0).getComments().getList().get(position).getPraiseNum() + 1);
+                        if (checkBox.isChecked()) {
+                            mList.get(0).getComments().getList().get(position).setPraiseNum(mList.get(0).getComments().getList().get(position).getPraiseNum() + 1);
+                            checkBox.setText(mList.get(0).getComments().getList().get(position).getPraiseNum() + "");
+                            sendPrice("https://www.univstar.com/v1/m/user/praise", mList.get(0).getComments().getList().get(position).getUserId(), mList.get(0).getComments().getList().get(position).getId());
+                        } else {
+                            if (mList.get(0).getComments().getList().get(position).getPraiseNum() == 0) {
                                 checkBox.setText(mList.get(0).getComments().getList().get(position).getPraiseNum() + "");
-                                sendPrice("https://www.univstar.com/v1/m/user/praise", mList.get(0).getComments().getList().get(position).getUserId(), mList.get(0).getComments().getList().get(position).getId());
                             } else {
-                                if (mList.get(0).getComments().getList().get(position).getPraiseNum() == 0) {
-                                    checkBox.setText(mList.get(0).getComments().getList().get(position).getPraiseNum() + "");
-                                } else {
-                                    mList.get(0).getComments().getList().get(position).setPraiseNum(mList.get(0).getComments().getList().get(position).getPraiseNum() - 1);
-                                    checkBox.setText(mList.get(0).getComments().getList().get(position).getPraiseNum() + "");
-                                }
-                                sendPrice("https://www.univstar.com/v1/m/user/praise/cancel", mList.get(0).getComments().getList().get(position).getUserId(), mList.get(0).getComments().getList().get(position).getId());
+                                mList.get(0).getComments().getList().get(position).setPraiseNum(mList.get(0).getComments().getList().get(position).getPraiseNum() - 1);
+                                checkBox.setText(mList.get(0).getComments().getList().get(position).getPraiseNum() + "");
                             }
+                            sendPrice("https://www.univstar.com/v1/m/user/praise/cancel", mList.get(0).getComments().getList().get(position).getUserId(), mList.get(0).getComments().getList().get(position).getId());
+                        }
                         break;
                 }
             }
@@ -135,25 +139,25 @@ public class ReplyListActivity extends BaseActivity implements ReplyListContract
         replyListPresenter.sendReplyList(map);
     }
 
-    @OnClick({R.id.work_detailed_pinglun_send, R.id.work_detailed_pinglun_input,R.id.reply_list_return})
+    @OnClick({R.id.work_detailed_pinglun_send, R.id.work_detailed_pinglun_input, R.id.reply_list_return})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.work_detailed_pinglun_send:
-                Map<String,String> map = new HashMap<>();
+                Map<String, String> map = new HashMap<>();
                 String replace = "";
                 if (posititon != -1) {
                     String s = workDetailedPinglunInput.getText().toString();
                     replace = s.replace("@" + mList.get(0).getComments().getList().get(posititon).getNickname(), "");
-                }else {
+                } else {
                     replace = workDetailedPinglunInput.getText().toString();
                 }
-                map.put("pid", id +"");//id
-                map.put("userId",loginUserId+"");//用户ID
-                map.put("content",replace);//用户评论内容
-                map.put("toId", toId +"");//原评论人ID
-                map.put("toContent", toContent +"");//原评论内容
-                map.put("refId", workId +"");//id
-                map.put("replyId",replyId+"");//@用户的Id
+                map.put("pid", id + "");//id
+                map.put("userId", loginUserId + "");//用户ID
+                map.put("content", replace);//用户评论内容
+                map.put("toId", toId + "");//原评论人ID
+                map.put("toContent", toContent + "");//原评论内容
+                map.put("refId", workId + "");//id
+                map.put("replyId", replyId + "");//@用户的Id
                 workDetailedPinglunInput.setText("");
                 replyListPresenter.sendReplyListSend(map);
                 break;
@@ -164,6 +168,7 @@ public class ReplyListActivity extends BaseActivity implements ReplyListContract
                 break;
         }
     }
+
     public static void showSoftInputFromWindow(Activity activity, EditText editText) {
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
@@ -176,12 +181,13 @@ public class ReplyListActivity extends BaseActivity implements ReplyListContract
 
     }
 
-    private void sendPrice(String url,int userId,int id){
-        Map<String,String> map = new HashMap<>();
-        map.put("id",id+"");
-        map.put("loginUserId",loginUserId+"");
-        map.put("userId",userId+"");
-        map.put("type","作业回复");
-        followPraisePresenter.sendFollowPraise(url,map);
+    private void sendPrice(String url, int userId, int id) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id + "");
+        map.put("loginUserId", loginUserId + "");
+        map.put("userId", userId + "");
+        map.put("type", "作业回复");
+        followPraisePresenter.sendFollowPraise(url, map);
     }
+
 }

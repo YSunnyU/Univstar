@@ -3,7 +3,6 @@ package com.sunny.univstar.view.personal.activity.login.bean.view.MyMessage.coll
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,9 +19,6 @@ import java.util.List;
 
 import butterknife.Bind;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CollectPostsFragment extends BaseFragment implements CollectPostsContract.CollectPostsInView{
     public CollectPostsContract.CollectPostsInPresenter collectPostsInPresenter;
     

@@ -21,15 +21,24 @@ import butterknife.OnClick;
 public class NewPswActivity extends BaseActivity implements NewPswContract.NewPasswordInView {
 
     public NewPswContract.NewPasswordInPresenter newPasswordInPresenter;
-    @Bind(R.id.newPsw_back)
+    /*@Bind(R.id.newPsw_back)
     ImageView newPswBack;
     @Bind(R.id.newPsw_psw)
     EditText newPswPsw;
     @Bind(R.id.newPsw_rePsw)
     EditText newPswRePsw;
     @Bind(R.id.newPsw_okBtn)
-    Button newPswOkBtn;
+    Button newPswOkBtn;*/
     public SharedPreferences sharedPreferences;
+    @Bind(R.id.newPsw_back)
+    ImageView newPswBack;
+
+    @Bind(R.id.newPsw_psw)
+    EditText newPswPsw;
+    @Bind(R.id.newPsw_rePsw)
+    EditText newPswRePsw;
+    @Bind(R.id.newPsw_okBtn)
+    Button newPswOkBtn;
     private String mobile;
 
     @Override
@@ -57,7 +66,7 @@ public class NewPswActivity extends BaseActivity implements NewPswContract.NewPa
                 break;
             case R.id.newPsw_okBtn:
                 if (newPswPsw.getText().toString().equals(newPswRePsw.getText().toString())) {
-                    newPasswordInPresenter.sendPasswordData(mobile,newPswPsw.getText().toString());
+                    newPasswordInPresenter.sendPasswordData(mobile, newPswPsw.getText().toString());
                 }
                 break;
         }
@@ -87,11 +96,14 @@ public class NewPswActivity extends BaseActivity implements NewPswContract.NewPa
             edit.putString("mobile", mobile);
             edit.commit();
             Intent intent = new Intent(NewPswActivity.this, MainActivity.class);
-            intent.putExtra("upDataPsw","aab");
+            intent.putExtra("upDataPsw", "aab");
             startActivity(intent);
             finish();
-        }else {
+        } else {
             Toast.makeText(this, loginSucessBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 }

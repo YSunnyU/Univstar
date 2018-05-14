@@ -43,11 +43,39 @@ public class MyCollectionActivity extends BaseActivity {
     TextView myCollectionPostsLine;
     @Bind(R.id.myCollection_posts)
     RelativeLayout myCollectionPosts;
-
-
-
     @Bind(R.id.myCollection_frag)
     FrameLayout myCollectionFrag;
+//    @Bind(R.id.myCollection_back)
+//    ImageView myCollectionBack;
+//    @Bind(R.id.myCollection_Living_tv)
+//    TextView myCollectionLivingTv;
+//    @Bind(R.id.myCollection_LivingLine)
+//    TextView myCollectionLivingLine;
+//    @Bind(R.id.myCollection_Living)
+//    RelativeLayout myCollectionLiving;
+//    @Bind(R.id.myCollection_experience_tv)
+//    TextView myCollectionExperienceTv;
+//    @Bind(R.id.myCollection_experienceLine)
+//    TextView myCollectionExperienceLine;
+//    @Bind(R.id.myCollection_experience)
+//    RelativeLayout myCollectionExperience;
+//    @Bind(R.id.myCollection_eavesdrop_tv)
+//    TextView myCollectionEavesdropTv;
+//    @Bind(R.id.myCollection_eavesdropLine)
+//    TextView myCollectionEavesdropLine;
+//    @Bind(R.id.myCollection_eavesdrop)
+//    RelativeLayout myCollectionEavesdrop;
+//    @Bind(R.id.myCollection_posts_tv)
+//    TextView myCollectionPostsTv;
+//    @Bind(R.id.myCollection_postsLine)
+//    TextView myCollectionPostsLine;
+//    @Bind(R.id.myCollection_posts)
+//    RelativeLayout myCollectionPosts;
+//
+//
+//
+//    @Bind(R.id.myCollection_frag)
+//    FrameLayout myCollectionFrag;
 
     @Override
     protected int getLayoutId() {
@@ -159,6 +187,7 @@ public class MyCollectionActivity extends BaseActivity {
         transaction.replace(R.id.myCollection_frag, fragment);
         transaction.commit();
     }
+
 
 
 }

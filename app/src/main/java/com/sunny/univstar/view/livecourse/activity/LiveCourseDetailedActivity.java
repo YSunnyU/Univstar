@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,27 +35,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LiveCourseDetailedActivity extends BaseActivity implements View.OnClickListener,LiveCourseDetailedContract.LiveCourseDetailedView,FollowPraiseContract.FollowPraiseView{
+public class LiveCourseDetailedActivity extends BaseActivity implements View.OnClickListener, LiveCourseDetailedContract.LiveCourseDetailedView, FollowPraiseContract.FollowPraiseView {
 
 
-    private CheckBox live_course_detailed_collect;
-    private LinearLayout live_course_detailed_buy;
-    private ImageView live_course_detailed_msg_img;
-    private TextView live_course_detailed_classify;
-    private TextView live_course_detailed_course_time;
-    private ImageView live_course_detailed__header_img;
-    private TextView live_course_detailed_nick_name;
-    private ImageView live_course_detailed_vip;
-    private TextView live_course_detailed_synopsis;
-    private CheckBox live_course_detailed_follow_check;
-    private TextView course_type_text;
-    private LinearLayout live_course_detailed_type;
-    private TextView live_course_detailed_reservation;
-    private TextView live_course_detailed_subscribe;
-    private TextView live_course_detailed_item_price;
-    private WebView live_course_detailed_web;
-    private ImageView live_course_detailed_return;
-    private ImageView live_course_detailed_share;
     private LiveCourseDetailedContract.LiveCourseDetailedPresenter liveCourseDetailedPresenter;
     private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
     private String id;
@@ -62,6 +45,28 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
     private String teacherId;
     private int keChengId;
     private int userId;
+    private CheckBox live_course_detailed_collect;
+    private LinearLayout live_course_detailed_buy;
+    private LinearLayout masterdetail_coachbtn;
+    private ImageView live_course_detailed_msg_img;
+    private TextView live_course_detailed_classify;
+    private TextView live_course_detailed_course_time;
+    private RelativeLayout img_re;
+    private ImageView live_course_detailed__header_img;
+    private TextView live_course_detailed_nick_name;
+    private ImageView live_course_detailed_vip;
+    private TextView live_course_detailed_synopsis;
+    private CheckBox live_course_detailed_follow_check;
+    private RelativeLayout img_re2;
+    private TextView course_type_text;
+    private LinearLayout live_course_detailed_type;
+    private TextView live_course_detailed_reservation;
+    private TextView live_course_detailed_subscribe;
+    private TextView live_course_detailed_item_price;
+    private LinearLayout img_re4;
+    private WebView live_course_detailed_web;
+    private ImageView live_course_detailed_return;
+    private ImageView live_course_detailed_share;
 
     @Override
     protected int getLayoutId() {
@@ -73,43 +78,43 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
         liveCourseDetailedPresenter = new LiveCourseDetailedPresenter(this);
         followPraisePresenter = new FollowPraiisePresenter(this);
 //        收藏按钮
-          live_course_detailed_collect = (CheckBox) findViewById(R.id.live_course_detailed_collect);
+        live_course_detailed_collect = (CheckBox) findViewById(R.id.live_course_detailed_collect);
         live_course_detailed_collect.setOnClickListener(this);
 //        购买
-          live_course_detailed_buy = (LinearLayout) findViewById(R.id.live_course_detailed_buy);
+        live_course_detailed_buy = (LinearLayout) findViewById(R.id.live_course_detailed_buy);
         live_course_detailed_buy.setOnClickListener(this);
 //        内容头图片
-          live_course_detailed_msg_img = (ImageView) findViewById(R.id.live_course_detailed_msg_img);
+        live_course_detailed_msg_img = (ImageView) findViewById(R.id.live_course_detailed_msg_img);
 //        重播还是直播
-          live_course_detailed_classify = (TextView) findViewById(R.id.live_course_detailed_classify);
+        live_course_detailed_classify = (TextView) findViewById(R.id.live_course_detailed_classify);
 //        讲堂课堂
-          live_course_detailed_course_time = (TextView) findViewById(R.id.live_course_detailed_course_time);
+        live_course_detailed_course_time = (TextView) findViewById(R.id.live_course_detailed_course_time);
 //        头像
-          live_course_detailed__header_img = (ImageView) findViewById(R.id.live_course_detailed__header_img);
+        live_course_detailed__header_img = (ImageView) findViewById(R.id.live_course_detailed__header_img);
 //        昵称
-          live_course_detailed_nick_name = (TextView) findViewById(R.id.live_course_detailed_nick_name);
+        live_course_detailed_nick_name = (TextView) findViewById(R.id.live_course_detailed_nick_name);
 //        vip图片
-          live_course_detailed_vip = (ImageView) findViewById(R.id.live_course_detailed_vip);
+        live_course_detailed_vip = (ImageView) findViewById(R.id.live_course_detailed_vip);
 //        老师类别
-          live_course_detailed_synopsis = (TextView) findViewById(R.id.live_course_detailed_synopsis);
+        live_course_detailed_synopsis = (TextView) findViewById(R.id.live_course_detailed_synopsis);
 //        关注
-          live_course_detailed_follow_check = (CheckBox) findViewById(R.id.live_course_detailed_follow_check);
+        live_course_detailed_follow_check = (CheckBox) findViewById(R.id.live_course_detailed_follow_check);
         live_course_detailed_follow_check.setOnClickListener(this);
 //        标签
-          live_course_detailed_type = (LinearLayout) findViewById(R.id.live_course_detailed_type);
+        live_course_detailed_type = (LinearLayout) findViewById(R.id.live_course_detailed_type);
 //        已预约数
-          live_course_detailed_reservation = (TextView) findViewById(R.id.live_course_detailed_reservation);
+        live_course_detailed_reservation = (TextView) findViewById(R.id.live_course_detailed_reservation);
 //        总预约数
-          live_course_detailed_subscribe = (TextView) findViewById(R.id.live_course_detailed_subscribe);
+        live_course_detailed_subscribe = (TextView) findViewById(R.id.live_course_detailed_subscribe);
 //        价格
-          live_course_detailed_item_price = (TextView) findViewById(R.id.live_course_detailed_item_price);
+        live_course_detailed_item_price = (TextView) findViewById(R.id.live_course_detailed_item_price);
 //        Js显示内容
-          live_course_detailed_web = (WebView) findViewById(R.id.live_course_detailed_web);
+        live_course_detailed_web = (WebView) findViewById(R.id.live_course_detailed_web);
 //        返回按钮
-          live_course_detailed_return = (ImageView) findViewById(R.id.live_course_detailed_return);
+        live_course_detailed_return = (ImageView) findViewById(R.id.live_course_detailed_return);
         live_course_detailed_return.setOnClickListener(this);
 //        分享按钮
-          live_course_detailed_share = (ImageView) findViewById(R.id.live_course_detailed_share);
+        live_course_detailed_share = (ImageView) findViewById(R.id.live_course_detailed_share);
         live_course_detailed_share.setOnClickListener(this);
         webSetting();
         SharedPreferences userState = getSharedPreferences("userState", 0);
@@ -118,14 +123,14 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
         id = intent.getStringExtra("id");
         teacherId = intent.getStringExtra("teacherId");
         userId = userState.getInt("loginUserId", 0);
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("loginUserId", userId + "");
 //        直播课程Id
-        map.put("id",id);
+        map.put("id", id);
         liveCourseDetailedPresenter.sendLiveCourseDetailed(map);
     }
 
-    private void webSetting(){
+    private void webSetting() {
         //声明WebSettings子类
         WebSettings webSettings = live_course_detailed_web.getSettings();
 
@@ -160,7 +165,7 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.live_course_detailed_buy:
                 if (!isLogin)
                     startActivity(new Intent(LiveCourseDetailedActivity.this, LoginActivity.class));
@@ -173,8 +178,8 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
                 break;
             case R.id.live_course_detailed_share:
                 ShapeUtils shapeUtils = new ShapeUtils(this);
-                shapeUtils.setWeb("http://share.univstar.com/share/teacher-live-detail.html?id="+teacherId,
-                        null,"风里雨里,心愿艺考等你",R.mipmap.ic_launcher);
+                shapeUtils.setWeb("http://share.univstar.com/share/teacher-live-detail.html?id=" + teacherId,
+                        null, "风里雨里,心愿艺考等你", R.mipmap.ic_launcher);
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.live_course_detailed_follow_check:
@@ -186,12 +191,12 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
 
                 if (isAttention) {
                     isAttention = false;
-                    prasre("https://www.univstar.com/v1/m/user/attention/cancel",teacherId);
+                    prasre("https://www.univstar.com/v1/m/user/attention/cancel", teacherId);
                     live_course_detailed_follow_check.setText("关注");
                     live_course_detailed_follow_check.setActivated(true);
                 } else {
                     isAttention = true;
-                    prasre("https://www.univstar.com/v1/m/user/attention",teacherId);
+                    prasre("https://www.univstar.com/v1/m/user/attention", teacherId);
                     live_course_detailed_follow_check.setText("已关注");
                     live_course_detailed_follow_check.setActivated(false);
                 }
@@ -202,19 +207,19 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
                     live_course_detailed_follow_check.setChecked(false);
                     startActivity(new Intent(LiveCourseDetailedActivity.this, LoginActivity.class));
                     return;
-                }else {
-                    if (live_course_detailed_collect.isChecked()){
-                        Map<String,String> map = new HashMap<>();
-                        map.put("loginUserId",userId+"");
-                        map.put("id",keChengId+"");
-                        map.put("type","直播课");
-                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite",map);
-                    }else {
-                        Map<String,String> map = new HashMap<>();
-                        map.put("loginUserId",userId+"");
-                        map.put("id",keChengId+"");
-                        map.put("type","直播课");
-                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite/cancel",map);
+                } else {
+                    if (live_course_detailed_collect.isChecked()) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("loginUserId", userId + "");
+                        map.put("id", keChengId + "");
+                        map.put("type", "直播课");
+                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite", map);
+                    } else {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("loginUserId", userId + "");
+                        map.put("id", keChengId + "");
+                        map.put("type", "直播课");
+                        followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/favorite/cancel", map);
                     }
                 }
                 break;
@@ -225,76 +230,76 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
 
     @Override
     public void getLiveCourseDetailedData(LiveCourseDetailedEntity liveCourseDetailedEntity) {
-          if (liveCourseDetailedEntity.getCode() == 0){
+        if (liveCourseDetailedEntity.getCode() == 0) {
 //              加载头图片
-              keChengId = liveCourseDetailedEntity.getData().getId();
-              Glide.with(this).load(liveCourseDetailedEntity.getData().getCoverImg())
-                      .asBitmap()
-                      .into(live_course_detailed_msg_img);
-              live_course_detailed_classify.setText("重播");
+            keChengId = liveCourseDetailedEntity.getData().getId();
+            Glide.with(this).load(liveCourseDetailedEntity.getData().getCoverImg())
+                    .asBitmap()
+                    .into(live_course_detailed_msg_img);
+            live_course_detailed_classify.setText("重播");
 //              讲堂课堂
-              SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-              Date date = new Date(liveCourseDetailedEntity.getData().getStartDate());
-              live_course_detailed_course_time.setText(""+sdf.format(date));
-              if (liveCourseDetailedEntity.getData().getIsFavorite() == 0){
-                  live_course_detailed_collect.setChecked(false);
-              }else {
-                  live_course_detailed_collect.setChecked(true);
-              }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date = new Date(liveCourseDetailedEntity.getData().getStartDate());
+            live_course_detailed_course_time.setText("" + sdf.format(date));
+            if (liveCourseDetailedEntity.getData().getIsFavorite() == 0) {
+                live_course_detailed_collect.setChecked(false);
+            } else {
+                live_course_detailed_collect.setChecked(true);
+            }
 //              設置頭像
-              Glide.with(this)
-                      .load(liveCourseDetailedEntity.getData().getPhoto())
-                      .asBitmap()
-                      .placeholder(R.mipmap.user_head_portrait)
-                      .diskCacheStrategy(DiskCacheStrategy.NONE)
-                      .into(new BitmapImageViewTarget(live_course_detailed__header_img){
-                          @Override
-                          protected void setResource(Bitmap resource) {
-                              RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),resource);
-                              bitmapDrawable.setCircular(true);
-                              live_course_detailed__header_img.setImageDrawable(bitmapDrawable);
-                          }
-                      });
+            Glide.with(this)
+                    .load(liveCourseDetailedEntity.getData().getPhoto())
+                    .asBitmap()
+                    .placeholder(R.mipmap.user_head_portrait)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(new BitmapImageViewTarget(live_course_detailed__header_img) {
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), resource);
+                            bitmapDrawable.setCircular(true);
+                            live_course_detailed__header_img.setImageDrawable(bitmapDrawable);
+                        }
+                    });
 //              設置昵稱
-              live_course_detailed_nick_name.setText(liveCourseDetailedEntity.getData().getNickname());
+            live_course_detailed_nick_name.setText(liveCourseDetailedEntity.getData().getNickname());
 //              設置Vip圖片類型
-              if (liveCourseDetailedEntity.getData().getUserType() == 4){
-                  live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_red);
-              }else if (liveCourseDetailedEntity.getData().getUserType() == 3){
-                  live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_yellow);
-              }else if (liveCourseDetailedEntity.getData().getUserType() == 2){
-                  live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_blue);
-              }
+            if (liveCourseDetailedEntity.getData().getUserType() == 4) {
+                live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_red);
+            } else if (liveCourseDetailedEntity.getData().getUserType() == 3) {
+                live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_yellow);
+            } else if (liveCourseDetailedEntity.getData().getUserType() == 2) {
+                live_course_detailed_vip.setImageResource(R.mipmap.home_level_vip_blue);
+            }
 
-              int attention = liveCourseDetailedEntity.getData().getAttention();
-              if (attention == 0) {
-                  live_course_detailed_follow_check.setText("关注");
-                  live_course_detailed_follow_check.setActivated(true);
-                  isAttention = false;
-              } else if (attention == 1) {
-                  live_course_detailed_follow_check.setText("已关注");
-                  live_course_detailed_follow_check.setActivated(false);
-                  isAttention = true;
-              } else if (attention == 2) {
-                  live_course_detailed_follow_check.setText("相互关注");
-                  live_course_detailed_follow_check.setActivated(false);
-                  isAttention = true;
-              }
+            int attention = liveCourseDetailedEntity.getData().getAttention();
+            if (attention == 0) {
+                live_course_detailed_follow_check.setText("关注");
+                live_course_detailed_follow_check.setActivated(true);
+                isAttention = false;
+            } else if (attention == 1) {
+                live_course_detailed_follow_check.setText("已关注");
+                live_course_detailed_follow_check.setActivated(false);
+                isAttention = true;
+            } else if (attention == 2) {
+                live_course_detailed_follow_check.setText("相互关注");
+                live_course_detailed_follow_check.setActivated(false);
+                isAttention = true;
+            }
 
 //              老師類別
-              live_course_detailed_synopsis.setText(liveCourseDetailedEntity.getData().getIntro());
+            live_course_detailed_synopsis.setText(liveCourseDetailedEntity.getData().getIntro());
 //              已預約數
-              live_course_detailed_reservation.setText(""+liveCourseDetailedEntity.getData().getSubscribe());
+            live_course_detailed_reservation.setText("" + liveCourseDetailedEntity.getData().getSubscribe());
 //              縂預約數
-              live_course_detailed_subscribe.setText(""+liveCourseDetailedEntity.getData().getSubscribeNum());
+            live_course_detailed_subscribe.setText("" + liveCourseDetailedEntity.getData().getSubscribeNum());
 //              價格
-              live_course_detailed_item_price.setText(""+liveCourseDetailedEntity.getData().getPrice());
+            live_course_detailed_item_price.setText("" + liveCourseDetailedEntity.getData().getPrice());
 
 //              webView和JS交互
-                live_course_detailed_web.loadUrl("http://share.univstar.com/view/live.html?id="+ this.id);
-          }else {
-              Toast.makeText(this, liveCourseDetailedEntity.getMessage(), Toast.LENGTH_SHORT).show();
-          }
+            live_course_detailed_web.loadUrl("http://share.univstar.com/view/live.html?id=" + this.id);
+        } else {
+            Toast.makeText(this, liveCourseDetailedEntity.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -302,20 +307,21 @@ public class LiveCourseDetailedActivity extends BaseActivity implements View.OnC
 
     }
 
-    private void prasre(String url,String attentionId){
-        Map<String,String> map = new HashMap<>();
-        map.put("attentionId",attentionId+"");
-        map.put("loginUserId",userId+"");
-        followPraisePresenter.sendFollowPraise(url,map);
+    private void prasre(String url, String attentionId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("attentionId", attentionId + "");
+        map.put("loginUserId", userId + "");
+        followPraisePresenter.sendFollowPraise(url, map);
     }
 
-    private void prasre2(String url,String attentionId,String type){
-        Log.e("userIdaaaaaaaa",userId+"");
-        Map<String,String> map = new HashMap<>();
-        map.put("userId",attentionId+"");
-        map.put("loginUserId",userId+"");
-        map.put("id",attentionId+"");
-        map.put("type",type);
-        followPraisePresenter.sendFollowPraise(url,map);
+    private void prasre2(String url, String attentionId, String type) {
+        Log.e("userIdaaaaaaaa", userId + "");
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", attentionId + "");
+        map.put("loginUserId", userId + "");
+        map.put("id", attentionId + "");
+        map.put("type", type);
+        followPraisePresenter.sendFollowPraise(url, map);
     }
+
 }

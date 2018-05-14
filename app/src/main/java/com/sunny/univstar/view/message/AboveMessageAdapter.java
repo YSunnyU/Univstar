@@ -46,6 +46,7 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
         //            时间转换
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm");
         Date date = new Date(data.get(position).getCreateDate());
+
         holder.aboveMessageItem_time.setText(sdf.format(date));
         holder.aboveMessageItem_content.setText(data.get(position).getContent());
         holder.itemView.setTag(position);
@@ -64,6 +65,7 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
                             holder.aboveMessageItem_image.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+            holder.aboveMessageItem_one.setText("订单提醒");
         }
         if ("MSG_PRAISE".equals(type)) {
             Glide.with(context)
@@ -79,6 +81,8 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
                             holder.aboveMessageItem_image.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+            holder.aboveMessageItem_one.setText("赞我的");
+
         }
         if ("MSG_COMMENTS".equals(type)) {
             Glide.with(context)
@@ -94,6 +98,8 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
                             holder.aboveMessageItem_image.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+            holder.aboveMessageItem_one.setText("评论我的");
+
         }
         if ("MSG_HOMEWOK".equals(type)) {
             Glide.with(context)
@@ -109,6 +115,8 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
                             holder.aboveMessageItem_image.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+            holder.aboveMessageItem_one.setText("作业提醒");
+
         }
         if ("MSG_UNIVSTAR".equals(type)) {
             Glide.with(context)
@@ -124,6 +132,8 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
                             holder.aboveMessageItem_image.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+            holder.aboveMessageItem_one.setText("UnivStar团队");
+
         }
         if ("MSG_ATTENTION".equals(type)) {
             Glide.with(context)
@@ -139,6 +149,8 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
                             holder.aboveMessageItem_image.setImageDrawable(circularBitmapDrawable);
                         }
                     });
+            holder.aboveMessageItem_one.setText("关注提醒");
+
         }
     }
 
@@ -146,17 +158,23 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
     public int getItemCount() {
         return data.isEmpty() ? 0 : data.size();
     }
-    public interface OnShortListener{
-            void setOnShortListener(View view,int position);
-        }
-        private OnShortListener shortListener;
-        public void OnShortListener(OnShortListener shortListener){
-            this.shortListener=shortListener;
-        };
+
+    public interface OnShortListener {
+        void setOnShortListener(View view, int position);
+    }
+
+    private OnShortListener shortListener;
+
+    public void OnShortListener(OnShortListener shortListener) {
+        this.shortListener = shortListener;
+    }
+
+    ;
+
     @Override
     public void onClick(View view) {
-        if (shortListener!=null){
-            shortListener.setOnShortListener(view,(int)view.getTag());
+        if (shortListener != null) {
+            shortListener.setOnShortListener(view, (int) view.getTag());
         }
     }
 
@@ -164,6 +182,7 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
         public ImageView aboveMessageItem_image;
         public TextView aboveMessageItem_time;
         public TextView aboveMessageItem_content;
+        public TextView aboveMessageItem_one;
 
 
         public Holder(View itemView) {
@@ -171,7 +190,10 @@ public class AboveMessageAdapter extends RecyclerView.Adapter<AboveMessageAdapte
             this.aboveMessageItem_image = (ImageView) itemView.findViewById(R.id.aboveMessageItem_image);
             this.aboveMessageItem_time = (TextView) itemView.findViewById(R.id.aboveMessageItem_time);
             this.aboveMessageItem_content = (TextView) itemView.findViewById(R.id.aboveMessageItem_content);
+            this.aboveMessageItem_one = (TextView) itemView.findViewById(R.id.aboveMessageItem_one);
 
         }
     }
+
+
 }

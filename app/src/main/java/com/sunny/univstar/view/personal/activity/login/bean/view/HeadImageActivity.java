@@ -13,8 +13,6 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class HeadImageActivity extends BaseActivity {
-
-
     @Bind(R.id.head_image_back)
     ImageView headImageBack;
     @Bind(R.id.head_image_userImage)
@@ -23,22 +21,52 @@ public class HeadImageActivity extends BaseActivity {
     TextView headImageUserName;
     @Bind(R.id.head_image_attentionNum)
     TextView headImageAttentionNum;
+    @Bind(R.id.head_image_attention)
+    TextView headImageAttention;
+    @Bind(R.id.head_image_lines)
+    TextView headImageLines;
     @Bind(R.id.head_image_fanNum)
     TextView headImageFanNum;
-    @Bind(R.id.head_image_production)
-    RelativeLayout headImageProduction;
-    @Bind(R.id.head_image_invitation)
-    RelativeLayout headImageInvitation;
     @Bind(R.id.head_image_productionText)
     TextView headImageProductionText;
     @Bind(R.id.head_image_production_line)
     TextView headImageProductionLine;
+    @Bind(R.id.head_image_production)
+    RelativeLayout headImageProduction;
     @Bind(R.id.head_image_invitationText)
     TextView headImageInvitationText;
     @Bind(R.id.head_image_invitationLine)
     TextView headImageInvitationLine;
+    @Bind(R.id.head_image_invitation)
+    RelativeLayout headImageInvitation;
     @Bind(R.id.head_image_fragContainer)
     FrameLayout headImageFragContainer;
+
+
+//    @Bind(R.id.head_image_back)
+//    ImageView headImageBack;
+//    @Bind(R.id.head_image_userImage)
+//    ImageView headImageUserImage;
+//    @Bind(R.id.head_image_userName)
+//    TextView headImageUserName;
+//    @Bind(R.id.head_image_attentionNum)
+//    TextView headImageAttentionNum;
+//    @Bind(R.id.head_image_fanNum)
+//    TextView headImageFanNum;
+//    @Bind(R.id.head_image_production)
+//    RelativeLayout headImageProduction;
+//    @Bind(R.id.head_image_invitation)
+//    RelativeLayout headImageInvitation;
+//    @Bind(R.id.head_image_productionText)
+//    TextView headImageProductionText;
+//    @Bind(R.id.head_image_production_line)
+//    TextView headImageProductionLine;
+//    @Bind(R.id.head_image_invitationText)
+//    TextView headImageInvitationText;
+//    @Bind(R.id.head_image_invitationLine)
+//    TextView headImageInvitationLine;
+//    @Bind(R.id.head_image_fragContainer)
+//    FrameLayout headImageFragContainer;
 
     @Override
     protected int getLayoutId() {
@@ -79,4 +107,6 @@ public class HeadImageActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }

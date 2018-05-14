@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sunny.univstar.view.personal.activity.login.bean.view.MyMessage.collection.CollectEavesdropFragment">
+    tools:context=".view.personal.activity.login.bean.view.MyMessage.collection.MyCollectionActivity">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView

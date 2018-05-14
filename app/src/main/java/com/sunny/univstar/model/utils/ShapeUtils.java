@@ -338,7 +338,7 @@ public class ShapeUtils {
     public void setWeb(String url, String title, String message, int image) {
         UMWeb web = new UMWeb(url);  
         if (image == 0) {
-            web.setThumb(new UMImage(context, R.mipmap.ic_launcher));  
+            web.setThumb(new UMImage(context, R.mipmap.ic_launcher));
         } else {  
             web.setThumb(new UMImage(context, image));  
         }  

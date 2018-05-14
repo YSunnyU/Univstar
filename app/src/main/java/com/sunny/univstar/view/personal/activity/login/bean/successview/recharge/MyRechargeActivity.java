@@ -19,6 +19,8 @@ import butterknife.OnClick;
 
 public class MyRechargeActivity extends BaseActivity implements MyRechargeContract.RechargeDataInView {
     public MyRechargeContract.RechargeDataInPresenter rechargeDataInPresenter;
+
+    public static SharedPreferences sharedPreferences;
     @Bind(R.id.myRecharge_back)
     ImageView myRechargeBack;
     @Bind(R.id.myRecharge_phoneNum)
@@ -27,7 +29,6 @@ public class MyRechargeActivity extends BaseActivity implements MyRechargeContra
     TextView myRechargeResidualNum;
     @Bind(R.id.myRecharge_moneyRecyView)
     RecyclerView myRechargeMoneyRecyView;
-    public static SharedPreferences sharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -63,9 +64,10 @@ public class MyRechargeActivity extends BaseActivity implements MyRechargeContra
     }
 
 
-
     @OnClick(R.id.myRecharge_back)
     public void onViewClicked() {
         finish();
     }
+
+
 }

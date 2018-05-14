@@ -25,8 +25,28 @@ import butterknife.OnClick;
 import static com.sunny.univstar.view.personal.activity.LoginSetActivity.sharedPreferences;
 
 public class PerfectUserInfoActivity extends BaseActivity implements RegisterContract.RegisterView {
+    @Bind(R.id.perfect_info_return)
+    ImageView perfectInfoReturn;
+    @Bind(R.id.perfect_user_img)
+    ImageView perfectUserImg;
+    @Bind(R.id.perfect_user_name)
+    EditText perfectUserName;
+    @Bind(R.id.perfect_user_name_close)
+    ImageView perfectUserNameClose;
+    @Bind(R.id.user_sex_man)
+    RadioButton userSexMan;
+    @Bind(R.id.user_sex_woman)
+    RadioButton userSexWoman;
+    @Bind(R.id.user_sex_group)
+    RadioGroup userSexGroup;
+    @Bind(R.id.perfect_user_psw)
+    EditText perfectUserPsw;
+    @Bind(R.id.perfect_user_psw_close)
+    ImageView perfectUserPswClose;
+    @Bind(R.id.user_perfect_yes)
+    Button userPerfectYes;
     private RegisterContract.RegisterPresenter presenter;
-    //返回按钮
+    /*//返回按钮
     @Bind(R.id.perfect_info_return)
     ImageView perfectInfoReturn;
     //    头像上传
@@ -55,7 +75,7 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
     ImageView perfectUserPswClose;
     //    完成完善
     @Bind(R.id.user_perfect_yes)
-    Button userPerfectYes;
+    Button userPerfectYes;*/
     private String phone;
     private SharedPreferences.Editor edit;
 
@@ -127,7 +147,7 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
 //        如果是1  就已经登录
         sharedPreferences = getSharedPreferences("keeepUserName", MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putBoolean("isLogin",false);
+        edit.putBoolean("isLogin", false);
         edit.commit();
 //        edit.putBoolean("isUserLogin",false);
         Toast.makeText(this, registerCodeEntity.getMessage(), Toast.LENGTH_SHORT).show();
@@ -147,5 +167,6 @@ public class PerfectUserInfoActivity extends BaseActivity implements RegisterCon
     }
 
     private int f = 1;
+
 
 }

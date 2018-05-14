@@ -18,6 +18,12 @@ public class AboutUnivStarActivity extends BaseActivity {
     RelativeLayout aboutUStarIntro;
     @Bind(R.id.aboutUStar_version)
     RelativeLayout aboutUStarVersion;
+//    @Bind(R.id.aboutUStar_back)
+//    ImageView aboutUStarBack;
+//    @Bind(R.id.aboutUStar_intro)
+//    RelativeLayout aboutUStarIntro;
+//    @Bind(R.id.aboutUStar_version)
+//    RelativeLayout aboutUStarVersion;
 
 
     @Override
@@ -42,10 +48,9 @@ public class AboutUnivStarActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.aboutUStar_intro:
-                startActivity(new Intent(AboutUnivStarActivity.this,AboutIntroActivity.class));
+                startActivity(new Intent(AboutUnivStarActivity.this, AboutIntroActivity.class));
                 break;
         }
     }
-
 
 }

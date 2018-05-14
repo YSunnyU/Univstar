@@ -20,6 +20,14 @@ public class SocialNumBindActivity extends BaseActivity {
     RelativeLayout socialNumBindSina;
     @Bind(R.id.socialNumBind_Weixin)
     RelativeLayout socialNumBindWeixin;
+    /*@Bind(R.id.socialNumBind_back)
+    TextView socialNumBindBack;
+    @Bind(R.id.socialNumBind_QQ)
+    RelativeLayout socialNumBindQQ;
+    @Bind(R.id.socialNumBind_Sina)
+    RelativeLayout socialNumBindSina;
+    @Bind(R.id.socialNumBind_Weixin)
+    RelativeLayout socialNumBindWeixin;*/
 
     @Override
     protected int getLayoutId() {
@@ -37,7 +45,6 @@ public class SocialNumBindActivity extends BaseActivity {
     }
 
 
-
     @OnClick({R.id.socialNumBind_back, R.id.socialNumBind_QQ, R.id.socialNumBind_Sina, R.id.socialNumBind_Weixin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -52,7 +59,8 @@ public class SocialNumBindActivity extends BaseActivity {
                 break;
         }
     }
-//activity_social_num_bind
+
+
 
 
 }

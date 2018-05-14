@@ -9,10 +9,12 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class AboutIntroActivity extends BaseActivity {
-
-
     @Bind(R.id.aboutIntro_back)
     ImageView aboutIntroBack;
+
+
+//    @Bind(R.id.aboutIntro_back)
+//    ImageView aboutIntroBack;
 
     @Override
     protected int getLayoutId() {
@@ -30,9 +32,10 @@ public class AboutIntroActivity extends BaseActivity {
     }
 
 
-
     @OnClick(R.id.aboutIntro_back)
     public void onViewClicked() {
         finish();
     }
+
+
 }

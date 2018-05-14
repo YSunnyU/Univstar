@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sunny.univstar.R;
@@ -27,14 +28,17 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class TeacherFanActivity extends BaseActivity implements TeacherFanContract.TeacherFanView,FollowPraiseContract.FollowPraiseView{
+public class TeacherFanActivity extends BaseActivity implements TeacherFanContract.TeacherFanView, FollowPraiseContract.FollowPraiseView {
+
 
     @Bind(R.id.teacher_follower_return)
     ImageView teacherFollowerReturn;
-    @Bind(R.id.teacher_follower_list)
-    ListView teacherFollowerList;
     @Bind(R.id.teacher_fan_title)
     TextView teacherFanTitle;
+    @Bind(R.id.reaaa_2)
+    RelativeLayout reaaa2;
+    @Bind(R.id.teacher_follower_list)
+    ListView teacherFollowerList;
     private FollowPraiseContract.FollowPraisePresenter followPraisePresenter;
     private TeacherFanContract.TeacherFanPersenter teacherFanPersenter;
     private List<TeacherFanEntity.DataBean.ListBean> mList;
@@ -52,7 +56,7 @@ public class TeacherFanActivity extends BaseActivity implements TeacherFanContra
         teacherFanPersenter = new TeacherFanPresenter(this);
         followPraisePresenter = new FollowPraiisePresenter(this);
         mList = new ArrayList<>();
-        adapter = new TeacherFanAdapter(mList,this);
+        adapter = new TeacherFanAdapter(mList, this);
         adapter.setOnClickItem(new TeacherFanAdapter.OnClickItem() {
             @Override
             public void onClickItem(View view, int position) {
@@ -62,16 +66,16 @@ public class TeacherFanActivity extends BaseActivity implements TeacherFanContra
                     startActivity(new Intent(TeacherFanActivity.this, LoginActivity.class));
                     return;
                 }
-                Map<String,String> map = new HashMap<>();
-                map.put("attentionId",mList.get(position).getFansId()+"");
-                map.put("loginUserId",loginUserId+"");
-                if (checkBox.isChecked()){
-                    followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/attention/cancel",map);
+                Map<String, String> map = new HashMap<>();
+                map.put("attentionId", mList.get(position).getFansId() + "");
+                map.put("loginUserId", loginUserId + "");
+                if (checkBox.isChecked()) {
+                    followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/attention/cancel", map);
 
                     checkBox.setText("关注");
                     checkBox.setTextColor(Color.parseColor("#9E9E9E"));
-                }else {
-                    followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/attention",map);
+                } else {
+                    followPraisePresenter.sendFollowPraise("https://www.univstar.com/v1/m/user/attention", map);
 
                     checkBox.setText("已关注");
                     checkBox.setTextColor(Color.parseColor("#FFFFFF"));
@@ -86,12 +90,12 @@ public class TeacherFanActivity extends BaseActivity implements TeacherFanContra
         Intent intent = getIntent();
         String teacherId = intent.getStringExtra("teacherId");
         String title = intent.getStringExtra("title");
-        teacherFanTitle.setText(title+"的粉丝");
-        Map<String,String> map = new HashMap<>();
-        map.put("page","1");
-        map.put("rows","100");
-        map.put("loginUserId", loginUserId +"");
-        map.put("teacherId",teacherId);
+        teacherFanTitle.setText(title + "的粉丝");
+        Map<String, String> map = new HashMap<>();
+        map.put("page", "1");
+        map.put("rows", "100");
+        map.put("loginUserId", loginUserId + "");
+        map.put("teacherId", teacherId);
         teacherFanPersenter.sendTeacherFan(map);
 
     }
@@ -121,4 +125,5 @@ public class TeacherFanActivity extends BaseActivity implements TeacherFanContra
     public void getFollowPraise(String msg) {
 
     }
+
 }

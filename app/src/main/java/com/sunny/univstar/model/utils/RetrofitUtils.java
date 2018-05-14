@@ -14,7 +14,9 @@ import com.sunny.univstar.model.entity.AppTokenModel;
 import com.sunny.univstar.model.interceptor.AddCookiesInterceptor;
 import com.sunny.univstar.model.interceptor.ReceivedCookiesInterceptor;
 import com.sunny.univstar.model.service.AlertPasswordService;
+import com.sunny.univstar.model.service.FansService;
 import com.sunny.univstar.model.service.FindTeacherService;
+import com.sunny.univstar.model.service.FollowService;
 import com.sunny.univstar.model.service.HomeMasterService;
 import com.sunny.univstar.model.service.HomeNoticeService;
 import com.sunny.univstar.model.service.HomeValuableService;
@@ -30,15 +32,21 @@ import com.sunny.univstar.model.service.NoticeDetailedService;
 import com.sunny.univstar.model.service.OrderDetailService;
 import com.sunny.univstar.model.service.PersonalLoginService;
 import com.sunny.univstar.model.service.PersonalRegisterService;
+import com.sunny.univstar.model.service.PostService;
 import com.sunny.univstar.model.service.PreferenceService;
 import com.sunny.univstar.model.service.RechargeService;
 import com.sunny.univstar.model.service.ReplyListService;
 import com.sunny.univstar.model.service.TeacherFanService;
 import com.sunny.univstar.model.service.TeacherLiveService;
+import com.sunny.univstar.model.service.TreaSureService;
 import com.sunny.univstar.model.service.UpdateUserMessService;
 import com.sunny.univstar.model.service.ValuableDetailedService;
 import com.sunny.univstar.model.service.WorkDetailedService;
 import com.sunny.univstar.model.service.abovemessage.AboveMessageService;
+import com.sunny.univstar.model.service.abovemessage.MessageCommentService;
+import com.sunny.univstar.model.service.abovemessage.MessageHomeworkService;
+import com.sunny.univstar.model.service.abovemessage.MessageOrderService;
+import com.sunny.univstar.model.service.abovemessage.MessagePraiseService;
 import com.sunny.univstar.model.service.mycollect.CollectEavesdropService;
 import com.sunny.univstar.model.service.mycollect.CollectExperienceService;
 import com.sunny.univstar.model.service.mycollect.CollectLivingService;
@@ -85,6 +93,7 @@ public class RetrofitUtils {
                     .build();
         }
     };
+
     public static void deleteFile(String filePath) {
         if (!TextUtils.isEmpty(filePath)) {
             try {
@@ -114,7 +123,7 @@ public class RetrofitUtils {
 
     public RetrofitUtils() {
 
-        if (TextUtils.isEmpty(getAppToken(context))){
+        if (TextUtils.isEmpty(getAppToken(context))) {
             loadApptoken(context);
         }
 
@@ -156,7 +165,7 @@ public class RetrofitUtils {
         }
 
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences("77777", Context.MODE_PRIVATE);
-        if (sharedPreferences == null){
+        if (sharedPreferences == null) {
             return "";
         }
         String apptoken = sharedPreferences.getString("xyxy_apptoken", "");
@@ -300,12 +309,14 @@ public class RetrofitUtils {
     public LiveCourseDetailedService getLiveCourseDetailedService() {
         return retrofit.create(LiveCourseDetailedService.class);
     }
-//    修改密码
-    public AlertPasswordService getAlertPasswordService(){
+
+    //    修改密码
+    public AlertPasswordService getAlertPasswordService() {
         return retrofit.create(AlertPasswordService.class);
     }
-//    设置新的密码
-    public NewPswService getNewPswService(){
+
+    //    设置新的密码
+    public NewPswService getNewPswService() {
         return retrofit.create(NewPswService.class);
     }
 
@@ -348,7 +359,7 @@ public class RetrofitUtils {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
             // return size + "Byte";
-            return size+"k";
+            return size + "k";
         }
 
         double megaByte = kiloByte / 1024;
@@ -375,65 +386,115 @@ public class RetrofitUtils {
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
                 + "TB";
     }
-    public NoticeDetailedService getNoticeDetailedService(){
+
+    public NoticeDetailedService getNoticeDetailedService() {
         return retrofit.create(NoticeDetailedService.class);
     }
-    public MyFollowPraiseService getMyFollowPraiseService(){
+
+    public MyFollowPraiseService getMyFollowPraiseService() {
         return retrofit.create(MyFollowPraiseService.class);
     }
-//   金豆充值价格
-    public RechargeService getRechargeService(){
+
+    //   金豆充值价格
+    public RechargeService getRechargeService() {
 
         return retrofit.create(RechargeService.class);
     }
-//    更改用户信息
-    public UpdateUserMessService getUpdateUserMessService(){
+
+    //    更改用户信息
+    public UpdateUserMessService getUpdateUserMessService() {
         return retrofit.create(UpdateUserMessService.class);
     }
-//    我的订单
-    public MyOrderService getMyOrderService(){
+
+    //    我的订单
+    public MyOrderService getMyOrderService() {
         return retrofit.create(MyOrderService.class);
     }
-//    订单详情
-    public OrderDetailService getOrderDetailService(){
+
+    //    订单详情
+    public OrderDetailService getOrderDetailService() {
         return retrofit.create(OrderDetailService.class);
     }
-    public WorkDetailedService getWorkDetailedService(){
+
+    public WorkDetailedService getWorkDetailedService() {
         return retrofit.create(WorkDetailedService.class);
     }
-    public ValuableDetailedService getValuableDetailedService(){
+
+    public ValuableDetailedService getValuableDetailedService() {
         return retrofit.create(ValuableDetailedService.class);
     }
-    public TeacherFanService getTeacherFan(){
+
+    public TeacherFanService getTeacherFan() {
         return retrofit.create(TeacherFanService.class);
     }
-    public TeacherLiveService getTeacherLive(){
+
+    public TeacherLiveService getTeacherLive() {
         return retrofit.create(TeacherLiveService.class);
     }
-    public ReplyListService getReplyList(){
+
+    public ReplyListService getReplyList() {
         return retrofit.create(ReplyListService.class);
     }
-//    我的收藏
+
+    //    我的收藏
 //    直播教程
-    public CollectLivingService getMyCollectLivingService(){
+    public CollectLivingService getMyCollectLivingService() {
         return retrofit.create(CollectLivingService.class);
     }
-//    体验课程
-    public CollectExperienceService getCollectExperienceService(){
+
+    //    体验课程
+    public CollectExperienceService getCollectExperienceService() {
         return retrofit.create(CollectExperienceService.class);
     }
-//    偷听更多
-    public CollectEavesdropService getCollectEavesdropService(){
+
+    //    偷听更多
+    public CollectEavesdropService getCollectEavesdropService() {
         return retrofit.create(CollectEavesdropService.class);
     }
-//    帖子
-    public CollectPostsService getCollectPostsService(){
+
+    //    帖子
+    public CollectPostsService getCollectPostsService() {
         return retrofit.create(CollectPostsService.class);
     }
-//    全部消息
+
+    //    全部消息
 //    消息提醒列表
-    public AboveMessageService getAboveMessageService(){
+    public AboveMessageService getAboveMessageService() {
         return retrofit.create(AboveMessageService.class);
+    }
+
+    //    订单提醒
+    public MessageOrderService getMessageOrderService() {
+        return retrofit.create(MessageOrderService.class);
+    }
+
+    //    点赞提醒
+    public MessagePraiseService getMessagePraiseService() {
+        return retrofit.create(MessagePraiseService.class);
+    }
+//    我的评论
+    public MessageCommentService getMessageCommentService(){
+        return retrofit.create(MessageCommentService.class);
+    }
+//    作业提醒
+    public MessageHomeworkService getMessageHomeworkService(){
+        return retrofit.create(MessageHomeworkService.class);
+    }
+
+    public PostService getPostService(){
+        return retrofit.create(PostService.class);
+    }
+
+    public FollowService getFollowService(){
+        return retrofit.create(FollowService.class);
+    }
+
+    public FansService getFansService(){
+        return retrofit.create(FansService.class);
+    }
+
+    public TreaSureService getTreaSureService(){
+        return retrofit.create(TreaSureService.class);
     }
 
 

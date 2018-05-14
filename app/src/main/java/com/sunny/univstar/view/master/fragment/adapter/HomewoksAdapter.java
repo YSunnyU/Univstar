@@ -26,9 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by 张玗 on 2018/5/4.
- */
+
 
 public class HomewoksAdapter extends RecyclerView.Adapter<HomewoksAdapter.Holder> implements View.OnClickListener {
     private List<HomeMasterBean.DataBean.HomewoksBean> homewoksBeanList;

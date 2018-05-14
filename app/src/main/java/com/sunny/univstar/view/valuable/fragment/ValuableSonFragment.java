@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.sunny.univstar.R;
@@ -27,11 +28,14 @@ import butterknife.Bind;
 public class ValuableSonFragment extends BaseFragment implements HomeValuableContract.HomeValuableInView {
 
     public HomeValuableContract.HomeValuableInPresenter homeValuableInPresenter;
-
     @Bind(R.id.valuable_son_recyclerView)
     RecyclerView valuableSonRecyclerView;
+    @Bind(R.id.empty)
+    ImageView empty;
     @Bind(R.id.content_empty)
     RelativeLayout contentEmpty;
+
+
     private int size;
     private List<HomeValuableBean.DataBean.ArtcircleListBean.ListBean> list;
 
@@ -53,7 +57,7 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
             String sortord = arguments.getString("sortord");
             String loginUserId = arguments.getString("loginUserId");
             size = arguments.getInt("size");
-                homeValuableInPresenter.sendHomeValuableData(page, rows, loginUserId, sortord);
+            homeValuableInPresenter.sendHomeValuableData(page, rows, loginUserId, sortord);
         }
 
     }
@@ -68,7 +72,7 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
         if (size >= 3) {
             contentEmpty.setVisibility(View.VISIBLE);
             valuableSonRecyclerView.setVisibility(View.GONE);
-        }else {
+        } else {
             HomeValuableBean.DataBean.ArtcircleListBean artcircleList = homeValuableBean.getData().getArtcircleList();
             list = artcircleList.getList();
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -80,7 +84,7 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
                     if (list != null && list.size() > 0) {
                         Intent intent = new Intent(getContext(), WorkDetailedActivity.class);
                         intent.putExtra("homewokId", list.get(position).getId() + "");
-                        intent.putExtra("type","宝典");
+                        intent.putExtra("type", "宝典");
                         startActivity(intent);
                     }
                 }
@@ -94,5 +98,6 @@ public class ValuableSonFragment extends BaseFragment implements HomeValuableCon
     public void showValueFlyBannerData(ValueFlaybannerBean valueFlaybannerBean) {
         Log.d("ValuableSonFragment", "aaaaa");
     }
+
 
 }

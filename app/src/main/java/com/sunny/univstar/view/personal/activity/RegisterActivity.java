@@ -31,9 +31,31 @@ import butterknife.OnClick;
 
 import static com.sunny.univstar.R.id.register_phone_code;
 
-public class RegisterActivity extends BaseActivity implements RegisterContract.RegisterView{
+public class RegisterActivity extends BaseActivity implements RegisterContract.RegisterView {
+    @Bind(R.id.register_return)
+    ImageView registerReturn;
+    @Bind(R.id.register_phone_number)
+    EditText registerPhoneNumber;
+    @Bind(R.id.phon_close)
+    ImageView phonClose;
+    @Bind(R.id.register_phone_code)
+    EditText registerPhoneCode;
+    @Bind(R.id.get_register_code)
+    TextView getRegisterCode;
+    @Bind(R.id.phone_code_close)
+    ImageView phoneCodeClose;
+    @Bind(R.id.univstar_protocol)
+    TextView univstarProtocol;
+    @Bind(R.id.phone_register_btn)
+    Button phoneRegisterBtn;
+    @Bind(R.id.weixin_login)
+    LinearLayout weixinLogin;
+    @Bind(R.id.qq_login)
+    LinearLayout qqLogin;
+    @Bind(R.id.weibo_login)
+    LinearLayout weiboLogin;
     private String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
-    //    手机号
+    /*//    手机号
     @Bind(R.id.register_phone_number)
     EditText registerPhoneNumber;
     //    删除手机号
@@ -66,7 +88,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     //    返回
     @Bind(R.id.register_return)
     ImageView registerReturn;
-
+*/
 //    发送验证码
     private final int SENDCODE = 0;
     //    验证手机号
@@ -79,26 +101,26 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     private Timer timer;
     //    P层
     private RegisterContract.RegisterPresenter registerPresenter;
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(final Message msg) {
             super.handleMessage(msg);
-            if (msg.what == SENDCODE){
+            if (msg.what == SENDCODE) {
                 timer = new Timer();
-                RegisterCodeEntity regsiterCodeEntity= (RegisterCodeEntity) msg.obj;
-                if ("成功".equals(regsiterCodeEntity.getMessage()) && isCode){
-                    Toast.makeText(RegisterActivity.this, "手机号码验证"+regsiterCodeEntity.getMessage(), Toast.LENGTH_SHORT).show();
-                    Map<String,String> map = new HashMap<>();
-                    map.put("mobile",registerPhoneNumber.getText().toString());
-                    map.put("authCode",registerPhoneCode.getText().toString());
-                    registerPresenter.sendRegister("https://www.univstar.com/v1/m/user/verify/authcode",map);
+                RegisterCodeEntity regsiterCodeEntity = (RegisterCodeEntity) msg.obj;
+                if ("成功".equals(regsiterCodeEntity.getMessage()) && isCode) {
+                    Toast.makeText(RegisterActivity.this, "手机号码验证" + regsiterCodeEntity.getMessage(), Toast.LENGTH_SHORT).show();
+                    Map<String, String> map = new HashMap<>();
+                    map.put("mobile", registerPhoneNumber.getText().toString());
+                    map.put("authCode", registerPhoneCode.getText().toString());
+                    registerPresenter.sendRegister("https://www.univstar.com/v1/m/user/verify/authcode", map);
                     isCode = false;
                     Intent intent = new Intent(RegisterActivity.this, PerfectUserInfoActivity.class);
-                    intent.putExtra("phone",registerPhoneNumber.getText().toString());
+                    intent.putExtra("phone", registerPhoneNumber.getText().toString());
                     startActivity(intent);
                     finish();
                 }
-                if ("验证码已发送".equals(regsiterCodeEntity.getMessage())){
+                if ("验证码已发送".equals(regsiterCodeEntity.getMessage())) {
                     Toast.makeText(RegisterActivity.this, regsiterCodeEntity.getMessage(), Toast.LENGTH_SHORT).show();
                     //    计时器
                     timer.schedule(new TimerTask() {
@@ -110,7 +132,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                                 public void run() {
                                     getRegisterCode.setText(codeInt + "");
                                     getRegisterCode.setEnabled(false);
-                                    if (codeInt < 1){
+                                    if (codeInt < 1) {
                                         getRegisterCode.setText("获取验证码");
                                         getRegisterCode.setEnabled(true);
                                         timer.cancel();
@@ -122,7 +144,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                         }
                     }, 0, 1000);
                 }
-            }else {
+            } else {
                 RegisterCodeEntity registerCodeEntity = (RegisterCodeEntity) msg.obj;
                 Toast.makeText(RegisterActivity.this, registerCodeEntity.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -153,6 +175,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                     phonClose.setVisibility(View.INVISIBLE);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -166,10 +189,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count > 0){
+                if (count > 0) {
                     phoneCodeClose.setVisibility(View.VISIBLE);
                 }
-                if (start < 1){
+                if (start < 1) {
                     phoneCodeClose.setVisibility(View.INVISIBLE);
                 }
             }
@@ -187,7 +210,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     }
 
 
-    @OnClick({R.id.register_return,R.id.register_phone_number, R.id.phon_close, register_phone_code, R.id.get_register_code, R.id.phone_code_close, R.id.univstar_protocol, R.id.phone_register_btn, R.id.weixin_login, R.id.qq_login, R.id.weibo_login})
+    @OnClick({R.id.register_return, R.id.register_phone_number, R.id.phon_close, register_phone_code, R.id.get_register_code, R.id.phone_code_close, R.id.univstar_protocol, R.id.phone_register_btn, R.id.weixin_login, R.id.qq_login, R.id.weibo_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 //            删除手机号
@@ -201,11 +224,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                 Matcher matcher1 = pattern.matcher(registerPhoneNumber.getText().toString());
                 boolean flag = matcher1.matches();
 
-                if (flag){
-                    Map<String,String> map = new HashMap<>();
-                    map.put("mobile",registerPhoneNumber.getText().toString());
-                    registerPresenter.sendRegister("https://www.univstar.com/v1/m/user/authcode",map);
-                }else {
+                if (flag) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("mobile", registerPhoneNumber.getText().toString());
+                    registerPresenter.sendRegister("https://www.univstar.com/v1/m/user/authcode", map);
+                } else {
 
                 }
                 break;
@@ -219,9 +242,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
                 break;
 //            注册
             case R.id.phone_register_btn:
-                Map<String,String> map = new HashMap<>();
-                map.put("mobile",registerPhoneNumber.getText().toString());
-                registerPresenter.sendRegister("https://www.univstar.com/v1/m/user/verify/mobile",map);
+                Map<String, String> map = new HashMap<>();
+                map.put("mobile", registerPhoneNumber.getText().toString());
+                registerPresenter.sendRegister("https://www.univstar.com/v1/m/user/verify/mobile", map);
                 break;
 //            微信登陆
             case R.id.weixin_login:
@@ -251,4 +274,5 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     public void codePhoneAndIdentifying(RegisterCodeEntity registerCodeEntity) {
 
     }
+
 }
